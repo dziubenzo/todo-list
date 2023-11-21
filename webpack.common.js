@@ -14,15 +14,15 @@ module.exports = {
         test: /\.s[ac]ss$/i,
         use: ['style-loader', 'css-loader', 'sass-loader'],
       },
-      // {
-      //   test: /\.(png|svg|jpg|jpeg|webp|gif)$/i,
-      //   type: 'asset/resource',
-      // },
+      {
+        test: /\.(png|svg|jpg|jpeg|webp|gif)$/i,
+        type: 'asset/resource',
+      },
     ],
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'Restaurant Page',
+      title: 'Todo List',
       template: './src/template.html',
       favicon: './src/assets/favicon.ico',
     }),

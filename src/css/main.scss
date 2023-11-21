@@ -1,7 +1,61 @@
 @use 'utilities' as *;
 @use 'mobile';
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz@9..40&display=swap');
 
 html,
 body {
-  background-color: $bg-colour;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: $font-stack;
+  background-color: $bg-colour-dark;
+  color: $font-colour-dark;
+}
+
+.container {
+  display: grid;
+  grid-template-rows: 1fr 5fr 1fr;
+  height: 100lvh;
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+
+  .title {
+    font-size: 3rem;
+    letter-spacing: 10px;
+    margin: 0;
+  }
+
+  .title-description {
+    font-size: 0.8rem;
+    font-style: italic;
+    color: darken($font-colour-dark, 20%);
+    margin: 0;
+  }
+}
+
+main {
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+}
+
+footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: center;
+  gap: 8px;
+
+  p {
+    margin: 0;
+  }
+
+  img {
+    height: 24px;
+    width: 24px;
+  }
 }

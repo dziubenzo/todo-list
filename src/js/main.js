@@ -1,5 +1,11 @@
 import '../css/main.scss';
 import Task from './tasks';
+import logo from '../assets/github-mark-white.svg';
+
+// Get images working
+const logoImg = document.querySelector('footer img');
+logoImg.src = logo;
+logoImg.alt = 'GitHub Logo - White';
 
 const tasks = [];
 
