@@ -1,6 +1,8 @@
 import '../css/main.scss';
 import Task from './tasks';
 
+const tasks = [];
+
 const item1 = new Task(
   'Learn JS',
   'Learn some JS, dumbass!!!',
@@ -20,4 +22,6 @@ const item3 = new Task(
   'low'
 );
 
-console.table(item1);
+tasks.push(item1, item2, item3);
+
+console.table(tasks);
