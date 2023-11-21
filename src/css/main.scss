@@ -70,4 +70,36 @@ main {
       animation: show-border 0.5s forwards;
     }
   }
+
+  .tabs {
+    display: grid;
+    gap: 16px;
+    margin: 32px;
+
+    p {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: $sidebar-item-size;
+      padding: 0 16px;
+      margin: 0;
+      cursor: pointer;
+
+      &::before {
+        display: inline-block;
+        width: $sidebar-item-size;
+        height: $sidebar-item-size;
+        color: $font-colour-dark;
+        filter: invert(76%) sepia(98%) saturate(1639%) hue-rotate(327deg) brightness(102%) contrast(106%);
+      }
+    }
+
+    .all-tasks::before {
+      content: url('../assets/all-tasks.svg');
+    }
+
+    .coming-up::before {
+      content: url('../assets/coming-up.svg');
+    }
+  }
 }
