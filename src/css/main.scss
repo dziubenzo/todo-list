@@ -14,18 +14,20 @@ body {
 
 .container {
   display: grid;
-  grid-template-rows: 1fr 5fr 1fr;
+  grid-template-rows: min-content 5fr min-content;
   height: 100lvh;
+  box-sizing: border-box;
+  padding: 8px;
 }
 
 header {
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-  align-items: center;
+  display: grid;
+  place-items: center;
+  padding-bottom: 8px;
 
   .title {
     font-size: 3rem;
+    font-weight: bold;
     letter-spacing: 10px;
     margin: 0;
   }
@@ -38,17 +40,11 @@ header {
   }
 }
 
-main {
-  display: grid;
-  grid-template-columns: 1fr 5fr;
-}
-
 footer {
-  display: flex;
-  flex-direction: column;
-  justify-content: end;
-  align-items: center;
+  display: grid;
+  place-items: center;
   gap: 8px;
+  padding-top: 8px;
 
   p {
     margin: 0;
@@ -57,5 +53,21 @@ footer {
   img {
     height: 24px;
     width: 24px;
+  }
+}
+
+main {
+  display: grid;
+  grid-template-columns: minmax(250px, 1fr) 4fr;
+  gap: 16px;
+
+  .sidebar,
+  .content {
+    background-color: lighten($bg-colour-dark, 10%);
+    border-radius: 16px;
+
+    &:hover {
+      animation: show-border 0.5s forwards;
+    }
   }
 }
