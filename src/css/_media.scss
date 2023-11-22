@@ -1,7 +1,7 @@
 @media only screen and (width >= 1200px) {
   main {
     display: grid;
-    grid-template-columns: 1fr 1fr 4fr 1fr !important;
+    grid-template-columns: 1fr 1fr 2fr 1fr !important;
     grid-template-areas: '. sidebar content .';
     gap: 16px;
 
