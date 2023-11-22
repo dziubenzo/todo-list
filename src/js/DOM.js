@@ -44,7 +44,7 @@ export function generateTaskDetails(task, index) {
   const list = createP(task.list, 'list-details');
   const priority = createP(task.priority, 'priority-details');
   const dueDate = createP(task.dueDate, 'due-date-details');
-  const creationDate = createP(task.creationDate, 'creation-date-details');
+  const creationDate = createP(task.creationDate.toLocaleDateString('en-GB'), 'creation-date-details');
   const completionDate = createP(
     task.completionDate,
     'completion-date-details'
