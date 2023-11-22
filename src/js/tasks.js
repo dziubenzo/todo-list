@@ -1,6 +1,6 @@
 class Task {
   creationDate;
-  dueDate;
+  dueDate = 'Due Date Goes Here';
   completed;
   completionDate;
 
@@ -15,27 +15,15 @@ class Task {
   }
 }
 
-const tasks = [];
-
-const item1 = new Task(
-  'Learn JS',
-  'Learn some JS, dumbass!!!',
-  'default',
-  'high'
-);
-const item2 = new Task(
-  'Learn React',
-  'Learn some React, dumbass',
-  'default',
-  'medium'
-);
-const item3 = new Task(
-  'Learn algorithms',
-  'Learn some algorithms, dumbass',
-  'default',
-  'low'
-);
-
-tasks.push(item1, item2, item3);
+const tasks = [
+  new Task('Learn JS', 'Learn some JS, dumbass!!!', 'default', 'high'),
+  new Task('Learn React', 'Learn some React, dumbass', 'default', 'medium'),
+  new Task(
+    'Learn algorithms',
+    'Learn some algorithms, dumbass',
+    'default',
+    'low'
+  ),
+];
 
 export { Task, tasks };
