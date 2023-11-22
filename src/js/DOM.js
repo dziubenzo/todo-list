@@ -18,7 +18,7 @@ export function displayAllTasks() {
 
     const checkbox = createImg(checkboxSrc, 'Checkbox', 'checkbox');
     const title = createP(task.title, 'title');
-    const dueDate = createP(task.dueDate, 'due-date');
+    const dueDate = createP(task.dueDate.toLocaleDateString('en-GB'), 'due-date');
     taskDiv.append(checkbox, title, dueDate);
   });
 }
