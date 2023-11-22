@@ -2,7 +2,7 @@ class Task {
   creationDate;
   dueDate = 'Due Date Goes Here';
   completed;
-  completionDate;
+  completionDate = 'Not Completed Yet';
 
   constructor(title, description, list, priority) {
     this.title = title;

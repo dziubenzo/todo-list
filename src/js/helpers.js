@@ -28,8 +28,20 @@ export function createImg(src, alt, className = '') {
   return img;
 }
 
-// Insert a DOM element after another element
-export function insertAfter(newElement, existingElement) {
-  existingElement.parentNode.insertBefore(newElement, existingElement.nextSibling);
+// Create span
+export function createSpan(content, className = '') {
+  const span = document.createElement('span');
+  span.innerHTML = content;
+  if (className) {
+    span.classList.add(className);
+  }
+  return span;
 }
 
+// Insert a DOM element after another element
+export function insertAfter(newElement, existingElement) {
+  existingElement.parentNode.insertBefore(
+    newElement,
+    existingElement.nextSibling
+  );
+}
