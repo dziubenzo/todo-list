@@ -38,10 +38,22 @@ export function createSpan(content, className = '') {
   return span;
 }
 
+// Create input of type date
+export function createInputDate(value, min, classList = '') {
+  return
+}
+
 // Insert a DOM element after another element
 export function insertAfter(newElement, existingElement) {
   existingElement.parentNode.insertBefore(
     newElement,
     existingElement.nextSibling
   );
+}
+
+// Format date (yyyy-mm-dd) so that it can be directly plugged into HTML
+export function formatDate(dateObject) {
+  return `${dateObject.getFullYear()}-${
+    dateObject.getMonth() + 1
+  }-${dateObject.getDate()}`;
 }
