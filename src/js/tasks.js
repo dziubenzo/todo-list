@@ -11,7 +11,7 @@ class Task {
     this.priority = priority;
     this.completed = false;
     this.creationDate = new Date();
-    this.creationDate = this.creationDate.toLocaleString('en-GB');
+    this.creationDate = this.creationDate.toLocaleDateString('en-GB');
   }
 
   updateTitle(newTitle) {
