@@ -13,6 +13,14 @@ class Task {
     this.creationDate = new Date();
     this.creationDate = this.creationDate.toLocaleString('en-GB');
   }
+
+  updateTitle(newTitle) {
+    this.title = newTitle;
+  }
+
+  updateDescription(newDescription) {
+    this.description = newDescription;
+  }
 }
 
 const tasks = [

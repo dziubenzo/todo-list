@@ -100,10 +100,10 @@ function changeTitleOrDescription(titleClicked, index) {
   // Listen for changes and change values in the Task objects
   // Update task title value
   editableTitle.addEventListener('input', () => {
-    tasks[index].title = editableTitle.innerHTML;
+    tasks[index].updateTitle(editableTitle.innerHTML);
     titleClicked.innerHTML = tasks[index].title;
   });
   editableDescription.addEventListener('input', () => {
-    tasks[index].description = editableDescription.innerHTML;
+    tasks[index].updateDescription(editableDescription.innerHTML);
   });
 }
