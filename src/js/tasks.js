@@ -1,5 +1,5 @@
 class Task {
-  completionDate;
+  completionDate = 'Implement me pls';
 
   constructor(title, description, list, priority, dueDate) {
     this.title = title;
@@ -26,14 +26,14 @@ const tasks = [
     'Learn some JS, dumbass',
     'default',
     'high',
-    new Date('2023, 11, 26')
+    new Date(2023, 10, 26)
   ),
   new Task(
     'Learn React',
     'Learn some React, dumbass',
     'default',
     'medium',
-    new Date('2023, 11, 28')
+    new Date(2023, 10, 28)
   ),
 
   new Task(
@@ -41,7 +41,7 @@ const tasks = [
     'Learn some algorithms, dumbass',
     'default',
     'low',
-    new Date('2023, 12, 02')
+    new Date(2023, 11, 5)
   ),
 ];
 

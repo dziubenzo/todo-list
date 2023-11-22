@@ -39,7 +39,7 @@ export function createSpan(content, className = '') {
 }
 
 // Create input of type date, with min value of today if set to true
-export function createInputDate(value, min = false, classList = '') {
+export function createInputDate(value, min = false, className = '') {
   const input = document.createElement('input');
   input.type = 'date';
   input.value = formatDate(value);
@@ -47,9 +47,10 @@ export function createInputDate(value, min = false, classList = '') {
     const today = new Date();
     input.min = formatDate(today);
   }
-  if (classList) {
+  if (className) {
     input.classList.add(className);
   }
+  return input;
 }
 
 // Insert a DOM element after another element
@@ -61,8 +62,17 @@ export function insertAfter(newElement, existingElement) {
 }
 
 // Format date (yyyy-mm-dd) so that it can be directly plugged into HTML
+// Handle digits from 0 to 9
+// Add one to the month due to them being counted from 0
 export function formatDate(dateObject) {
-  return `${dateObject.getFullYear()}-${
-    dateObject.getMonth() + 1
-  }-${dateObject.getDate()}`;
+  const year = String(dateObject.getFullYear());
+  let month = String(dateObject.getMonth() + 1);
+  let day = String(dateObject.getDate());
+  if (month.length === 1) {
+    month = `0${month}`;
+  }
+  if (day.length === 1) {
+    day = `0${day}`;
+  }
+  return `${year}-${month}-${day}`;
 }

@@ -6,6 +6,7 @@ import {
   createImg,
   createSpan,
   insertAfter,
+  createInputDate,
 } from './helpers';
 
 const contentDiv = document.querySelector('.content');
@@ -18,7 +19,10 @@ export function displayAllTasks() {
 
     const checkbox = createImg(checkboxSrc, 'Checkbox', 'checkbox');
     const title = createP(task.title, 'title');
-    const dueDate = createP(task.dueDate.toLocaleDateString('en-GB'), 'due-date');
+    const dueDate = createP(
+      task.dueDate.toLocaleDateString('en-GB'),
+      'due-date'
+    );
     taskDiv.append(checkbox, title, dueDate);
   });
 }
@@ -43,8 +47,11 @@ export function generateTaskDetails(task, index) {
   description.contentEditable = 'true';
   const list = createP(task.list, 'list-details');
   const priority = createP(task.priority, 'priority-details');
-  const dueDate = createP(task.dueDate, 'due-date-details');
-  const creationDate = createP(task.creationDate.toLocaleDateString('en-GB'), 'creation-date-details');
+  const dueDate = createInputDate(task.dueDate, true, 'due-date-details');
+  const creationDate = createP(
+    task.creationDate.toLocaleDateString('en-GB'),
+    'creation-date-details'
+  );
   const completionDate = createP(
     task.completionDate,
     'completion-date-details'
