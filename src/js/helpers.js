@@ -38,9 +38,18 @@ export function createSpan(content, className = '') {
   return span;
 }
 
-// Create input of type date
-export function createInputDate(value, min, classList = '') {
-  return
+// Create input of type date, with min value of today if set to true
+export function createInputDate(value, min = false, classList = '') {
+  const input = document.createElement('input');
+  input.type = 'date';
+  input.value = formatDate(value);
+  if (min) {
+    const today = new Date();
+    input.min = formatDate(today);
+  }
+  if (classList) {
+    input.classList.add(className);
+  }
 }
 
 // Insert a DOM element after another element
