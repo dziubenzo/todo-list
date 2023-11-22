@@ -38,7 +38,9 @@ export function generateTaskDetails(task, index) {
   const completionDateSpan = createSpan('Completed on');
 
   const title = createP(task.title, 'title-details');
+  title.contentEditable = 'true';
   const description = createP(task.description, 'description-details');
+  description.contentEditable = 'true';
   const list = createP(task.list, 'list-details');
   const priority = createP(task.priority, 'priority-details');
   const dueDate = createP(task.dueDate, 'due-date-details');
@@ -76,11 +78,32 @@ export function listenForTitleClick() {
       const index = event.target.parentNode.classList.value.substr(-1, 1);
       generateTaskDetails(tasks[index], index);
       title.removeEventListener('click', showDetails);
+      changeTitleOrDescription(title, index);
       title.addEventListener('click', function hideDetails(event) {
         event.target.parentNode.nextSibling.remove();
         title.removeEventListener('click', hideDetails);
         title.addEventListener('click', showDetails);
       });
     });
+  });
+}
+
+// Listen for value change in title or description in the opened task details
+function changeTitleOrDescription(titleClicked, index) {
+  // Select editable elements in the opened task details
+  const editableTitle = titleClicked.parentNode.nextSibling.querySelector(
+    "p[class='title-details'"
+  );
+  const editableDescription = titleClicked.parentNode.nextSibling.querySelector(
+    "p[class='description-details'"
+  );
+  // Listen for changes and change values in the Task objects
+  // Update task title value
+  editableTitle.addEventListener('input', () => {
+    tasks[index].title = editableTitle.innerHTML;
+    titleClicked.innerHTML = tasks[index].title;
+  });
+  editableDescription.addEventListener('input', () => {
+    tasks[index].description = editableDescription.innerHTML;
   });
 }
