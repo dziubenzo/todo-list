@@ -67,7 +67,7 @@ export function generateTaskDetails(task, index) {
 }
 
 // Listen for task title click
-// Show and hide task details
+// Show or hide task details
 export function listenForTitleClick() {
   const taskTitles = document.querySelectorAll('.title');
 

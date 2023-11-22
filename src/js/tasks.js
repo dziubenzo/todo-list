@@ -16,7 +16,7 @@ class Task {
 }
 
 const tasks = [
-  new Task('Learn JS', 'Learn some JS, dumbass!!!', 'default', 'high'),
+  new Task('Learn JS', 'Learn some JS, dumbass', 'default', 'high'),
   new Task('Learn React', 'Learn some React, dumbass', 'default', 'medium'),
   new Task(
     'Learn algorithms',

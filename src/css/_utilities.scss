@@ -12,3 +12,13 @@ $sidebar-item-size: 1.2rem;
     outline: 1px solid darken($font-colour-dark, 20%);
   }
 }
+
+// Animation when showing task details
+@keyframes show-details {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
