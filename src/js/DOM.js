@@ -24,9 +24,9 @@ export function displayAllTasks() {
 }
 
 // Show task details
-export function showTaskDetails(task) {
+export function showTaskDetails(task, index) {
   const detailsDiv = createDiv('details');
-  const clickedTask = document.querySelector('div.task-0');
+  const clickedTask = document.querySelector(`div.task-${index}`);
   insertAfter(detailsDiv, clickedTask);
 
   const titleSpan = createSpan('Title');
