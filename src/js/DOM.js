@@ -1,6 +1,12 @@
 import { tasks } from './tasks';
 import checkboxSrc from '../assets/checkbox.svg';
-import { createDiv, createP, createImg, createSpan, insertAfter } from './helpers';
+import {
+  createDiv,
+  createP,
+  createImg,
+  createSpan,
+  insertAfter,
+} from './helpers';
 
 const contentDiv = document.querySelector('.content');
 
@@ -23,26 +29,39 @@ export function showTaskDetails(task) {
   const clickedTask = document.querySelector('div.task-0');
   insertAfter(detailsDiv, clickedTask);
 
-  const test = createSpan('Test');
-  const title = createP(task.title, 'title');
-  const description = createP(
-    task.description,
-    'description'
+  const titleSpan = createSpan('Title');
+  const descriptionSpan = createSpan('Description');
+  const listSpan = createSpan('List');
+  const prioritySpan = createSpan('Priority');
+  const dueDateSpan = createSpan('Due date');
+  const creationDateSpan = createSpan('Created on');
+  const completionDateSpan = createSpan('Completed on');
+
+  const title = createP(task.title, 'title-details');
+  const description = createP(task.description, 'description-details');
+  const list = createP(task.list, 'list-details');
+  const priority = createP(task.priority, 'priority-details');
+  const dueDate = createP(task.dueDate, 'due-date-details');
+  const creationDate = createP(task.creationDate, 'creation-date-details');
+  const completionDate = createP(
+    task.completionDate,
+    'completion-date-details'
   );
-  const list = createP(task.list, 'list');
-  const priority = createP(task.priority, 'priority');
-  const dueDate = createP(task.dueDate);
-  const creationDate = createP(task.creationDate);
-  const completionDate = createP(task.completionDate);
 
   detailsDiv.append(
-    test,
+    titleSpan,
     title,
+    descriptionSpan,
     description,
+    listSpan,
     list,
+    prioritySpan,
     priority,
+    dueDateSpan,
     dueDate,
+    creationDateSpan,
     creationDate,
+    completionDateSpan,
     completionDate
   );
 }

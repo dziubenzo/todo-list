@@ -142,6 +142,12 @@ main {
     .details {
       display: grid;
       grid-template-columns: 1fr 3fr;
+      gap: 8px;
+      padding: 8px;
+
+      span {
+        color: darken($font-colour-dark, 20%);
+      }
     }
   }
 }
