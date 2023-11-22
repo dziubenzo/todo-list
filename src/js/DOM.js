@@ -23,8 +23,8 @@ export function displayAllTasks() {
   });
 }
 
-// Show task details
-export function showTaskDetails(task, index) {
+// Generate task details
+export function generateTaskDetails(task, index) {
   const detailsDiv = createDiv('details');
   const clickedTask = document.querySelector(`div.task-${index}`);
   insertAfter(detailsDiv, clickedTask);
@@ -64,4 +64,23 @@ export function showTaskDetails(task, index) {
     completionDateSpan,
     completionDate
   );
+}
+
+// Listen for task title click
+// Show and hide task details
+export function listenForTitleClick() {
+  const taskTitles = document.querySelectorAll('.title');
+
+  taskTitles.forEach((title) => {
+    title.addEventListener('click', function showDetails(event) {
+      const index = event.target.parentNode.classList.value.substr(-1, 1);
+      generateTaskDetails(tasks[index], index);
+      title.removeEventListener('click', showDetails);
+      title.addEventListener('click', function hideDetails(event) {
+        event.target.parentNode.nextSibling.remove();
+        title.removeEventListener('click', hideDetails);
+        title.addEventListener('click', showDetails);
+      });
+    });
+  });
 }
