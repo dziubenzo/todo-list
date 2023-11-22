@@ -1,11 +1,11 @@
 import { tasks } from './tasks';
 import checkboxSrc from '../assets/checkbox.svg';
-import { createDiv, createP, createImg } from './helpers';
+import { createDiv, createP, createImg, insertAfter } from './helpers';
 
 const contentDiv = document.querySelector('.content');
 
 // Display all tasks
-function displayAllTasks() {
+export function displayAllTasks() {
   tasks.forEach((task, index) => {
     const taskDiv = createDiv(`task-${index}`);
     contentDiv.append(taskDiv);
@@ -17,4 +17,9 @@ function displayAllTasks() {
   });
 }
 
-export { displayAllTasks };
+// Show task details
+export function showTaskDetails(task) {
+  const detailsDiv = createDiv('details');
+  const clickedTask = document.querySelector('div.task-0');
+  insertAfter(detailsDiv, clickedTask);
+}

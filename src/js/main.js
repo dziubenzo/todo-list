@@ -1,6 +1,6 @@
 import '../css/main.scss';
 import { tasks } from './tasks';
-import { displayAllTasks } from './DOM';
+import { displayAllTasks, showTaskDetails } from './DOM';
 
-console.log(tasks);
 displayAllTasks();
+showTaskDetails(tasks[0]);

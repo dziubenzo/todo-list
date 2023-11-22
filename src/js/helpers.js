@@ -28,3 +28,8 @@ export function createImg(src, alt, className = '') {
   return img;
 }
 
+// Insert a DOM element after another element
+export function insertAfter(newElement, existingElement) {
+  existingElement.parentNode.insertBefore(newElement, existingElement.nextSibling);
+}
+
