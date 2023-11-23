@@ -24,6 +24,10 @@ class Task {
   updateDueDate(newDueDate) {
     this.dueDate = newDueDate;
   }
+
+  updatePriority(newPriority) {
+    this.priority = newPriority;
+  }
 }
 
 const tasks = [

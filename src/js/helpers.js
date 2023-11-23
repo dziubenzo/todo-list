@@ -54,15 +54,12 @@ export function createInputDate(value, min = false, className = '') {
 }
 
 // Create input of type radio
-function createInputRadio(value, name, id, className = '', checked = false) {
+function createInputRadio(value, name, id, checked = false) {
   const input = document.createElement('input');
   input.type = 'radio';
   input.value = value;
   input.name = name;
   input.id = id;
-  if (className) {
-    input.classList.add(className);
-  }
   if (checked) {
     input.checked = true;
   }
@@ -85,8 +82,6 @@ function createLabel(content, forName, className = '') {
 export function createRadioButtonGroup(task, index, priorities, parentElement) {
   for (const priority of priorities) {
     let input;
-    console.log(priority);
-    console.log(task.priority);
     if (priority === task.priority) {
       input = createInputRadio(
         priority,
