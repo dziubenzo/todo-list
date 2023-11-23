@@ -142,8 +142,8 @@ export function createTextarea(
   return textarea;
 }
 
-// Create a drop down list of lists
-// If task and index given, select the list that is consistent with the list of the task selected
+// Create a drop down list of task lists
+// If task and index given as arguments, select the list of the task selected
 export function createDropDownList(
   task = '',
   index = '',
@@ -173,36 +173,43 @@ export function createDropDownList(
   return select;
 }
 
-// Create a group of priority radio buttons for a task nested in a div
-// Make the radio button that is consistent with the priority of a task checked
+// Create a group of priority radio buttons nested in a div
+// If task and index given as arguments, make the radio button that is consistent with the priority of a task checked
 export function createRadioButtonGroup(
-  task,
-  index,
+  task = '',
+  index = '',
   priorities,
   className = ''
 ) {
   const div = createDiv(className);
   for (const priority of priorities) {
     let input;
-    if (priority === task.priority) {
-      input = createInputRadio(
+    let label;
+    if (task && index) {
+      if (priority === task.priority) {
+        input = createInputRadio(
+          priority,
+          `priority-task-${index}`,
+          `${priority}-task-${index}`,
+          true
+        );
+      } else {
+        input = createInputRadio(
+          priority,
+          `priority-task-${index}`,
+          `${priority}-task-${index}`
+        );
+      }
+      label = createLabel(
         priority,
-        `priority-task-${index}`,
         `${priority}-task-${index}`,
-        true
+        `${priority}-priority-label`
       );
     } else {
-      input = createInputRadio(
-        priority,
-        `priority-task-${index}`,
-        `${priority}-task-${index}`
-      );
+      input = createInputRadio(priority, 'priority', `${priority}-priority`);
+      label = createLabel(priority, `${priority}-priority`);
     }
-    const label = createLabel(
-      priority,
-      `${priority}-task-${index}`,
-      `${priority}-priority-label`
-    );
+
     div.append(input, label);
   }
   return div;

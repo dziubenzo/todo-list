@@ -63,7 +63,8 @@ function showAddTaskForm(insertBeforeElement) {
     250,
     'Description (3 to 250 characters)'
   );
-  const listDropDown = createDropDownList('', '', 'list', 'list', Task.lists)
+  const priorityRadioButtons = createRadioButtonGroup('', '', Task.priorities);
+  const listDropDown = createDropDownList('', '', 'list', 'list', Task.lists);
   addTaskForm.append(
     titleLabel,
     descriptionLabel,
@@ -72,7 +73,8 @@ function showAddTaskForm(insertBeforeElement) {
     dueDateLabel,
     titleInput,
     descriptionInput,
-    listDropDown
+    listDropDown,
+    priorityRadioButtons
   );
   insertBeforeElement.parentNode.insertBefore(addTaskForm, insertBeforeElement);
 }
