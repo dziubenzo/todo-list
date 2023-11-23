@@ -1,6 +1,6 @@
 import { Task, tasks } from './tasks';
 import checkboxSrc from '../assets/checkbox.svg';
-import addTaskSrc from '../assets/add-task.svg';
+import addIconSrc from '../assets/add-task.svg';
 import {
   createDiv,
   createP,
@@ -10,6 +10,8 @@ import {
   createInputDate,
   createRadioButtonGroup,
   createDropDownList,
+  createLabel,
+  createInputText,
 } from './helpers';
 
 const contentDiv = document.querySelector('.content');
@@ -17,13 +19,43 @@ const contentDiv = document.querySelector('.content');
 // Display add task button
 // Listen for it
 export function displayAddTaskBtn() {
-  const addTaskDiv = createDiv(`add-task`);
-  contentDiv.append(addTaskDiv);
+  const addBtn = createDiv(`add-task`);
+  contentDiv.append(addBtn);
 
-  const addBtn = createImg(addTaskSrc, 'Add Task Button', 'add-task-btn');
-  addTaskDiv.append(addBtn);
+  const addIcon = createImg(addIconSrc, 'Add Task Button', 'add-task-btn');
+  addBtn.append(addIcon);
 
-  addTaskDiv.addEventListener('click', showNewTaskForm);
+  addBtn.addEventListener('click', () => {
+    showNewTaskForm(addBtn);
+  });
+}
+
+// Show form for adding a new task
+function showNewTaskForm(insertBeforeElement) {
+  const addTaskForm = createDiv('add-task-form');
+  const titleLabel = createLabel('Title', 'title');
+  const descriptionLabel = createLabel('Description', 'description');
+  const listLabel = createLabel('List', 'list');
+  const priorityLabel = createLabel('Priority', 'priority');
+  const dueDateLabel = createLabel('Due Date', 'due-date');
+
+  const titleInput = createInputText(
+    'title',
+    'title',
+    3,
+    48,
+    'Your title goes here (3 to 48 characters)',
+    true
+  );
+  addTaskForm.append(
+    titleLabel,
+    descriptionLabel,
+    listLabel,
+    priorityLabel,
+    dueDateLabel,
+    titleInput
+  );
+  insertBeforeElement.parentNode.insertBefore(addTaskForm, insertBeforeElement);
 }
 
 // Display all tasks
@@ -49,8 +81,8 @@ export function generateTaskDetails(task, index) {
   const descriptionSpan = createSpan('Description');
   const listSpan = createSpan('List');
   const prioritySpan = createSpan('Priority');
-  const dueDateSpan = createSpan('Due date');
-  const creationDateSpan = createSpan('Created on');
+  const dueDateSpan = createSpan('Due Date');
+  const creationDateSpan = createSpan('Created On');
   // const completionDateSpan = createSpan('Completed on');
 
   const title = createP(task.title, 'title-details');
@@ -61,6 +93,7 @@ export function generateTaskDetails(task, index) {
     task,
     index,
     'lists',
+    'lists-select',
     Task.lists,
     'lists-details'
   );

@@ -67,7 +67,7 @@ function createInputRadio(value, name, id, checked = false) {
 }
 
 // Create label
-function createLabel(content, forName, className = '') {
+export function createLabel(content, forName, className = '') {
   const label = document.createElement('label');
   label.innerHTML = content;
   label.htmlFor = forName;
@@ -78,8 +78,9 @@ function createLabel(content, forName, className = '') {
 }
 
 // Create select
-function createSelect(name, className = '') {
+function createSelect(name, id, className = '') {
   const select = document.createElement('select');
+  select.id = id;
   select.name = name;
   if (className) {
     select.classList.add(className);
@@ -98,10 +99,42 @@ function createOption(content, selected = false) {
   return option;
 }
 
+// Create input of type text
+export function createInputText(
+  id,
+  name,
+  minlength,
+  maxlength,
+  placeholder = '',
+  required = false
+) {
+  const input = document.createElement('input');
+  input.type = 'text';
+  input.id = id;
+  input.name = name;
+  input.minLength = minlength;
+  input.maxLength = maxlength;
+  if (placeholder) {
+    input.placeholder = placeholder;
+  }
+  if (required) {
+    input.required = true;
+  }
+  return input;
+}
+
 // Create a drop down list of lists
 // Make the list that is consistent with the list of a task selected
-export function createDropDownList(task, index, name, lists, className = '') {
+export function createDropDownList(
+  task,
+  index,
+  name,
+  id,
+  lists,
+  className = ''
+) {
   const select = createSelect(`${name}-task-${index}`);
+  select.id = id;
   if (className) {
     select.classList.add(className);
   }
@@ -119,7 +152,12 @@ export function createDropDownList(task, index, name, lists, className = '') {
 
 // Create a group of priority radio buttons for a task nested in a div
 // Make the radio button that is consistent with the priority of a task checked
-export function createRadioButtonGroup(task, index, priorities, className = '') {
+export function createRadioButtonGroup(
+  task,
+  index,
+  priorities,
+  className = ''
+) {
   const div = createDiv(className);
   for (const priority of priorities) {
     let input;
