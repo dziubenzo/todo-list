@@ -35,14 +35,14 @@ const tasks = [
   new Task(
     'Learn JS',
     'Learn some JS, dumbass',
-    'default',
+    'Personal',
     'high',
     new Date(2023, 10, 26)
   ),
   new Task(
     'Learn React',
     'Learn some React, dumbass',
-    'default',
+    'Work',
     'medium',
     new Date(2023, 10, 28)
   ),
@@ -50,7 +50,7 @@ const tasks = [
   new Task(
     'Learn algorithms',
     'Learn some algorithms, dumbass',
-    'default',
+    'Travel',
     'low',
     new Date(2023, 11, 5)
   ),

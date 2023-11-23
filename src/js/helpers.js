@@ -78,19 +78,37 @@ function createLabel(content, forName, className = '') {
 }
 
 // Create select
-function createSelect(content, name) {
+function createSelect(name) {
   const select = document.createElement('select');
-  select.innerHTML = content;
   select.name = name;
   return select;
 }
 
 // Create option
-function createOption(content) {
+function createOption(content, selected = false) {
   const option = document.createElement('option');
   option.innerHTML = content;
   option.value = content.toLowerCase();
+  if (selected) {
+    option.selected = true;
+  }
   return option;
+}
+
+// Create a drop down list of lists
+// Make the list that is consistent with the list of a task selected
+export function createDropDownList(task, index, name, lists) {
+  const select = createSelect(`${name}-task-${index}`);
+  for (list of lists) {
+    let option;
+    if (list === task.list) {
+      option = createOption(list, true);
+    } else {
+      option = createOption(list);
+    }
+    select.append(option);
+  }
+  return select;
 }
 
 // Create a group of priority radio buttons for a task and append them to parentElement
