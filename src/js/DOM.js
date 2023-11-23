@@ -12,6 +12,7 @@ import {
   createDropDownList,
   createLabel,
   createInputText,
+  createTextarea,
 } from './helpers';
 
 const contentDiv = document.querySelector('.content');
@@ -27,7 +28,7 @@ export function displayAddTaskBtn() {
 
   // Show add task form and hide add task form when clicked
   addBtn.addEventListener('click', () => {
-    showAddTaskForm(addBtn)
+    showAddTaskForm(addBtn);
     hideAddTaskBtn(addBtn);
   });
 }
@@ -51,16 +52,27 @@ function showAddTaskForm(insertBeforeElement) {
     'title',
     3,
     48,
-    'Your title goes here (3 to 48 characters)',
+    'Title (3 to 48 characters)',
     true
   );
+  const descriptionInput = createTextarea(
+    'description',
+    'description',
+    5,
+    3,
+    250,
+    'Description (3 to 250 characters)'
+  );
+  const listDropDown = createDropDownList('', '', 'list', 'list', Task.lists)
   addTaskForm.append(
     titleLabel,
     descriptionLabel,
     listLabel,
     priorityLabel,
     dueDateLabel,
-    titleInput
+    titleInput,
+    descriptionInput,
+    listDropDown
   );
   insertBeforeElement.parentNode.insertBefore(addTaskForm, insertBeforeElement);
 }

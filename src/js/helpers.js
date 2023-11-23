@@ -124,34 +124,46 @@ export function createInputText(
 }
 
 // Create textarea
-export function createTextarea(id, name, rows, cols, content) {
+export function createTextarea(
+  id,
+  name,
+  rows,
+  minlength,
+  maxlength,
+  placeholder
+) {
   const textarea = document.createElement('textarea');
   textarea.id = id;
   textarea.name = name;
   textarea.rows = rows;
-  textarea.cols = cols;
-  textarea.innerHTML = content;
+  textarea.minLength = minlength;
+  textarea.maxLength = maxlength;
+  textarea.placeholder = placeholder;
   return textarea;
 }
 
 // Create a drop down list of lists
-// Make the list that is consistent with the list of a task selected
+// If task and index given, select the list that is consistent with the list of the task selected
 export function createDropDownList(
-  task,
-  index,
+  task = '',
+  index = '',
   name,
   id,
   lists,
   className = ''
 ) {
-  const select = createSelect(`${name}-task-${index}`);
-  select.id = id;
+  let select;
+  if (index) {
+    select = createSelect(`${name}-task-${index}`, id);
+  } else {
+    select = createSelect(name, id);
+  }
   if (className) {
     select.classList.add(className);
   }
   for (const list of lists) {
     let option;
-    if (list === task.list) {
+    if (task && list === task.list) {
       option = createOption(list, true);
     } else {
       option = createOption(list);
