@@ -123,6 +123,17 @@ export function createInputText(
   return input;
 }
 
+// Create textarea
+export function createTextarea(id, name, rows, cols, content) {
+  const textarea = document.createElement('textarea');
+  textarea.id = id;
+  textarea.name = name;
+  textarea.rows = rows;
+  textarea.cols = cols;
+  textarea.innerHTML = content;
+  return textarea;
+}
+
 // Create a drop down list of lists
 // Make the list that is consistent with the list of a task selected
 export function createDropDownList(

@@ -25,13 +25,20 @@ export function displayAddTaskBtn() {
   const addIcon = createImg(addIconSrc, 'Add Task Button', 'add-task-btn');
   addBtn.append(addIcon);
 
+  // Show add task form and hide add task form when clicked
   addBtn.addEventListener('click', () => {
-    showNewTaskForm(addBtn);
+    showAddTaskForm(addBtn)
+    hideAddTaskBtn(addBtn);
   });
 }
 
+// Hide add task button
+function hideAddTaskBtn(addTaskButton) {
+  addTaskButton.style.display = 'none';
+}
+
 // Show form for adding a new task
-function showNewTaskForm(insertBeforeElement) {
+function showAddTaskForm(insertBeforeElement) {
   const addTaskForm = createDiv('add-task-form');
   const titleLabel = createLabel('Title', 'title');
   const descriptionLabel = createLabel('Description', 'description');
