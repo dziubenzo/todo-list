@@ -1,5 +1,6 @@
 class Task {
   static priorities = ['low', 'medium', 'high', 'yesterday'];
+  static lists = ['Personal', 'Work', 'Travel'];
 
   completionDate = 'Implement me pls';
 

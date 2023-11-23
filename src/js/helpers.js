@@ -77,6 +77,22 @@ function createLabel(content, forName, className = '') {
   return label;
 }
 
+// Create select
+function createSelect(content, name) {
+  const select = document.createElement('select');
+  select.innerHTML = content;
+  select.name = name;
+  return select;
+}
+
+// Create option
+function createOption(content) {
+  const option = document.createElement('option');
+  option.innerHTML = content;
+  option.value = content.toLowerCase();
+  return option;
+}
+
 // Create a group of priority radio buttons for a task and append them to parentElement
 // Make the radio button that is consistent with the priority of a task checked
 export function createRadioButtonGroup(task, index, priorities, parentElement) {
