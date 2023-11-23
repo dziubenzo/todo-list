@@ -43,7 +43,7 @@ export function generateTaskDetails(task, index) {
   const description = createP(task.description, 'description-details');
   description.contentEditable = 'true';
   const list = createP(task.list, 'list-details');
-  const priority = createP(task.priority, 'priority-details');
+  const priority = createDiv('priorities-details');
   const dueDate = createInputDate(task.dueDate, true, 'due-date-details');
   const creationDate = createP(
     task.creationDate.toLocaleDateString('pl'),

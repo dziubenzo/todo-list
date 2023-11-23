@@ -1,10 +1,5 @@
 class Task {
-  static priorities = {
-    low: 'low',
-    medium: 'medium',
-    high: 'high',
-    yesterday: 'yesterday',
-  };
+  static priorities = ['low', 'medium', 'high', 'yesterday'];
 
   completionDate = 'Implement me pls';
 

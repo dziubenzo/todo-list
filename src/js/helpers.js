@@ -54,12 +54,11 @@ export function createInputDate(value, min = false, className = '') {
 }
 
 // Create input of type radio
-function createInputRadio(value, id, name, className = '', checked = false) {
+function createInputRadio(value, className = '', checked = false) {
   const input = document.createElement('input');
   input.type = 'radio';
   input.value = value;
-  input.name = name;
-  input.id = id;
+  input.id = value;
   if (className) {
     input.classList.add(className);
   }
@@ -70,14 +69,29 @@ function createInputRadio(value, id, name, className = '', checked = false) {
 }
 
 // Create label
-function createLabel(content, forValue, className = '') {
+function createLabel(content, className = '') {
   const label = document.createElement('label');
   label.innerHTML = content;
-  label.for = forValue;
+  label.for = content;
   if (className) {
     label.classList.add(className);
   }
   return label;
+}
+
+// Create a group of priority radio buttons for a task and append them to parentElement
+// Make the radio button that is consistent with the priority of a task checked
+export function createRadioButtonGroup(priorities, parentElement) {
+  for (priority of priorities) {
+    let input;
+    if (priority === task.priority) {
+      input = createInputRadio(priority, true);
+    } else {
+      input = createInputRadio(priority);
+    }
+    const label = createLabel(priority, `${priority}-priority-label`);
+    parentElement.append(input, label);
+  }
 }
 
 // Insert a DOM element after another element
