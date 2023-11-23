@@ -53,6 +53,33 @@ export function createInputDate(value, min = false, className = '') {
   return input;
 }
 
+// Create input of type radio
+function createInputRadio(value, id, name, className = '', checked = false) {
+  const input = document.createElement('input');
+  input.type = 'radio';
+  input.value = value;
+  input.name = name;
+  input.id = id;
+  if (className) {
+    input.classList.add(className);
+  }
+  if (checked) {
+    input.checked = 'true';
+  }
+  return input;
+}
+
+// Create label
+function createLabel(content, forValue, className = '') {
+  const label = document.createElement('label');
+  label.innerHTML = content;
+  label.for = forValue;
+  if (className) {
+    label.classList.add(className);
+  }
+  return label;
+}
+
 // Insert a DOM element after another element
 export function insertAfter(newElement, existingElement) {
   existingElement.parentNode.insertBefore(
