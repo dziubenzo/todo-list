@@ -54,25 +54,26 @@ export function createInputDate(value, min = false, className = '') {
 }
 
 // Create input of type radio
-function createInputRadio(value, className = '', checked = false) {
+function createInputRadio(value, name, id, className = '', checked = false) {
   const input = document.createElement('input');
   input.type = 'radio';
   input.value = value;
-  input.id = value;
+  input.name = name;
+  input.id = id;
   if (className) {
     input.classList.add(className);
   }
   if (checked) {
-    input.checked = 'true';
+    input.checked = true;
   }
   return input;
 }
 
 // Create label
-function createLabel(content, className = '') {
+function createLabel(content, forName, className = '') {
   const label = document.createElement('label');
   label.innerHTML = content;
-  label.for = content;
+  label.htmlFor = forName;
   if (className) {
     label.classList.add(className);
   }
@@ -81,15 +82,30 @@ function createLabel(content, className = '') {
 
 // Create a group of priority radio buttons for a task and append them to parentElement
 // Make the radio button that is consistent with the priority of a task checked
-export function createRadioButtonGroup(priorities, parentElement) {
-  for (priority of priorities) {
+export function createRadioButtonGroup(task, index, priorities, parentElement) {
+  for (const priority of priorities) {
     let input;
+    console.log(priority);
+    console.log(task.priority);
     if (priority === task.priority) {
-      input = createInputRadio(priority, true);
+      input = createInputRadio(
+        priority,
+        `priority-task-${index}`,
+        `${priority}-task-${index}`,
+        true
+      );
     } else {
-      input = createInputRadio(priority);
+      input = createInputRadio(
+        priority,
+        `priority-task-${index}`,
+        `${priority}-task-${index}`
+      );
     }
-    const label = createLabel(priority, `${priority}-priority-label`);
+    const label = createLabel(
+      priority,
+      `${priority}-task-${index}`,
+      `${priority}-priority-label`
+    );
     parentElement.append(input, label);
   }
 }

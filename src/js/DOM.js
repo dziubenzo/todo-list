@@ -1,4 +1,4 @@
-import { tasks } from './tasks';
+import { Task, tasks } from './tasks';
 import checkboxSrc from '../assets/checkbox.svg';
 import {
   createDiv,
@@ -7,6 +7,7 @@ import {
   createSpan,
   insertAfter,
   createInputDate,
+  createRadioButtonGroup,
 } from './helpers';
 
 const contentDiv = document.querySelector('.content');
@@ -43,7 +44,10 @@ export function generateTaskDetails(task, index) {
   const description = createP(task.description, 'description-details');
   description.contentEditable = 'true';
   const list = createP(task.list, 'list-details');
+
   const priority = createDiv('priorities-details');
+  createRadioButtonGroup(task, index, Task.priorities, priority);
+
   const dueDate = createInputDate(task.dueDate, true, 'due-date-details');
   const creationDate = createP(
     task.creationDate.toLocaleDateString('pl'),
