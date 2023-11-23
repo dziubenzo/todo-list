@@ -78,9 +78,12 @@ function createLabel(content, forName, className = '') {
 }
 
 // Create select
-function createSelect(name) {
+function createSelect(name, className = '') {
   const select = document.createElement('select');
   select.name = name;
+  if (className) {
+    select.classList.add(className);
+  }
   return select;
 }
 
@@ -97,8 +100,11 @@ function createOption(content, selected = false) {
 
 // Create a drop down list of lists
 // Make the list that is consistent with the list of a task selected
-export function createDropDownList(task, index, name, lists) {
+export function createDropDownList(task, index, name, lists, className = '') {
   const select = createSelect(`${name}-task-${index}`);
+  if (className) {
+    select.classList.add(className);
+  }
   for (const list of lists) {
     let option;
     if (list === task.list) {

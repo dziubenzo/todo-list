@@ -178,14 +178,12 @@ main {
         font-family: $font-stack;
         background-color: lighten($bg-colour-dark, 10%);
         color: $font-colour-dark;
-        padding-left: 2px;
         font-size: 0.9rem;
         border-radius: 4px;
         border: none;
-        outline: 1px solid $font-colour-dark;
 
         &:focus {
-          outline: 1px solid $font-colour-dark;
+          outline: none;
         }
 
         &::-webkit-calendar-picker-indicator {
@@ -224,6 +222,19 @@ main {
 
         label {
           margin: 0 6px;
+        }
+      }
+
+      select {
+        cursor: pointer;
+        width: min-content;
+        background-color: lighten($bg-colour-dark, 10%);
+        color: $font-colour-dark;
+        font-weight: bold;
+        border: none;
+
+        &:focus {
+          outline: none;
         }
       }
 

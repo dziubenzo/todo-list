@@ -44,7 +44,7 @@ export function generateTaskDetails(task, index) {
   title.contentEditable = 'true';
   const description = createP(task.description, 'description-details');
   description.contentEditable = 'true';
-  const list = createDropDownList(task, index, 'lists', Task.lists);
+  const list = createDropDownList(task, index, 'lists', Task.lists, 'lists-details');
 
   const priority = createDiv('priorities-details');
   createRadioButtonGroup(task, index, Task.priorities, priority);
