@@ -110,6 +110,8 @@ function editTask(titleClicked, index) {
     titleClicked.parentNode.nextSibling.querySelector("input[type='date']");
   const editablePriorities =
     titleClicked.parentNode.nextSibling.querySelectorAll("input[type='radio']");
+  const editableList =
+    titleClicked.parentNode.nextSibling.querySelector('select');
 
   // Listen for changes and change values in the Task objects
   // Update task title value dynamically
@@ -131,5 +133,9 @@ function editTask(titleClicked, index) {
     priorityInput.addEventListener('change', () => {
       tasks[index].updatePriority(priorityInput.value);
     });
+  });
+  // Update list
+  editableList.addEventListener('change', () => {
+    tasks[index].updateList(editableList.value);
   });
 }

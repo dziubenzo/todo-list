@@ -88,7 +88,7 @@ function createSelect(name) {
 function createOption(content, selected = false) {
   const option = document.createElement('option');
   option.innerHTML = content;
-  option.value = content.toLowerCase();
+  option.value = content;
   if (selected) {
     option.selected = true;
   }

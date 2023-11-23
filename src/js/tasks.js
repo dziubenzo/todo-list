@@ -29,6 +29,10 @@ class Task {
   updatePriority(newPriority) {
     this.priority = newPriority;
   }
+
+  updateList(newList) {
+    this.list = newList;
+  }
 }
 
 const tasks = [
