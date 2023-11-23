@@ -99,7 +99,7 @@ function createOption(content, selected = false) {
 // Make the list that is consistent with the list of a task selected
 export function createDropDownList(task, index, name, lists) {
   const select = createSelect(`${name}-task-${index}`);
-  for (list of lists) {
+  for (const list of lists) {
     let option;
     if (list === task.list) {
       option = createOption(list, true);

@@ -8,6 +8,7 @@ import {
   insertAfter,
   createInputDate,
   createRadioButtonGroup,
+  createDropDownList,
 } from './helpers';
 
 const contentDiv = document.querySelector('.content');
@@ -43,7 +44,7 @@ export function generateTaskDetails(task, index) {
   title.contentEditable = 'true';
   const description = createP(task.description, 'description-details');
   description.contentEditable = 'true';
-  const list = createP(task.list, 'list-details');
+  const list = createDropDownList(task, index, 'lists', Task.lists);
 
   const priority = createDiv('priorities-details');
   createRadioButtonGroup(task, index, Task.priorities, priority);
