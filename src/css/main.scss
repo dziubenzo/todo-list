@@ -195,6 +195,38 @@ main {
         }
       }
 
+      .priorities-details {
+        input,
+        label {
+          cursor: pointer;
+        }
+
+        input {
+          position: relative;
+          top: 2px;
+        }
+
+        input[id^='low'] {
+          accent-color: green;
+        }
+
+        input[id^='medium'] {
+          accent-color: yellow;
+        }
+
+        input[id^='high'] {
+          accent-color: red;
+        }
+
+        input[id^='yesterday'] {
+          accent-color: rgba(50, 1, 141, 0.616);
+        }
+
+        label {
+          margin: 0 6px;
+        }
+      }
+
       span {
         color: darken($font-colour-dark, 20%);
       }
