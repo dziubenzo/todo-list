@@ -18,6 +18,10 @@ class Task {
   updateDescription(newDescription) {
     this.description = newDescription;
   }
+
+  updateDueDate(newDueDate) {
+    this.dueDate = newDueDate;
+  }
 }
 
 const tasks = [

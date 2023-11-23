@@ -19,10 +19,7 @@ export function displayAllTasks() {
 
     const checkbox = createImg(checkboxSrc, 'Checkbox', 'checkbox');
     const title = createP(task.title, 'title');
-    const dueDate = createP(
-      task.dueDate.toLocaleDateString('en-GB'),
-      'due-date'
-    );
+    const dueDate = createP(task.dueDate.toLocaleDateString('pl'), 'due-date');
     taskDiv.append(checkbox, title, dueDate);
   });
 }
@@ -39,7 +36,7 @@ export function generateTaskDetails(task, index) {
   const prioritySpan = createSpan('Priority');
   const dueDateSpan = createSpan('Due date');
   const creationDateSpan = createSpan('Created on');
-  const completionDateSpan = createSpan('Completed on');
+  // const completionDateSpan = createSpan('Completed on');
 
   const title = createP(task.title, 'title-details');
   title.contentEditable = 'true';
@@ -49,13 +46,13 @@ export function generateTaskDetails(task, index) {
   const priority = createP(task.priority, 'priority-details');
   const dueDate = createInputDate(task.dueDate, true, 'due-date-details');
   const creationDate = createP(
-    task.creationDate.toLocaleDateString('en-GB'),
+    task.creationDate.toLocaleDateString('pl'),
     'creation-date-details'
   );
-  const completionDate = createP(
-    task.completionDate,
-    'completion-date-details'
-  );
+  // const completionDate = createP(
+  //   task.completionDate,
+  //   'completion-date-details'
+  // );
 
   detailsDiv.append(
     titleSpan,
@@ -69,9 +66,9 @@ export function generateTaskDetails(task, index) {
     dueDateSpan,
     dueDate,
     creationDateSpan,
-    creationDate,
-    completionDateSpan,
-    completionDate
+    creationDate
+    // completionDateSpan,
+    // completionDate
   );
 }
 
@@ -85,7 +82,7 @@ export function listenForTitleClick() {
       const index = event.target.parentNode.classList.value.substr(-1, 1);
       generateTaskDetails(tasks[index], index);
       title.removeEventListener('click', showDetails);
-      changeTitleOrDescription(title, index);
+      editTask(title, index);
       title.addEventListener('click', function hideDetails(event) {
         event.target.parentNode.nextSibling.remove();
         title.removeEventListener('click', hideDetails);
@@ -96,7 +93,7 @@ export function listenForTitleClick() {
 }
 
 // Listen for value change in title or description in the opened task details
-function changeTitleOrDescription(titleClicked, index) {
+function editTask(titleClicked, index) {
   // Select editable elements in the opened task details
   const editableTitle = titleClicked.parentNode.nextSibling.querySelector(
     "p[class='title-details'"
@@ -104,6 +101,8 @@ function changeTitleOrDescription(titleClicked, index) {
   const editableDescription = titleClicked.parentNode.nextSibling.querySelector(
     "p[class='description-details'"
   );
+  const editableDueDate =
+    titleClicked.parentNode.nextSibling.querySelector("input[type='date']");
   // Listen for changes and change values in the Task objects
   // Update task title value dynamically
   editableTitle.addEventListener('input', () => {
@@ -112,5 +111,11 @@ function changeTitleOrDescription(titleClicked, index) {
   });
   editableDescription.addEventListener('input', () => {
     tasks[index].updateDescription(editableDescription.innerHTML);
+  });
+  // Update due date value dynamically
+  editableDueDate.addEventListener('change', () => {
+    tasks[index].updateDueDate(new Date(editableDueDate.value));
+    titleClicked.nextSibling.innerHTML =
+      tasks[index].dueDate.toLocaleDateString('pl');
   });
 }
