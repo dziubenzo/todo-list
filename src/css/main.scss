@@ -189,7 +189,7 @@ main {
         }
       }
 
-      .due-date-details {
+      input[type='date'] {
         cursor: pointer;
         width: min-content;
         font-family: $font-stack;
@@ -210,7 +210,8 @@ main {
         }
       }
 
-      .priorities-details {
+      .priorities-details,
+      .priorities-add-task {
         input,
         label {
           cursor: pointer;
