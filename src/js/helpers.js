@@ -1,3 +1,13 @@
+// Create h1-6
+export function createH(level, content, className = '') {
+  const heading = document.createElement(`h${level}`);
+  heading.innerHTML = content;
+  if (className) {
+    heading.classList.add(className);
+  }
+  return heading;
+}
+
 // Create div
 export function createDiv(className = '') {
   const div = document.createElement('div');

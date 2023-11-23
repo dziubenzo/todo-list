@@ -2,6 +2,7 @@ import { Task, tasks } from './tasks';
 import checkboxSrc from '../assets/checkbox.svg';
 import addIconSrc from '../assets/add-task.svg';
 import {
+  createH,
   createDiv,
   createP,
   createImg,
@@ -40,6 +41,7 @@ function hideAddTaskBtn(addTaskButton) {
 
 // Show form for adding a new task
 function showAddTaskForm(insertBeforeElement) {
+  const heading = createH(2, 'Add New Task', 'add-task-heading');
   const addTaskForm = createDiv('add-task-form');
   const titleLabel = createLabel('Title', 'title');
   const descriptionLabel = createLabel('Description', 'description');
@@ -63,10 +65,16 @@ function showAddTaskForm(insertBeforeElement) {
     250,
     'Description (3 to 250 characters)'
   );
-  const priorityRadioButtons = createRadioButtonGroup('', '', Task.priorities, 'priorities-add-task');
+  const priorityRadioButtons = createRadioButtonGroup(
+    '',
+    '',
+    Task.priorities,
+    'priorities-add-task'
+  );
   const listDropDown = createDropDownList('', '', 'list', 'list', Task.lists);
   const dueDatePicker = createInputDate(new Date(), true);
   addTaskForm.append(
+    heading,
     titleLabel,
     titleInput,
     descriptionLabel,
