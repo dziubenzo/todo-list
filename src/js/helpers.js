@@ -117,9 +117,10 @@ export function createDropDownList(task, index, name, lists, className = '') {
   return select;
 }
 
-// Create a group of priority radio buttons for a task and append them to parentElement
+// Create a group of priority radio buttons for a task nested in a div
 // Make the radio button that is consistent with the priority of a task checked
-export function createRadioButtonGroup(task, index, priorities, parentElement) {
+export function createRadioButtonGroup(task, index, priorities, className = '') {
+  const div = createDiv(className);
   for (const priority of priorities) {
     let input;
     if (priority === task.priority) {
@@ -141,8 +142,9 @@ export function createRadioButtonGroup(task, index, priorities, parentElement) {
       `${priority}-task-${index}`,
       `${priority}-priority-label`
     );
-    parentElement.append(input, label);
+    div.append(input, label);
   }
+  return div;
 }
 
 // Insert a DOM element after another element
