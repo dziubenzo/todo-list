@@ -140,7 +140,8 @@ export function createTextarea(
   rows,
   minlength,
   maxlength,
-  placeholder
+  placeholder,
+  required = false
 ) {
   const textarea = document.createElement('textarea');
   textarea.id = id;
@@ -149,6 +150,9 @@ export function createTextarea(
   textarea.minLength = minlength;
   textarea.maxLength = maxlength;
   textarea.placeholder = placeholder;
+  if (required) {
+    textarea.required = true;
+  }
   return textarea;
 }
 
@@ -192,6 +196,7 @@ export function createRadioButtonGroup(
   className = ''
 ) {
   const div = createDiv(className);
+  const SELECTED_OPTION = 'low';
   for (const priority of priorities) {
     let input;
     let label;
@@ -216,10 +221,18 @@ export function createRadioButtonGroup(
         `${priority}-priority-label`
       );
     } else {
-      input = createInputRadio(priority, 'priority', `${priority}-priority`);
+      if (priority === SELECTED_OPTION) {
+        input = createInputRadio(
+          priority,
+          'priority',
+          `${priority}-priority`,
+          true
+        );
+      } else {
+        input = createInputRadio(priority, 'priority', `${priority}-priority`);
+      }
       label = createLabel(priority, `${priority}-priority`);
     }
-
     div.append(input, label);
   }
   return div;

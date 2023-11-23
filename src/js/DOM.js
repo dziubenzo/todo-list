@@ -63,7 +63,8 @@ function showAddTaskForm(insertBeforeElement) {
     5,
     3,
     250,
-    'Description (3 to 250 characters)'
+    'Description (3 to 250 characters)',
+    true
   );
   const priorityRadioButtons = createRadioButtonGroup(
     '',
