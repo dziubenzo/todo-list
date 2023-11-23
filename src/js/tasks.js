@@ -1,4 +1,11 @@
 class Task {
+  static priorities = {
+    low: 'low',
+    medium: 'medium',
+    high: 'high',
+    yesterday: 'yesterday',
+  };
+
   completionDate = 'Implement me pls';
 
   constructor(title, description, list, priority, dueDate) {

@@ -187,6 +187,12 @@ main {
         &:focus {
           outline: 1px solid $font-colour-dark;
         }
+
+        &::-webkit-calendar-picker-indicator {
+          filter: invert(76%) sepia(98%) saturate(1639%) hue-rotate(327deg)
+            brightness(102%) contrast(106%);
+          cursor: pointer;
+        }
       }
 
       span {
