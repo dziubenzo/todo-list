@@ -113,6 +113,22 @@ main {
     gap: 4px;
     padding: 16px;
 
+    .add-task {
+      display: flex;
+      justify-content: center;
+      cursor: pointer;
+
+      &:hover {
+        outline: 1px solid $font-colour-dark;
+        border-radius: 8px;
+      }
+
+      img[alt='Add Task Button'] {
+        width: 36px;
+        height: 36px;
+      }
+    }
+
     div[class^='task'] {
       display: flex;
       align-items: center;

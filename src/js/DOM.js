@@ -1,5 +1,6 @@
 import { Task, tasks } from './tasks';
 import checkboxSrc from '../assets/checkbox.svg';
+import addTaskSrc from '../assets/add-task.svg';
 import {
   createDiv,
   createP,
@@ -12,6 +13,18 @@ import {
 } from './helpers';
 
 const contentDiv = document.querySelector('.content');
+
+// Display add task button
+// Listen for it
+export function displayAddTaskBtn() {
+  const addTaskDiv = createDiv(`add-task`);
+  contentDiv.append(addTaskDiv);
+
+  const addBtn = createImg(addTaskSrc, 'Add Task Button', 'add-task-btn');
+  addTaskDiv.append(addBtn);
+
+  addTaskDiv.addEventListener('click', showNewTaskForm);
+}
 
 // Display all tasks
 export function displayAllTasks() {
