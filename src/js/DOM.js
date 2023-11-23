@@ -96,7 +96,7 @@ export function listenForTitleClick() {
   });
 }
 
-// Listen for value change in title or description in the opened task details
+// Edit task details (title, description, list, priority, due date)
 function editTask(titleClicked, index) {
   // Select editable elements in the opened task details
   const editableTitle = titleClicked.parentNode.nextSibling.querySelector(
@@ -107,6 +107,9 @@ function editTask(titleClicked, index) {
   );
   const editableDueDate =
     titleClicked.parentNode.nextSibling.querySelector("input[type='date']");
+  const editablePriorities =
+    titleClicked.parentNode.nextSibling.querySelectorAll("input[type='radio']");
+
   // Listen for changes and change values in the Task objects
   // Update task title value dynamically
   editableTitle.addEventListener('input', () => {
@@ -121,5 +124,11 @@ function editTask(titleClicked, index) {
     tasks[index].updateDueDate(new Date(editableDueDate.value));
     titleClicked.nextSibling.innerHTML =
       tasks[index].dueDate.toLocaleDateString('pl');
+  });
+  // Update priority
+  editablePriorities.forEach((priorityInput) => {
+    priorityInput.addEventListener('change', () => {
+      tasks[index].updatePriority(priorityInput.value);
+    });
   });
 }
