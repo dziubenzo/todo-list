@@ -244,22 +244,22 @@ export function listenForTitleClick() {
 }
 
 // Listen for delete task icon clicks
-// Delete task from the DOM and tasks array
+// Delete task from the tasks array
+// Refresh page
 export function listenForDeleteClick() {
   const deleteIcons = document.querySelectorAll('.delete-task-icon');
 
   deleteIcons.forEach((deleteIcon) => {
     deleteIcon.addEventListener('click', () => {
-      const index = deleteIcon.parentNode.classList.value.substr(-1, 1);
-      // Delete from the DOM
-      deleteIcon.parentNode.remove();
-      // Delete task details as well if shown
-      if (document.querySelector(`.details-task-${index}`)) {
-        document.querySelector(`.details-task-${index}`).remove();
-      }
       // Delete from the tasks array
+      const index = deleteIcon.parentNode.classList.value.substr(-1, 1);
       tasks.splice(index, 1);
-      console.log(tasks);
+      // Refresh page
+      removeTasks();
+      displayAllTasks();
+      createAddTaskBtn();
+      listenForTitleClick();
+      listenForDeleteClick();
     });
   });
 }
