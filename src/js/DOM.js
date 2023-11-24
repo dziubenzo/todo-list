@@ -1,5 +1,6 @@
 import { Task, tasks } from './tasks';
 import checkboxSrc from '../assets/checkbox.svg';
+import checkedCheckboxSrc from '../assets/checkbox-checked.svg';
 import addIconSrc from '../assets/add-task.svg';
 import deleteTaskScr from '../assets/delete-task.svg';
 import {
@@ -267,6 +268,7 @@ export function listenForDeleteClick() {
 
 // Listen for checkbox click
 // Mark the task as completed
+// Change icon to checked box
 export function listenForCheckboxClick() {
   const checkboxIcons = document.querySelectorAll('.checkbox-icon');
 
@@ -274,9 +276,10 @@ export function listenForCheckboxClick() {
     checkboxIcon.addEventListener('click', () => {
       const index = checkboxIcon.parentNode.dataset.index;
       tasks[index].markAsCompleted();
-      console.table(tasks);
-    })
-  })
+      checkboxIcon.src = checkedCheckboxSrc;
+      checkboxIcon.classList.replace('checkbox-icon', 'checkbox-checked-icon');
+    });
+  });
 }
 
 // Edit task details (title, description, list, priority, due date)
