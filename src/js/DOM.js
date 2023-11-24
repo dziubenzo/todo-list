@@ -114,7 +114,7 @@ function listenForNewTask(formElement) {
     const dueDate = new Date(formElement.elements['due-date'].value);
     // Create new Task instance and add it to the tasks array
     tasks.push(new Task(title, description, list, priority, dueDate));
-    // Refresh page
+    // Refresh tasks
     removeTasks();
     displayAllTasks();
     createAddTaskBtn();
@@ -245,7 +245,7 @@ export function listenForTitleClick() {
 
 // Listen for delete task icon clicks
 // Delete task from the tasks array
-// Refresh page
+// Refresh tasks
 export function listenForDeleteClick() {
   const deleteIcons = document.querySelectorAll('.delete-task-icon');
 
@@ -254,7 +254,7 @@ export function listenForDeleteClick() {
       // Delete from the tasks array
       const index = deleteIcon.parentNode.classList.value.substr(-1, 1);
       tasks.splice(index, 1);
-      // Refresh page
+      // Refresh tasks
       removeTasks();
       displayAllTasks();
       createAddTaskBtn();
