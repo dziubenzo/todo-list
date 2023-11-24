@@ -166,6 +166,19 @@ export function createForm(id, className = '') {
   return form;
 }
 
+// Create button
+export function createButton(type, form = '', className = '') {
+  const button = document.createElement('button');
+  button.type = type;
+  if (form) {
+    button.form = form;
+  }
+  if (className) {
+    button.classList.add(classname);
+  }
+  return button;
+}
+
 // Create a drop down list of task lists
 // If task and index given as arguments, select the list of the task selected
 export function createDropDownList(
