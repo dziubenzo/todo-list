@@ -28,10 +28,11 @@ export function displayAddTaskBtn() {
 
   const addIcon = createImg(addIconSrc, 'Add Task Button', 'add-task-btn');
   addBtn.append(addIcon);
+  showAddTaskForm(addBtn); // temporary
 
   // Show add task form and hide add task form when clicked
   addBtn.addEventListener('click', () => {
-    showAddTaskForm(addBtn);
+    // showAddTaskForm(addBtn);
     hideAddTaskBtn(addBtn);
   });
 }
@@ -44,17 +45,17 @@ function hideAddTaskBtn(addTaskButton) {
 // Show form for adding a new task
 function showAddTaskForm(insertBeforeElement) {
   const heading = createH(2, 'Add New Task', 'add-task-heading');
-  const addTaskForm = createForm('add-task-form', 'add-task-form');
+  const addTaskForm = createForm('add-task-form');
   const titleLabel = createLabel('Title', 'title');
   const descriptionLabel = createLabel('Description', 'description');
   const listLabel = createLabel('List', 'list');
   const priorityLabel = createLabel('Priority', 'priority');
   const dueDateLabel = createLabel('Due Date', 'due-date');
 
-  const buttonsDiv = createDiv('add-form-buttons');
-  const cancelBtn = createButton('button', 'Cancel');
+  const buttonsDiv = createDiv('add-task-form-buttons');
   const submitBtn = createButton('submit', 'Create');
-  buttonsDiv.append(cancelBtn, submitBtn);
+  const cancelBtn = createButton('button', 'Cancel');
+  buttonsDiv.append(submitBtn, cancelBtn);
 
   const titleInput = createInputText(
     'title',
