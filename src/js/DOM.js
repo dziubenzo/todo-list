@@ -14,6 +14,7 @@ import {
   createLabel,
   createInputText,
   createTextarea,
+  createForm,
 } from './helpers';
 
 const contentDiv = document.querySelector('.content');
@@ -42,7 +43,7 @@ function hideAddTaskBtn(addTaskButton) {
 // Show form for adding a new task
 function showAddTaskForm(insertBeforeElement) {
   const heading = createH(2, 'Add New Task', 'add-task-heading');
-  const addTaskForm = createDiv('add-task-form');
+  const addTaskForm = createForm('add-task-form', 'add-task-form');
   const titleLabel = createLabel('Title', 'title');
   const descriptionLabel = createLabel('Description', 'description');
   const listLabel = createLabel('List', 'list');
@@ -199,7 +200,7 @@ function editTask(titleClicked, index) {
   const editableList =
     titleClicked.parentNode.nextSibling.querySelector('select');
 
-  // Listen for changes and change values in the Task objects
+  // Listen for task edits and change corresponding values in Task objects
   // Update task title value dynamically
   editableTitle.addEventListener('input', () => {
     tasks[index].updateTitle(editableTitle.innerHTML);

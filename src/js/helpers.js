@@ -156,6 +156,16 @@ export function createTextarea(
   return textarea;
 }
 
+// Create form
+export function createForm(id, className = '') {
+  const form = document.createElement('form');
+  form.id = id;
+  if (className) {
+    form.classList.add(className);
+  }
+  return form;
+}
+
 // Create a drop down list of task lists
 // If task and index given as arguments, select the list of the task selected
 export function createDropDownList(
