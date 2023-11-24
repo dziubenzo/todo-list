@@ -1,6 +1,7 @@
 import { Task, tasks } from './tasks';
 import checkboxSrc from '../assets/checkbox.svg';
 import addIconSrc from '../assets/add-task.svg';
+import deleteTaskScr from '../assets/delete-task.svg';
 import {
   createH,
   createDiv,
@@ -144,10 +145,15 @@ export function displayAllTasks() {
     const taskDiv = createDiv(`task-${index}`);
     contentDiv.append(taskDiv);
 
-    const checkbox = createImg(checkboxSrc, 'Checkbox', 'checkbox');
+    const checkbox = createImg(checkboxSrc, 'Checkbox Icon', 'checkbox-icon');
     const title = createP(task.title, 'title');
+    const deleteIcon = createImg(
+      deleteTaskScr,
+      'Delete Task Icon',
+      'delete-task-icon'
+    );
     const dueDate = createP(task.dueDate.toLocaleDateString('pl'), 'due-date');
-    taskDiv.append(checkbox, title, dueDate);
+    taskDiv.append(checkbox, title, deleteIcon, dueDate);
   });
 }
 

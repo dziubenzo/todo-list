@@ -142,8 +142,8 @@ main {
     }
 
     img {
-      height: 1rem;
-      width: 1rem;
+      height: 1.1rem;
+      width: 1.1rem;
       filter: invert(76%) sepia(98%) saturate(1639%) hue-rotate(327deg)
         brightness(102%) contrast(106%);
       cursor: pointer;
@@ -153,8 +153,13 @@ main {
       cursor: pointer;
     }
 
-    p.due-date {
+    img[class='delete-task-icon'] {
       margin-left: auto;
+    }
+
+    p.due-date {
+      width: 75px;
+      text-align: end;
     }
 
     .details,
