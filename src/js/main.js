@@ -1,15 +1,16 @@
 import '../css/main.scss';
-import { Task, tasks } from './tasks';
+import { Task } from './tasks';
 import {
   displayAllTasks,
   listenForTitleClick,
-  createAddTaskBtn,
+  createAddTaskButton,
   listenForDeleteClick,
   listenForCheckboxClick,
 } from './DOM';
 
-displayAllTasks();
-createAddTaskBtn();
-listenForTitleClick();
-listenForDeleteClick();
+// Show all tasks on page load
+displayAllTasks(Task.tasks);
+createAddTaskButton();
+listenForTitleClick(Task.tasks);
+listenForDeleteClick(Task.tasks);
 listenForCheckboxClick();

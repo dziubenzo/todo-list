@@ -22,7 +22,7 @@ import {
 
 // Create add task button
 // Listen for it
-export function createAddTaskBtn() {
+export function createAddTaskButton() {
   const contentDiv = document.querySelector('main .content');
   const addBtn = createDiv(`add-task`);
   contentDiv.append(addBtn);
@@ -100,7 +100,7 @@ function createAddTaskForm(addTaskButton) {
   // Listen for form submission
   listenForNewTask(addTaskForm);
   // Listen for Cancel button click
-  listenForCancelButton(cancelBtn, addTaskForm, addTaskButton);
+  listenForCancelButton(cancelBtn, addTaskForm);
 }
 
 // Add new task when the Create button is clicked
@@ -117,18 +117,18 @@ function listenForNewTask(formElement) {
     Task.tasks.push(new Task(title, description, list, priority, dueDate));
     // Refresh tasks
     removeTasks();
-    displayAllTasks();
-    createAddTaskBtn();
-    listenForTitleClick();
-    listenForDeleteClick();
+    displayAllTasks(Task.tasks);
+    createAddTaskButton();
+    listenForTitleClick(Task.tasks);
+    listenForDeleteClick(Task.tasks);
   });
 }
 
 // Remove the add task form and recreate the add form button if the Cancel button is clicked
-function listenForCancelButton(cancelButton, addTaskForm, addTaskButton) {
+function listenForCancelButton(cancelButton, addTaskForm) {
   cancelButton.addEventListener('click', () => {
     addTaskForm.remove();
-    createAddTaskBtn();
+    createAddTaskButton();
   });
 }
 
@@ -141,9 +141,9 @@ function removeTasks() {
 }
 
 // Display all tasks
-export function displayAllTasks() {
+export function displayAllTasks(taskArray) {
   const contentDiv = document.querySelector('main .content');
-  Task.tasks.forEach((task, index) => {
+  taskArray.forEach((task, index) => {
     const taskDiv = createDiv(`task-${index}`);
     taskDiv.dataset.index = index;
     contentDiv.append(taskDiv);
@@ -227,13 +227,13 @@ export function generateTaskDetails(task, index) {
 
 // Listen for task title click
 // Show or hide task details
-export function listenForTitleClick() {
+export function listenForTitleClick(taskArray) {
   const taskTitles = document.querySelectorAll('.title');
 
   taskTitles.forEach((title) => {
     title.addEventListener('click', function showDetails() {
       const index = title.parentNode.dataset.index;
-      generateTaskDetails(Task.tasks[index], index);
+      generateTaskDetails(taskArray[index], index);
       title.removeEventListener('click', showDetails);
       editTask(title, index);
       title.addEventListener('click', function hideDetails() {
@@ -248,7 +248,7 @@ export function listenForTitleClick() {
 // Listen for delete task icon clicks
 // Delete task from the tasks array
 // Refresh tasks
-export function listenForDeleteClick() {
+export function listenForDeleteClick(taskArray) {
   const deleteIcons = document.querySelectorAll('.delete-task-icon');
 
   deleteIcons.forEach((deleteIcon) => {
@@ -256,13 +256,12 @@ export function listenForDeleteClick() {
       // Delete from the tasks array
       const index = deleteIcon.parentNode.dataset.index;
       Task.tasks.splice(index, 1);
-      console.log(Task.prototype);
       // Refresh tasks
       removeTasks();
-      displayAllTasks();
-      createAddTaskBtn();
-      listenForTitleClick();
-      listenForDeleteClick();
+      displayAllTasks(taskArray);
+      createAddTaskButton();
+      listenForTitleClick(taskArray);
+      listenForDeleteClick(taskArray);
     });
   });
 }
