@@ -144,6 +144,7 @@ export function displayAllTasks() {
   const contentDiv = document.querySelector('main .content');
   tasks.forEach((task, index) => {
     const taskDiv = createDiv(`task-${index}`);
+    taskDiv.dataset.index = index;
     contentDiv.append(taskDiv);
 
     const checkbox = createImg(checkboxSrc, 'Checkbox Icon', 'checkbox-icon');
@@ -229,13 +230,13 @@ export function listenForTitleClick() {
   const taskTitles = document.querySelectorAll('.title');
 
   taskTitles.forEach((title) => {
-    title.addEventListener('click', function showDetails(event) {
-      const index = event.target.parentNode.classList.value.substr(-1, 1);
+    title.addEventListener('click', function showDetails() {
+      const index = title.parentNode.dataset.index;
       generateTaskDetails(tasks[index], index);
       title.removeEventListener('click', showDetails);
       editTask(title, index);
-      title.addEventListener('click', function hideDetails(event) {
-        event.target.parentNode.nextSibling.remove();
+      title.addEventListener('click', function hideDetails() {
+        title.parentNode.nextSibling.remove();
         title.removeEventListener('click', hideDetails);
         title.addEventListener('click', showDetails);
       });
@@ -252,7 +253,7 @@ export function listenForDeleteClick() {
   deleteIcons.forEach((deleteIcon) => {
     deleteIcon.addEventListener('click', () => {
       // Delete from the tasks array
-      const index = deleteIcon.parentNode.classList.value.substr(-1, 1);
+      const index = deleteIcon.parentNode.dataset.index;
       tasks.splice(index, 1);
       // Refresh tasks
       removeTasks();
