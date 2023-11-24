@@ -49,10 +49,11 @@ export function createSpan(content, className = '') {
 }
 
 // Create input of type date, with min value of today if set to true
-export function createInputDate(value, min = false, className = '') {
+export function createInputDate(value, name, min = false, className = '') {
   const input = document.createElement('input');
   input.type = 'date';
   input.value = formatDate(value);
+  input.name = name;
   if (min) {
     const today = new Date();
     input.min = formatDate(today);

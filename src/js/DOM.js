@@ -18,21 +18,19 @@ import {
   createButton,
 } from './helpers';
 
-const contentDiv = document.querySelector('.content');
-
 // Display add task button
 // Listen for it
 export function displayAddTaskBtn() {
+  const contentDiv = document.querySelector('main .content');
   const addBtn = createDiv(`add-task`);
   contentDiv.append(addBtn);
 
   const addIcon = createImg(addIconSrc, 'Add Task Button', 'add-task-btn');
   addBtn.append(addIcon);
-  showAddTaskForm(addBtn); // temporary
 
   // Show add task form and hide add task form when clicked
   addBtn.addEventListener('click', () => {
-    // showAddTaskForm(addBtn);
+    showAddTaskForm(addBtn);
     hideAddTaskBtn(addBtn);
   });
 }
@@ -81,7 +79,7 @@ function showAddTaskForm(insertBeforeElement) {
     'priorities-add-task'
   );
   const listDropDown = createDropDownList('', '', 'list', 'list', Task.lists);
-  const dueDatePicker = createInputDate(new Date(), true);
+  const dueDatePicker = createInputDate(new Date(), 'due-date', true);
   addTaskForm.append(
     heading,
     titleLabel,
@@ -97,10 +95,41 @@ function showAddTaskForm(insertBeforeElement) {
     buttonsDiv
   );
   insertBeforeElement.parentNode.insertBefore(addTaskForm, insertBeforeElement);
+  // Listen for form submission
+  listenForNewTask(addTaskForm);
+}
+
+// Add new task when the Create button is clicked
+function listenForNewTask(formElement) {
+  formElement.addEventListener('submit', (event) => {
+    event.preventDefault();
+    // Get form values
+    const title = formElement.elements.title.value;
+    const description = formElement.elements.description.value;
+    const list = formElement.elements.list.value;
+    const priority = formElement.elements.priority.value;
+    const dueDate = new Date(formElement.elements['due-date'].value);
+    // Create new Task instance and add it to the tasks array
+    tasks.push(new Task(title, description, list, priority, dueDate));
+    // Refresh page
+    removeContent();
+    displayAllTasks();
+    displayAddTaskBtn();
+    listenForTitleClick();
+  });
+}
+
+// Remove all tasks
+function removeContent() {
+  const contentDiv = document.querySelector('main .content');
+  const newContentDiv = createDiv('content');
+  contentDiv.parentNode.append(newContentDiv);
+  contentDiv.remove();
 }
 
 // Display all tasks
 export function displayAllTasks() {
+  const contentDiv = document.querySelector('main .content');
   tasks.forEach((task, index) => {
     const taskDiv = createDiv(`task-${index}`);
     contentDiv.append(taskDiv);
@@ -144,7 +173,12 @@ export function generateTaskDetails(task, index) {
     Task.priorities,
     'priorities-details'
   );
-  const dueDate = createInputDate(task.dueDate, true, 'due-date-details');
+  const dueDate = createInputDate(
+    task.dueDate,
+    'due-date-picker',
+    true,
+    'due-date-details'
+  );
   const creationDate = createP(
     task.creationDate.toLocaleDateString('pl'),
     'creation-date-details'
