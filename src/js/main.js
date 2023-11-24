@@ -1,7 +1,7 @@
 import '../css/main.scss';
 import { Task, tasks } from './tasks';
-import { displayAllTasks, listenForTitleClick, displayAddTaskBtn } from './DOM';
+import { displayAllTasks, listenForTitleClick, createAddTaskBtn } from './DOM';
 
 displayAllTasks();
-displayAddTaskBtn();
+createAddTaskBtn();
 listenForTitleClick();

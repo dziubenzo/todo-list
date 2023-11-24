@@ -18,9 +18,9 @@ import {
   createButton,
 } from './helpers';
 
-// Display add task button
+// Create add task button
 // Listen for it
-export function displayAddTaskBtn() {
+export function createAddTaskBtn() {
   const contentDiv = document.querySelector('main .content');
   const addBtn = createDiv(`add-task`);
   contentDiv.append(addBtn);
@@ -30,18 +30,18 @@ export function displayAddTaskBtn() {
 
   // Show add task form and hide add task form when clicked
   addBtn.addEventListener('click', () => {
-    showAddTaskForm(addBtn);
-    hideAddTaskBtn(addBtn);
+    createAddTaskForm(addBtn);
+    removeAddTaskBtn(addBtn);
   });
 }
 
-// Hide add task button
-function hideAddTaskBtn(addTaskButton) {
-  addTaskButton.style.display = 'none';
+// Remove add task button
+function removeAddTaskBtn(addTaskButton) {
+  addTaskButton.remove();
 }
 
-// Show form for adding a new task
-function showAddTaskForm(insertBeforeElement) {
+// Create and show form for adding a new task
+function createAddTaskForm(addTaskButton) {
   const heading = createH(2, 'Add New Task', 'add-task-heading');
   const addTaskForm = createForm('add-task-form');
   const titleLabel = createLabel('Title', 'title');
@@ -94,9 +94,11 @@ function showAddTaskForm(insertBeforeElement) {
     dueDatePicker,
     buttonsDiv
   );
-  insertBeforeElement.parentNode.insertBefore(addTaskForm, insertBeforeElement);
+  addTaskButton.parentNode.insertBefore(addTaskForm, addTaskButton);
   // Listen for form submission
   listenForNewTask(addTaskForm);
+  // Listen for Cancel button click
+  listenForCancelButton(cancelBtn, addTaskForm, addTaskButton);
 }
 
 // Add new task when the Create button is clicked
@@ -112,15 +114,23 @@ function listenForNewTask(formElement) {
     // Create new Task instance and add it to the tasks array
     tasks.push(new Task(title, description, list, priority, dueDate));
     // Refresh page
-    removeContent();
+    removeTasks();
     displayAllTasks();
-    displayAddTaskBtn();
+    createAddTaskBtn();
     listenForTitleClick();
   });
 }
 
+// Remove the add task form and recreate the add form button if the Cancel button is clicked
+function listenForCancelButton(cancelButton, addTaskForm, addTaskButton) {
+  cancelButton.addEventListener('click', () => {
+    addTaskForm.remove();
+    createAddTaskBtn();
+  });
+}
+
 // Remove all tasks
-function removeContent() {
+function removeTasks() {
   const contentDiv = document.querySelector('main .content');
   const newContentDiv = createDiv('content');
   contentDiv.parentNode.append(newContentDiv);
