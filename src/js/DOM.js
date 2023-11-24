@@ -1,3 +1,4 @@
+import { taskFilter } from './main';
 import { Task } from './tasks';
 import checkboxSrc from '../assets/checkbox.svg';
 import checkedCheckboxSrc from '../assets/checkbox-checked.svg';
@@ -117,10 +118,11 @@ function listenForNewTask(formElement) {
     Task.tasks.push(new Task(title, description, list, priority, dueDate));
     // Refresh tasks
     removeTasks();
-    displayAllTasks(Task.tasks);
+    displayTasks(taskFilter());
+    listenForTitleClick(taskFilter());
     createAddTaskButton();
-    listenForTitleClick(Task.tasks);
-    listenForDeleteClick(Task.tasks);
+    listenForDeleteClick();
+    listenForCheckboxClick();
   });
 }
 
@@ -140,8 +142,8 @@ function removeTasks() {
   contentDiv.remove();
 }
 
-// Display all tasks
-export function displayAllTasks(taskArray) {
+// Display tasks stored in the task array given as an argument
+export function displayTasks(taskArray) {
   const contentDiv = document.querySelector('main .content');
   taskArray.forEach((task, index) => {
     const taskDiv = createDiv(`task-${index}`);
@@ -248,7 +250,7 @@ export function listenForTitleClick(taskArray) {
 // Listen for delete task icon clicks
 // Delete task from the tasks array
 // Refresh tasks
-export function listenForDeleteClick(taskArray) {
+export function listenForDeleteClick() {
   const deleteIcons = document.querySelectorAll('.delete-task-icon');
 
   deleteIcons.forEach((deleteIcon) => {
@@ -258,10 +260,11 @@ export function listenForDeleteClick(taskArray) {
       Task.tasks.splice(index, 1);
       // Refresh tasks
       removeTasks();
-      displayAllTasks(taskArray);
+      displayTasks(taskFilter());
+      listenForTitleClick(taskFilter());
       createAddTaskButton();
-      listenForTitleClick(taskArray);
-      listenForDeleteClick(taskArray);
+      listenForDeleteClick();
+      listenForCheckboxClick();
     });
   });
 }
@@ -278,6 +281,13 @@ export function listenForCheckboxClick() {
       Task.tasks[index].markAsCompleted();
       checkboxIcon.src = checkedCheckboxSrc;
       checkboxIcon.classList.replace('checkbox-icon', 'checkbox-checked-icon');
+      // Refresh tasks
+      removeTasks();
+      displayTasks(taskFilter());
+      listenForTitleClick(taskFilter());
+      createAddTaskButton();
+      listenForDeleteClick();
+      listenForCheckboxClick();
     });
   });
 }

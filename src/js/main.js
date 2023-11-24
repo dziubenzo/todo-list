@@ -1,16 +1,18 @@
 import '../css/main.scss';
 import { Task } from './tasks';
 import {
-  displayAllTasks,
+  displayTasks,
   listenForTitleClick,
   createAddTaskButton,
   listenForDeleteClick,
   listenForCheckboxClick,
 } from './DOM';
 
-// Show all tasks on page load
-displayAllTasks(Task.tasks);
-createAddTaskButton();
-listenForTitleClick(Task.tasks);
-listenForDeleteClick(Task.tasks);
-listenForCheckboxClick();
+// Show active tasks by default
+export let taskFilter = () => Task.getActiveTasks();
+
+displayTasks(taskFilter());
+createAddTaskButton(taskFilter());
+listenForTitleClick(taskFilter());
+listenForDeleteClick(taskFilter());
+listenForCheckboxClick(taskFilter());

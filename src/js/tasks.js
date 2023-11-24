@@ -1,5 +1,3 @@
-import { formatDate } from './helpers';
-
 class Task {
   static tasks = [
     new Task(
@@ -27,6 +25,10 @@ class Task {
   ];
   static priorities = ['low', 'medium', 'high', 'yesterday'];
   static lists = ['Personal', 'Work', 'Travel'];
+
+  static getActiveTasks() {
+    return Task.tasks.filter((task) => task.completed === false);
+  }
 
   constructor(title, description, list, priority, dueDate) {
     this.title = title;
