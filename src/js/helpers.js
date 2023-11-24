@@ -167,14 +167,15 @@ export function createForm(id, className = '') {
 }
 
 // Create button
-export function createButton(type, form = '', className = '') {
+export function createButton(type, content, form = '', className = '') {
   const button = document.createElement('button');
   button.type = type;
+  button.innerHTML = content;
   if (form) {
     button.form = form;
   }
   if (className) {
-    button.classList.add(classname);
+    button.classList.add(className);
   }
   return button;
 }

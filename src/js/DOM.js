@@ -15,6 +15,7 @@ import {
   createInputText,
   createTextarea,
   createForm,
+  createButton,
 } from './helpers';
 
 const contentDiv = document.querySelector('.content');
@@ -49,6 +50,11 @@ function showAddTaskForm(insertBeforeElement) {
   const listLabel = createLabel('List', 'list');
   const priorityLabel = createLabel('Priority', 'priority');
   const dueDateLabel = createLabel('Due Date', 'due-date');
+
+  const buttonsDiv = createDiv('add-form-buttons');
+  const cancelBtn = createButton('button', 'Cancel');
+  const submitBtn = createButton('submit', 'Create');
+  buttonsDiv.append(cancelBtn, submitBtn);
 
   const titleInput = createInputText(
     'title',
@@ -86,7 +92,8 @@ function showAddTaskForm(insertBeforeElement) {
     priorityLabel,
     priorityRadioButtons,
     dueDateLabel,
-    dueDatePicker
+    dueDatePicker,
+    buttonsDiv
   );
   insertBeforeElement.parentNode.insertBefore(addTaskForm, insertBeforeElement);
 }
