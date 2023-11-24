@@ -311,26 +311,26 @@ function editTask(titleClicked, index) {
   // Listen for task edits and change corresponding values in Task objects
   // Update task title value dynamically
   editableTitle.addEventListener('input', () => {
-    Task.tasks[index].updateTitle(editableTitle.innerHTML);
-    titleClicked.innerHTML = Task.tasks[index].title;
+    taskFilter()[index].updateTitle(editableTitle.innerHTML);
+    titleClicked.innerHTML = taskFilter()[index].title;
   });
   editableDescription.addEventListener('input', () => {
-    Task.tasks[index].updateDescription(editableDescription.innerHTML);
+    taskFilter()[index].updateDescription(editableDescription.innerHTML);
   });
   // Update due date value dynamically
   editableDueDate.addEventListener('change', () => {
-    Task.tasks[index].updateDueDate(new Date(editableDueDate.value));
+    taskFilter()[index].updateDueDate(new Date(editableDueDate.value));
     titleClicked.nextSibling.innerHTML =
-      Task.tasks[index].dueDate.toLocaleDateString('pl');
+      taskFilter()[index].dueDate.toLocaleDateString('pl');
   });
   // Update priority
   editablePriorities.forEach((priorityInput) => {
     priorityInput.addEventListener('change', () => {
-      Task.tasks[index].updatePriority(priorityInput.value);
+      taskFilter()[index].updatePriority(priorityInput.value);
     });
   });
   // Update list
   editableList.addEventListener('change', () => {
-    Task.tasks[index].updateList(editableList.value);
+    taskFilter()[index].updateList(editableList.value);
   });
 }
