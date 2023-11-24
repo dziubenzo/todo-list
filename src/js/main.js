@@ -9,7 +9,7 @@ import {
 } from './DOM';
 
 // Show active tasks by default
-export let taskFilter = () => Task.getActiveTasks();
+export let taskFilter = () => Task.getTasksByList(Task.lists[2]);
 
 displayTasks(taskFilter());
 createAddTaskButton(taskFilter());
