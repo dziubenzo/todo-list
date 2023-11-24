@@ -242,6 +242,23 @@ export function listenForTitleClick() {
   });
 }
 
+// Listen for delete task icon clicks
+// Delete task from the DOM and tasks array
+export function listenForDeleteClick() {
+  const deleteIcons = document.querySelectorAll('.delete-task-icon');
+
+  deleteIcons.forEach((deleteIcon) => {
+    deleteIcon.addEventListener('click', () => {
+      const index = deleteIcon.parentNode.classList.value.substr(-1, 1);
+      // Delete from the DOM
+      deleteIcon.parentNode.remove();
+      // Delete from the tasks array
+      tasks.splice(index, 1);
+      console.log(tasks);
+    });
+  });
+}
+
 // Edit task details (title, description, list, priority, due date)
 function editTask(titleClicked, index) {
   // Select editable elements in the opened task details
