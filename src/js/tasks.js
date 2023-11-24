@@ -1,8 +1,8 @@
+import { formatDate } from "./helpers";
+
 class Task {
   static priorities = ['low', 'medium', 'high', 'yesterday'];
   static lists = ['Personal', 'Work', 'Travel'];
-
-  completionDate = 'Implement me pls';
 
   constructor(title, description, list, priority, dueDate) {
     this.title = title;
@@ -32,6 +32,11 @@ class Task {
 
   updateList(newList) {
     this.list = newList;
+  }
+
+  markAsCompleted() {
+    this.completed = true;
+    this.completionDate = new Date();
   }
 }
 

@@ -265,6 +265,20 @@ export function listenForDeleteClick() {
   });
 }
 
+// Listen for checkbox click
+// Mark the task as completed
+export function listenForCheckboxClick() {
+  const checkboxIcons = document.querySelectorAll('.checkbox-icon');
+
+  checkboxIcons.forEach((checkboxIcon) => {
+    checkboxIcon.addEventListener('click', () => {
+      const index = checkboxIcon.parentNode.dataset.index;
+      tasks[index].markAsCompleted();
+      console.table(tasks);
+    })
+  })
+}
+
 // Edit task details (title, description, list, priority, due date)
 function editTask(titleClicked, index) {
   // Select editable elements in the opened task details
