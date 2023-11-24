@@ -1,6 +1,30 @@
-import { formatDate } from "./helpers";
+import { formatDate } from './helpers';
 
 class Task {
+  static tasks = [
+    new Task(
+      'Learn JS',
+      'Learn some JS, dumbass',
+      'Personal',
+      'high',
+      new Date(2023, 10, 26)
+    ),
+    new Task(
+      'Learn React',
+      'Learn some React, dumbass',
+      'Work',
+      'medium',
+      new Date(2023, 10, 28)
+    ),
+
+    new Task(
+      'Learn algorithms',
+      'Learn some algorithms, dumbass',
+      'Travel',
+      'low',
+      new Date(2023, 11, 5)
+    ),
+  ];
   static priorities = ['low', 'medium', 'high', 'yesterday'];
   static lists = ['Personal', 'Work', 'Travel'];
 
@@ -40,29 +64,4 @@ class Task {
   }
 }
 
-const tasks = [
-  new Task(
-    'Learn JS',
-    'Learn some JS, dumbass',
-    'Personal',
-    'high',
-    new Date(2023, 10, 26)
-  ),
-  new Task(
-    'Learn React',
-    'Learn some React, dumbass',
-    'Work',
-    'medium',
-    new Date(2023, 10, 28)
-  ),
-
-  new Task(
-    'Learn algorithms',
-    'Learn some algorithms, dumbass',
-    'Travel',
-    'low',
-    new Date(2023, 11, 5)
-  ),
-];
-
-export { Task, tasks };
+export { Task };

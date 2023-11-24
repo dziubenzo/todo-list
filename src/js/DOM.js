@@ -1,4 +1,4 @@
-import { Task, tasks } from './tasks';
+import { Task } from './tasks';
 import checkboxSrc from '../assets/checkbox.svg';
 import checkedCheckboxSrc from '../assets/checkbox-checked.svg';
 import addIconSrc from '../assets/add-task.svg';
@@ -114,7 +114,7 @@ function listenForNewTask(formElement) {
     const priority = formElement.elements.priority.value;
     const dueDate = new Date(formElement.elements['due-date'].value);
     // Create new Task instance and add it to the tasks array
-    tasks.push(new Task(title, description, list, priority, dueDate));
+    Task.tasks.push(new Task(title, description, list, priority, dueDate));
     // Refresh tasks
     removeTasks();
     displayAllTasks();
@@ -143,7 +143,7 @@ function removeTasks() {
 // Display all tasks
 export function displayAllTasks() {
   const contentDiv = document.querySelector('main .content');
-  tasks.forEach((task, index) => {
+  Task.tasks.forEach((task, index) => {
     const taskDiv = createDiv(`task-${index}`);
     taskDiv.dataset.index = index;
     contentDiv.append(taskDiv);
@@ -233,7 +233,7 @@ export function listenForTitleClick() {
   taskTitles.forEach((title) => {
     title.addEventListener('click', function showDetails() {
       const index = title.parentNode.dataset.index;
-      generateTaskDetails(tasks[index], index);
+      generateTaskDetails(Task.tasks[index], index);
       title.removeEventListener('click', showDetails);
       editTask(title, index);
       title.addEventListener('click', function hideDetails() {
@@ -255,7 +255,8 @@ export function listenForDeleteClick() {
     deleteIcon.addEventListener('click', () => {
       // Delete from the tasks array
       const index = deleteIcon.parentNode.dataset.index;
-      tasks.splice(index, 1);
+      Task.tasks.splice(index, 1);
+      console.log(Task.prototype);
       // Refresh tasks
       removeTasks();
       displayAllTasks();
@@ -275,7 +276,7 @@ export function listenForCheckboxClick() {
   checkboxIcons.forEach((checkboxIcon) => {
     checkboxIcon.addEventListener('click', () => {
       const index = checkboxIcon.parentNode.dataset.index;
-      tasks[index].markAsCompleted();
+      Task.tasks[index].markAsCompleted();
       checkboxIcon.src = checkedCheckboxSrc;
       checkboxIcon.classList.replace('checkbox-icon', 'checkbox-checked-icon');
     });
@@ -301,26 +302,26 @@ function editTask(titleClicked, index) {
   // Listen for task edits and change corresponding values in Task objects
   // Update task title value dynamically
   editableTitle.addEventListener('input', () => {
-    tasks[index].updateTitle(editableTitle.innerHTML);
-    titleClicked.innerHTML = tasks[index].title;
+    Task.tasks[index].updateTitle(editableTitle.innerHTML);
+    titleClicked.innerHTML = Task.tasks[index].title;
   });
   editableDescription.addEventListener('input', () => {
-    tasks[index].updateDescription(editableDescription.innerHTML);
+    Task.tasks[index].updateDescription(editableDescription.innerHTML);
   });
   // Update due date value dynamically
   editableDueDate.addEventListener('change', () => {
-    tasks[index].updateDueDate(new Date(editableDueDate.value));
+    Task.tasks[index].updateDueDate(new Date(editableDueDate.value));
     titleClicked.nextSibling.innerHTML =
-      tasks[index].dueDate.toLocaleDateString('pl');
+      Task.tasks[index].dueDate.toLocaleDateString('pl');
   });
   // Update priority
   editablePriorities.forEach((priorityInput) => {
     priorityInput.addEventListener('change', () => {
-      tasks[index].updatePriority(priorityInput.value);
+      Task.tasks[index].updatePriority(priorityInput.value);
     });
   });
   // Update list
   editableList.addEventListener('change', () => {
-    tasks[index].updateList(editableList.value);
+    Task.tasks[index].updateList(editableList.value);
   });
 }
