@@ -117,6 +117,7 @@ function listenForNewTask(formElement) {
     // Create new Task instance and add it to the tasks array
     Task.tasks.push(new Task(title, description, list, priority, dueDate));
     // Refresh tasks
+    console.table(Task.tasks);
     removeTasks();
     displayTasks(taskFilter());
     listenForTitleClick(taskFilter());
@@ -146,19 +147,23 @@ function removeTasks() {
 export function displayTasks(taskArray) {
   const contentDiv = document.querySelector('main .content');
   taskArray.forEach((task, index) => {
-    const taskDiv = createDiv(`task-${index}`);
-    taskDiv.dataset.index = index;
-    contentDiv.append(taskDiv);
-
-    const checkbox = createImg(checkboxSrc, 'Checkbox Icon', 'checkbox-icon');
-    const title = createP(task.title, 'title');
-    const deleteIcon = createImg(
-      deleteTaskScr,
-      'Delete Task Icon',
-      'delete-task-icon'
-    );
-    const dueDate = createP(task.dueDate.toLocaleDateString('pl'), 'due-date');
-    taskDiv.append(checkbox, title, deleteIcon, dueDate);
+    if (Task.tasks.includes(task)) {
+      const taskDiv = createDiv(`task-${index}`);
+      taskDiv.dataset.index = index;
+      // Get index from the main array for task deletion purposes
+      taskDiv.dataset.ogindex = Task.tasks.indexOf(task);
+      contentDiv.append(taskDiv);
+  
+      const checkbox = createImg(checkboxSrc, 'Checkbox Icon', 'checkbox-icon');
+      const title = createP(task.title, 'title');
+      const deleteIcon = createImg(
+        deleteTaskScr,
+        'Delete Task Icon',
+        'delete-task-icon'
+      );
+      const dueDate = createP(task.dueDate.toLocaleDateString('pl'), 'due-date');
+      taskDiv.append(checkbox, title, deleteIcon, dueDate);
+    }
   });
 }
 
@@ -255,10 +260,11 @@ export function listenForDeleteClick() {
 
   deleteIcons.forEach((deleteIcon) => {
     deleteIcon.addEventListener('click', () => {
-      // Delete from the tasks array
-      const index = deleteIcon.parentNode.dataset.index;
-      Task.tasks.splice(index, 1);
+      // Delete from the original tasks array
+      const originalIndex = deleteIcon.parentNode.dataset.ogindex;
+      Task.tasks.splice(originalIndex, 1);
       // Refresh tasks
+      console.table(Task.tasks);
       removeTasks();
       displayTasks(taskFilter());
       listenForTitleClick(taskFilter());
@@ -282,6 +288,7 @@ export function listenForCheckboxClick() {
       checkboxIcon.src = checkedCheckboxSrc;
       checkboxIcon.classList.replace('checkbox-icon', 'checkbox-checked-icon');
       // Refresh tasks
+      console.table(Task.tasks);
       removeTasks();
       displayTasks(taskFilter());
       listenForTitleClick(taskFilter());
