@@ -119,6 +119,7 @@ function listenForNewTask(formElement) {
     displayAllTasks();
     createAddTaskBtn();
     listenForTitleClick();
+    listenForDeleteClick();
   });
 }
 
@@ -159,7 +160,7 @@ export function displayAllTasks() {
 
 // Generate task details
 export function generateTaskDetails(task, index) {
-  const detailsDiv = createDiv('details');
+  const detailsDiv = createDiv(`details-task-${index}`);
   const clickedTask = document.querySelector(`div.task-${index}`);
   insertAfter(detailsDiv, clickedTask);
 
@@ -252,6 +253,10 @@ export function listenForDeleteClick() {
       const index = deleteIcon.parentNode.classList.value.substr(-1, 1);
       // Delete from the DOM
       deleteIcon.parentNode.remove();
+      // Delete task details as well if shown
+      if (document.querySelector(`.details-task-${index}`)) {
+        document.querySelector(`.details-task-${index}`).remove();
+      }
       // Delete from the tasks array
       tasks.splice(index, 1);
       console.log(tasks);

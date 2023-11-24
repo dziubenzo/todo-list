@@ -162,7 +162,7 @@ main {
       text-align: end;
     }
 
-    .details,
+    div[class^='details'],
     #add-task-form {
       display: grid;
       grid-template-columns: 1fr 3fr;
