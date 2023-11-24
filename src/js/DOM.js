@@ -278,7 +278,7 @@ export function listenForCheckboxClick() {
   checkboxIcons.forEach((checkboxIcon) => {
     checkboxIcon.addEventListener('click', () => {
       const index = checkboxIcon.parentNode.dataset.index;
-      Task.tasks[index].markAsCompleted();
+      taskFilter()[index].markAsCompleted();
       checkboxIcon.src = checkedCheckboxSrc;
       checkboxIcon.classList.replace('checkbox-icon', 'checkbox-checked-icon');
       // Refresh tasks

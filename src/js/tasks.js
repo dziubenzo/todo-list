@@ -30,9 +30,12 @@ class Task {
     return Task.tasks.filter((task) => task.completed === false);
   }
 
-  // This will also show completed tasks
   static getTasksByList(list) {
-    return Task.tasks.filter((task) => task.list === list);
+    return Task.getActiveTasks().filter((task) => task.list === list);
+  }
+
+  static getTasksByPriority(priority) {
+    return Task.getActiveTasks().filter((task) => task.priority === priority);
   }
 
   constructor(title, description, list, priority, dueDate) {

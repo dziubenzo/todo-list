@@ -8,8 +8,8 @@ import {
   listenForCheckboxClick,
 } from './DOM';
 
-// Show active tasks by default
-export let taskFilter = () => Task.getTasksByList(Task.lists[2]);
+// Show all active tasks by default
+export let taskFilter = () => Task.getActiveTasks();
 
 displayTasks(taskFilter());
 createAddTaskButton(taskFilter());
