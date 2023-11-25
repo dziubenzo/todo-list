@@ -23,7 +23,7 @@ import {
 
 // Create add task button
 // Listen for it
-export function createAddTaskButton() {
+function createAddTaskButton() {
   const contentDiv = document.querySelector('main .content');
   const addBtn = createDiv(`add-task`);
   contentDiv.append(addBtn);
@@ -139,7 +139,7 @@ function removeTasks() {
 }
 
 // Display tasks stored in the task array given as an argument
-export function displayTasks(taskArray) {
+function displayTasks(taskArray) {
   const contentDiv = document.querySelector('main .content');
   taskArray.forEach((task, index) => {
     if (Task.tasks.includes(task)) {
@@ -166,7 +166,7 @@ export function displayTasks(taskArray) {
 }
 
 // Generate task details
-export function generateTaskDetails(task, index) {
+function generateTaskDetails(task, index) {
   const detailsDiv = createDiv(`details-task-${index}`);
   const clickedTask = document.querySelector(`div.task-${index}`);
   insertAfter(detailsDiv, clickedTask);
@@ -232,7 +232,7 @@ export function generateTaskDetails(task, index) {
 
 // Listen for task title click
 // Show or hide task details
-export function listenForTitleClick(taskArray) {
+function listenForTitleClick(taskArray) {
   const taskTitles = document.querySelectorAll('.title');
 
   taskTitles.forEach((title) => {
@@ -253,7 +253,7 @@ export function listenForTitleClick(taskArray) {
 // Listen for delete task icon clicks
 // Delete task from the tasks array
 // Refresh tasks
-export function listenForDeleteClick() {
+function listenForDeleteClick() {
   const deleteIcons = document.querySelectorAll('.delete-task-icon');
 
   deleteIcons.forEach((deleteIcon) => {
@@ -271,7 +271,7 @@ export function listenForDeleteClick() {
 // Listen for checkbox click
 // Mark the task as completed
 // Change icon to checked box
-export function listenForCheckboxClick() {
+function listenForCheckboxClick() {
   const checkboxIcons = document.querySelectorAll('.checkbox-icon');
 
   checkboxIcons.forEach((checkboxIcon) => {

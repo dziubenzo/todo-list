@@ -1,15 +1,10 @@
 import '../css/main.scss';
 import { Task } from './tasks';
-import {
-  displayTasks,
-  listenForTitleClick,
-  createAddTaskButton,
-  listenForDeleteClick,
-  listenForCheckboxClick,
-  generatePage,
-} from './DOM';
+import { handleTabs } from './sidebar';
+import { generatePage } from './DOM';
 
 // Show all active tasks by default
-export let filteredTasks = () => Task.getActiveTasks();
+export const filteredTasks = () => Task.getActiveTasks();
 
 generatePage(filteredTasks());
+handleTabs();

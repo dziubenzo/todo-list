@@ -5,14 +5,14 @@ class Task {
       'Learn some JS, dumbass',
       'Personal',
       'high',
-      new Date(2023, 10, 26)
+      new Date(2023, 11, 15)
     ),
     new Task(
       'Learn React',
       'Learn some React, dumbass',
       'Work',
       'medium',
-      new Date(2023, 10, 28)
+      new Date(2023, 11, 5)
     ),
 
     new Task(
@@ -20,7 +20,7 @@ class Task {
       'Learn some algorithms, dumbass',
       'Travel',
       'low',
-      new Date(2023, 11, 5)
+      new Date(2023, 11, 3)
     ),
   ];
   static priorities = ['low', 'medium', 'high', 'yesterday'];
