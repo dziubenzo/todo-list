@@ -238,9 +238,10 @@ function listenForTitleClick(taskArray) {
   taskTitles.forEach((title) => {
     title.addEventListener('click', function showDetails() {
       const index = title.parentNode.dataset.index;
+      const originalIndex = title.parentNode.dataset.ogindex;
       generateTaskDetails(taskArray[index], index);
       title.removeEventListener('click', showDetails);
-      editTask(title, index);
+      editTask(title, originalIndex);
       title.addEventListener('click', function hideDetails() {
         title.parentNode.nextSibling.remove();
         title.removeEventListener('click', hideDetails);
@@ -288,7 +289,7 @@ function listenForCheckboxClick() {
 }
 
 // Edit task details (title, description, list, priority, due date)
-function editTask(titleClicked, index) {
+function editTask(titleClicked, originalIndex) {
   // Select editable elements in the opened task details
   const editableTitle = titleClicked.parentNode.nextSibling.querySelector(
     "p[class='title-details'"
@@ -306,29 +307,28 @@ function editTask(titleClicked, index) {
   // Listen for task edits and change corresponding values in Task objects
   // Update task title value dynamically
   editableTitle.addEventListener('input', () => {
-    filteredTasks()[index].updateTitle(editableTitle.innerHTML);
-    titleClicked.innerHTML = filteredTasks()[index].title;
+    Task.tasks[originalIndex].updateTitle(editableTitle.innerHTML);
+    titleClicked.innerHTML = Task.tasks[originalIndex].title;
   });
   editableDescription.addEventListener('input', () => {
-    filteredTasks()[index].updateDescription(editableDescription.innerHTML);
+    Task.tasks[originalIndex].updateDescription(editableDescription.innerHTML);
   });
   // Update due date value dynamically
   editableDueDate.addEventListener('change', () => {
-    filteredTasks()[index].updateDueDate(new Date(editableDueDate.value));
-    titleClicked.nextSibling.innerHTML =
-      filteredTasks()[index].dueDate.toLocaleDateString('pl');
-    // Refresh page
-    generatePage(filteredTasks());
+    Task.tasks[originalIndex].updateDueDate(new Date(editableDueDate.value));
+    console.log(Task.tasks[originalIndex].dueDate)
+    titleClicked.parentNode.querySelector('p.due-date').innerHTML =
+      Task.tasks[originalIndex].dueDate.toLocaleDateString('pl');
   });
   // Update priority
   editablePriorities.forEach((priorityInput) => {
     priorityInput.addEventListener('change', () => {
-      filteredTasks()[index].updatePriority(priorityInput.value);
+      Task.tasks[originalIndex].updatePriority(priorityInput.value);
     });
   });
   // Update list
   editableList.addEventListener('change', () => {
-    filteredTasks()[index].updateList(editableList.value);
+    Task.tasks[originalIndex].updateList(editableList.value);
   });
 }
 
