@@ -6,13 +6,10 @@ import {
   createAddTaskButton,
   listenForDeleteClick,
   listenForCheckboxClick,
+  generatePage,
 } from './DOM';
 
 // Show all active tasks by default
-export let taskFilter = () => Task.getActiveTasks();
+export let filteredTasks = () => Task.getActiveTasks();
 
-displayTasks(taskFilter());
-createAddTaskButton(taskFilter());
-listenForTitleClick(taskFilter());
-listenForDeleteClick(taskFilter());
-listenForCheckboxClick(taskFilter());
+generatePage(filteredTasks());

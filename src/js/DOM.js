@@ -1,4 +1,4 @@
-import { taskFilter } from './main';
+import { filteredTasks } from './main';
 import { Task } from './tasks';
 import checkboxSrc from '../assets/checkbox.svg';
 import checkedCheckboxSrc from '../assets/checkbox-checked.svg';
@@ -118,12 +118,7 @@ function listenForNewTask(formElement) {
     Task.tasks.push(new Task(title, description, list, priority, dueDate));
     // Refresh tasks
     console.table(Task.tasks);
-    removeTasks();
-    displayTasks(taskFilter());
-    listenForTitleClick(taskFilter());
-    createAddTaskButton();
-    listenForDeleteClick();
-    listenForCheckboxClick();
+    generatePage(filteredTasks());
   });
 }
 
@@ -153,7 +148,7 @@ export function displayTasks(taskArray) {
       // Get index from the main array for task deletion purposes
       taskDiv.dataset.ogindex = Task.tasks.indexOf(task);
       contentDiv.append(taskDiv);
-  
+
       const checkbox = createImg(checkboxSrc, 'Checkbox Icon', 'checkbox-icon');
       const title = createP(task.title, 'title');
       const deleteIcon = createImg(
@@ -161,7 +156,10 @@ export function displayTasks(taskArray) {
         'Delete Task Icon',
         'delete-task-icon'
       );
-      const dueDate = createP(task.dueDate.toLocaleDateString('pl'), 'due-date');
+      const dueDate = createP(
+        task.dueDate.toLocaleDateString('pl'),
+        'due-date'
+      );
       taskDiv.append(checkbox, title, deleteIcon, dueDate);
     }
   });
@@ -265,12 +263,7 @@ export function listenForDeleteClick() {
       Task.tasks.splice(originalIndex, 1);
       // Refresh tasks
       console.table(Task.tasks);
-      removeTasks();
-      displayTasks(taskFilter());
-      listenForTitleClick(taskFilter());
-      createAddTaskButton();
-      listenForDeleteClick();
-      listenForCheckboxClick();
+      generatePage(filteredTasks());
     });
   });
 }
@@ -284,17 +277,12 @@ export function listenForCheckboxClick() {
   checkboxIcons.forEach((checkboxIcon) => {
     checkboxIcon.addEventListener('click', () => {
       const index = checkboxIcon.parentNode.dataset.index;
-      taskFilter()[index].markAsCompleted();
+      filteredTasks()[index].markAsCompleted();
       checkboxIcon.src = checkedCheckboxSrc;
       checkboxIcon.classList.replace('checkbox-icon', 'checkbox-checked-icon');
       // Refresh tasks
       console.table(Task.tasks);
-      removeTasks();
-      displayTasks(taskFilter());
-      listenForTitleClick(taskFilter());
-      createAddTaskButton();
-      listenForDeleteClick();
-      listenForCheckboxClick();
+      generatePage(filteredTasks());
     });
   });
 }
@@ -318,26 +306,36 @@ function editTask(titleClicked, index) {
   // Listen for task edits and change corresponding values in Task objects
   // Update task title value dynamically
   editableTitle.addEventListener('input', () => {
-    taskFilter()[index].updateTitle(editableTitle.innerHTML);
-    titleClicked.innerHTML = taskFilter()[index].title;
+    filteredTasks()[index].updateTitle(editableTitle.innerHTML);
+    titleClicked.innerHTML = filteredTasks()[index].title;
   });
   editableDescription.addEventListener('input', () => {
-    taskFilter()[index].updateDescription(editableDescription.innerHTML);
+    filteredTasks()[index].updateDescription(editableDescription.innerHTML);
   });
   // Update due date value dynamically
   editableDueDate.addEventListener('change', () => {
-    taskFilter()[index].updateDueDate(new Date(editableDueDate.value));
+    filteredTasks()[index].updateDueDate(new Date(editableDueDate.value));
     titleClicked.nextSibling.innerHTML =
-      taskFilter()[index].dueDate.toLocaleDateString('pl');
+      filteredTasks()[index].dueDate.toLocaleDateString('pl');
   });
   // Update priority
   editablePriorities.forEach((priorityInput) => {
     priorityInput.addEventListener('change', () => {
-      taskFilter()[index].updatePriority(priorityInput.value);
+      filteredTasks()[index].updatePriority(priorityInput.value);
     });
   });
   // Update list
   editableList.addEventListener('change', () => {
-    taskFilter()[index].updateList(editableList.value);
+    filteredTasks()[index].updateList(editableList.value);
   });
+}
+
+// Refresh or generate a page
+export function generatePage(taskArray) {
+  removeTasks();
+  displayTasks(taskArray);
+  listenForTitleClick(taskArray);
+  createAddTaskButton();
+  listenForDeleteClick();
+  listenForCheckboxClick();
 }
