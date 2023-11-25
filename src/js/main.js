@@ -8,3 +8,5 @@ export const filteredTasks = () => Task.getActiveTasks();
 
 generatePage(filteredTasks());
 handleTabs();
+
+console.table(Task.tasks)

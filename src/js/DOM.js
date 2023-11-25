@@ -317,6 +317,8 @@ function editTask(titleClicked, index) {
     filteredTasks()[index].updateDueDate(new Date(editableDueDate.value));
     titleClicked.nextSibling.innerHTML =
       filteredTasks()[index].dueDate.toLocaleDateString('pl');
+    // Refresh page
+    generatePage(filteredTasks());
   });
   // Update priority
   editablePriorities.forEach((priorityInput) => {

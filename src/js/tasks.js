@@ -26,7 +26,21 @@ class Task {
   static priorities = ['low', 'medium', 'high', 'yesterday'];
   static lists = ['Personal', 'Work', 'Travel'];
 
+  // Sort tasks by due date (short to long)
+  static sort() {
+    Task.tasks.sort((a, b) => {
+      if (a.dueDate < b.dueDate) {
+        return -1;
+      }
+      if (a.dueDate > b.dueDate) {
+        return 1;
+      }
+      return 0;
+    });
+  }
+
   static getActiveTasks() {
+    Task.sort();
     return Task.tasks.filter((task) => task.completed === false);
   }
 
