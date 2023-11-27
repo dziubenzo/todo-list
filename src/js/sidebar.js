@@ -1,17 +1,16 @@
 import { Task } from './tasks';
-import { generateComingUpPage, generatePage } from './DOM';
+import { generatePage } from './DOM';
 
 export function handleTabs() {
-  let taskArray;
   const allTasksBtn = document.querySelector('.sidebar .all-tasks');
   const comingUpBtn = document.querySelector('.sidebar .coming-up');
   allTasksBtn.addEventListener('click', () => {
-    taskArray = Task.getActiveTasks();
-    generatePage(taskArray);
+    Task.taskArrayMethod = 'getActiveTasks';
+    generatePage();
   });
 
   comingUpBtn.addEventListener('click', () => {
-    taskArray = Task.getComingUpTasks();
-    generateComingUpPage(taskArray);
+    Task.taskArrayMethod = 'getComingUpTasks';
+    generatePage();
   });
 }

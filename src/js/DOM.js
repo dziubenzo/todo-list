@@ -27,7 +27,7 @@ import {
 
 // Create add task button
 // Listen for it
-function createAddTaskButton(taskArray) {
+function createAddTaskButton() {
   const contentDiv = document.querySelector('main .content');
   const addBtn = createDiv(`add-task`);
   contentDiv.append(addBtn);
@@ -37,7 +37,7 @@ function createAddTaskButton(taskArray) {
 
   // Show add task form and hide add task form when clicked
   addBtn.addEventListener('click', () => {
-    createAddTaskForm(addBtn, taskArray);
+    createAddTaskForm(addBtn);
     removeAddTaskBtn(addBtn);
   });
 }
@@ -48,7 +48,7 @@ function removeAddTaskBtn(addTaskButton) {
 }
 
 // Create and show form for adding a new task
-function createAddTaskForm(addTaskButton, taskArray) {
+function createAddTaskForm(addTaskButton) {
   const heading = createH(2, 'Add New Task', 'add-task-heading');
   const addTaskForm = createForm('add-task-form');
   const titleLabel = createLabel('Title', 'title');
@@ -103,13 +103,13 @@ function createAddTaskForm(addTaskButton, taskArray) {
   );
   addTaskButton.parentNode.insertBefore(addTaskForm, addTaskButton);
   // Listen for form submission
-  listenForNewTask(addTaskForm, taskArray);
+  listenForNewTask(addTaskForm);
   // Listen for Cancel button click
   listenForCancelButton(cancelBtn, addTaskForm);
 }
 
 // Add new task when the Create button is clicked
-function listenForNewTask(formElement, taskArray) {
+function listenForNewTask(formElement) {
   formElement.addEventListener('submit', (event) => {
     event.preventDefault();
     // Get form values
@@ -123,12 +123,9 @@ function listenForNewTask(formElement, taskArray) {
     dueDate = setMinutes(dueDate, 59);
     dueDate = setSeconds(dueDate, 59);
     // Create new Task instance and add it to the tasks array
-    const newTask = new Task(title, description, list, priority, dueDate);
-    Task.tasks.push(newTask);
-    // Update currently displayed array
-    taskArray.push(newTask);
+    Task.tasks.push(new Task(title, description, list, priority, dueDate));
     // Refresh tasks
-    generatePage(taskArray);
+    generatePage();
   });
 }
 
@@ -150,7 +147,7 @@ function removeTasks() {
 
 // Display tasks stored in the task array given as an argument
 // Execute slightly differently for the Coming Up page
-function displayTasks(taskArray, isComingUpPage = false) {
+function displayTasks(taskArray) {
   const contentDiv = document.querySelector('main .content');
   taskArray.forEach((task, index) => {
     if (Task.tasks.includes(task)) {
@@ -162,16 +159,13 @@ function displayTasks(taskArray, isComingUpPage = false) {
 
       const checkbox = createImg(checkboxSrc, 'Checkbox Icon', 'checkbox-icon');
       const title = createP(task.title, 'title');
-      if (isComingUpPage) {
-        title.classList.add('coming-up');
-      }
       const deleteIcon = createImg(
         deleteTaskScr,
         'Delete Task Icon',
         'delete-task-icon'
       );
       let dueDate;
-      if (isComingUpPage) {
+      if (Task.taskArrayMethod === 'getComingUpTasks') {
         dueDate = createP(
           formatDistanceToNow(task.dueDate, { addSuffix: true }),
           'due-date'
@@ -273,7 +267,7 @@ function listenForTitleClick(taskArray) {
 // Listen for delete task icon clicks
 // Delete task from the tasks array
 // Refresh tasks
-function listenForDeleteClick(taskArray) {
+function listenForDeleteClick() {
   const deleteIcons = document.querySelectorAll('.delete-task-icon');
 
   deleteIcons.forEach((deleteIcon) => {
@@ -282,7 +276,7 @@ function listenForDeleteClick(taskArray) {
       const originalIndex = deleteIcon.parentNode.dataset.ogindex;
       Task.tasks.splice(originalIndex, 1);
       // Refresh tasks
-      generatePage(taskArray);
+      generatePage();
     });
   });
 }
@@ -296,11 +290,8 @@ function listenForCheckboxClick(taskArray) {
     checkboxIcon.addEventListener('click', () => {
       const originalIndex = checkboxIcon.parentNode.dataset.ogindex;
       Task.tasks[originalIndex].markAsCompleted();
-      // Remove completed task from the currently displayed array
-      const index = checkboxIcon.parentNode.dataset.index;
-      taskArray.splice(index, 1);
       // Refresh tasks
-      generatePage(taskArray);
+      generatePage();
     });
   });
 }
@@ -330,41 +321,46 @@ function editTask(titleClicked, originalIndex) {
   editableDescription.addEventListener('input', () => {
     Task.tasks[originalIndex].updateDescription(editableDescription.innerHTML);
   });
-  // Update due date value dynamically
+  // Update due date value and refresh page
   editableDueDate.addEventListener('change', () => {
-    Task.tasks[originalIndex].updateDueDate(new Date(editableDueDate.value));
-    titleClicked.parentNode.querySelector('p.due-date').innerHTML =
-      Task.tasks[originalIndex].dueDate.toLocaleDateString('pl');
+    let newDueDate = new Date(editableDueDate.value);
+    newDueDate = setHours(newDueDate, 23);
+    newDueDate = setMinutes(newDueDate, 59);
+    newDueDate = setSeconds(newDueDate, 59);
+    Task.tasks[originalIndex].updateDueDate(newDueDate);
+    generatePage();
   });
-  // Update priority
+  // Update priority and refresh page
   editablePriorities.forEach((priorityInput) => {
     priorityInput.addEventListener('change', () => {
       Task.tasks[originalIndex].updatePriority(priorityInput.value);
+      generatePage();
     });
   });
-  // Update list
+  // Update list and refresh page
   editableList.addEventListener('change', () => {
     Task.tasks[originalIndex].updateList(editableList.value);
+    generatePage();
   });
 }
 
 // Refresh or generate a page
-export function generatePage(taskArray) {
-  // Sort currently displayed array
-  Task.sort(taskArray);
+export function generatePage() {
+  let taskArray;
+  if (
+    Task.taskArrayMethod === 'getActiveTasks' ||
+    Task.taskArrayMethod === 'getComingUpTasks'
+  ) {
+    taskArray = Task[Task.taskArrayMethod]();
+  } else {
+    taskArray = Task[Task.taskArrayMethod](
+      Task[Task.taskArraySortedInto][Task.taskArraySortedIntoIndex]
+    );
+  }
   removeTasks();
   displayTasks(taskArray);
   listenForTitleClick(taskArray);
-  createAddTaskButton(taskArray);
-  listenForDeleteClick(taskArray);
-  listenForCheckboxClick(taskArray);
-}
-
-// Generate Coming Up page
-export function generateComingUpPage(taskArray) {
-  removeTasks();
-  displayTasks(taskArray, true);
-  // listenForTitleClick(taskArray);
-  listenForDeleteClick(taskArray);
+  createAddTaskButton();
+  listenForDeleteClick();
   listenForCheckboxClick(taskArray);
 }

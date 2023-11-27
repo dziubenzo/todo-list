@@ -4,7 +4,7 @@ import { generatePage } from './DOM';
 import { handleTabs } from './sidebar';
 
 // Show all uncompleted tasks by default
-generatePage(Task.getActiveTasks());
+generatePage(Task.taskArrayMethod);
 handleTabs();
 
 // setInterval(() => {

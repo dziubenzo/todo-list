@@ -27,6 +27,9 @@ export class Task {
   ];
   static priorities = ['low', 'medium', 'high', 'yesterday'];
   static lists = ['Personal', 'Work', 'Travel'];
+  static taskArrayMethod = "getActiveTasks";
+  static taskArraySortedInto;
+  static taskArraySortedIntoIndex;
 
   // Sort tasks by due date (short to long)
   static sort(taskArray) {
