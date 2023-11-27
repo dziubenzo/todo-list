@@ -1,5 +1,5 @@
 import { Task } from './tasks';
-import { generatePage } from './DOM';
+import { generateComingUpPage, generatePage } from './DOM';
 
 export function handleTabs() {
   let taskArray;
@@ -12,6 +12,6 @@ export function handleTabs() {
 
   comingUpBtn.addEventListener('click', () => {
     taskArray = Task.getComingUpTasks();
-    generatePage(taskArray);
+    generateComingUpPage(taskArray);
   });
 }

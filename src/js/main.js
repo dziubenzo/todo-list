@@ -10,5 +10,3 @@ handleTabs();
 // setInterval(() => {
 //   console.table(Task.tasks);
 // }, 2000);
-
-console.table(Task.getComingUpTasks());

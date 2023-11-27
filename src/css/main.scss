@@ -163,6 +163,10 @@ main {
       cursor: pointer;
     }
 
+    p.coming-up {
+      cursor: default;
+    }
+
     p.due-date {
       width: 75px;
       text-align: end;

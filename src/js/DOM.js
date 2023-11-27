@@ -1,6 +1,5 @@
 import { Task } from './tasks';
 import checkboxSrc from '../assets/checkbox.svg';
-import checkedCheckboxSrc from '../assets/checkbox-checked.svg';
 import addIconSrc from '../assets/add-task.svg';
 import deleteTaskScr from '../assets/delete-task.svg';
 import {
@@ -19,6 +18,12 @@ import {
   createForm,
   createButton,
 } from './helpers';
+import {
+  formatDistanceToNow,
+  setHours,
+  setMinutes,
+  setSeconds,
+} from 'date-fns';
 
 // Create add task button
 // Listen for it
@@ -112,9 +117,13 @@ function listenForNewTask(formElement, taskArray) {
     const description = formElement.elements.description.value;
     const list = formElement.elements.list.value;
     const priority = formElement.elements.priority.value;
-    const dueDate = new Date(formElement.elements['due-date'].value);
+    let dueDate = new Date(formElement.elements['due-date'].value);
+    // Make sure due date time is set to 23:59:59
+    dueDate = setHours(dueDate, 23);
+    dueDate = setMinutes(dueDate, 59);
+    dueDate = setSeconds(dueDate, 59);
     // Create new Task instance and add it to the tasks array
-    const newTask = new Task(title, description, list, priority, dueDate)
+    const newTask = new Task(title, description, list, priority, dueDate);
     Task.tasks.push(newTask);
     // Update currently displayed array
     taskArray.push(newTask);
@@ -140,7 +149,8 @@ function removeTasks() {
 }
 
 // Display tasks stored in the task array given as an argument
-function displayTasks(taskArray) {
+// Execute slightly differently for the Coming Up page
+function displayTasks(taskArray, isComingUpPage = false) {
   const contentDiv = document.querySelector('main .content');
   taskArray.forEach((task, index) => {
     if (Task.tasks.includes(task)) {
@@ -152,15 +162,23 @@ function displayTasks(taskArray) {
 
       const checkbox = createImg(checkboxSrc, 'Checkbox Icon', 'checkbox-icon');
       const title = createP(task.title, 'title');
+      if (isComingUpPage) {
+        title.classList.add('coming-up');
+      }
       const deleteIcon = createImg(
         deleteTaskScr,
         'Delete Task Icon',
         'delete-task-icon'
       );
-      const dueDate = createP(
-        task.dueDate.toLocaleDateString('pl'),
-        'due-date'
-      );
+      let dueDate;
+      if (isComingUpPage) {
+        dueDate = createP(
+          formatDistanceToNow(task.dueDate, { addSuffix: true }),
+          'due-date'
+        );
+      } else {
+        dueDate = createP(task.dueDate.toLocaleDateString('pl'), 'due-date');
+      }
       taskDiv.append(checkbox, title, deleteIcon, dueDate);
     }
   });
@@ -338,6 +356,15 @@ export function generatePage(taskArray) {
   displayTasks(taskArray);
   listenForTitleClick(taskArray);
   createAddTaskButton(taskArray);
+  listenForDeleteClick(taskArray);
+  listenForCheckboxClick(taskArray);
+}
+
+// Generate Coming Up page
+export function generateComingUpPage(taskArray) {
+  removeTasks();
+  displayTasks(taskArray, true);
+  // listenForTitleClick(taskArray);
   listenForDeleteClick(taskArray);
   listenForCheckboxClick(taskArray);
 }

@@ -7,14 +7,14 @@ export class Task {
       'Learn some JS, dumbass',
       'Personal',
       'high',
-      new Date(2023, 11, 15)
+      new Date(2023, 11, 15, 23, 59, 59)
     ),
     new Task(
       'Learn React',
       'Learn some React, dumbass',
       'Work',
       'medium',
-      new Date(2023, 11, 4)
+      new Date(2023, 11, 4, 23, 59, 59)
     ),
 
     new Task(
@@ -22,7 +22,7 @@ export class Task {
       'Learn some algorithms, dumbass',
       'Travel',
       'low',
-      new Date(2023, 11, 3)
+      new Date(2023, 11, 3, 23, 59, 59)
     ),
   ];
   static priorities = ['low', 'medium', 'high', 'yesterday'];
