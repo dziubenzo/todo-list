@@ -1,5 +1,6 @@
 import { Task } from './tasks';
 import checkboxSrc from '../assets/checkbox.svg';
+import checkboxCheckedSrc from '../assets/checkbox-checked.svg';
 import addIconSrc from '../assets/add-task.svg';
 import deleteTaskScr from '../assets/delete-task.svg';
 import {
@@ -146,7 +147,7 @@ function removeTasks() {
 }
 
 // Display tasks stored in the task array given as an argument
-// Execute slightly differently for the Coming Up page
+// Execute slightly differently for the Coming Up and Completed pages
 function displayTasks(taskArray) {
   const contentDiv = document.querySelector('main .content');
   taskArray.forEach((task, index) => {
@@ -157,7 +158,16 @@ function displayTasks(taskArray) {
       taskDiv.dataset.ogindex = Task.tasks.indexOf(task);
       contentDiv.append(taskDiv);
 
-      const checkbox = createImg(checkboxSrc, 'Checkbox Icon', 'checkbox-icon');
+      let checkbox;
+      if (Task.taskArrayMethod === 'getCompletedTasks') {
+        checkbox = createImg(
+          checkboxCheckedSrc,
+          'Checked Checkbox Icon',
+          'checked-checkbox-icon'
+        );
+      } else {
+        checkbox = createImg(checkboxSrc, 'Checkbox Icon', 'checkbox-icon');
+      }
       const title = createP(task.title, 'title');
       const deleteIcon = createImg(
         deleteTaskScr,
@@ -190,7 +200,6 @@ function generateTaskDetails(task, index) {
   const prioritySpan = createSpan('Priority');
   const dueDateSpan = createSpan('Due Date');
   const creationDateSpan = createSpan('Created On');
-  // const completionDateSpan = createSpan('Completed on');
 
   const title = createP(task.title, 'title-details');
   title.contentEditable = 'true';
@@ -220,10 +229,6 @@ function generateTaskDetails(task, index) {
     task.creationDate.toLocaleDateString('pl'),
     'creation-date-details'
   );
-  // const completionDate = createP(
-  //   task.completionDate,
-  //   'completion-date-details'
-  // );
 
   detailsDiv.append(
     titleSpan,
@@ -238,8 +243,37 @@ function generateTaskDetails(task, index) {
     dueDate,
     creationDateSpan,
     creationDate
-    // completionDateSpan,
-    // completionDate
+  );
+}
+
+// Generate task details for completed tasks
+function generateCompletedTaskDetails(task, index) {
+  const detailsDiv = createDiv(`details-task-${index}`);
+  const clickedTask = document.querySelector(`div.task-${index}`);
+  insertAfter(detailsDiv, clickedTask);
+
+  const titleSpan = createSpan('Title');
+  const descriptionSpan = createSpan('Description');
+  const listSpan = createSpan('List');
+  const completionDateSpan = createSpan('Completed on');
+
+  const title = createP(task.title, 'title-details');
+  const description = createP(task.description, 'description-details');
+  const list = createP(task.list, 'list-details');
+  const completionDate = createP(
+    task.completionDate.toLocaleDateString('pl'),
+    'completion-date-details'
+  );
+
+  detailsDiv.append(
+    titleSpan,
+    title,
+    descriptionSpan,
+    description,
+    listSpan,
+    list,
+    completionDateSpan,
+    completionDate
   );
 }
 
@@ -252,9 +286,13 @@ function listenForTitleClick(taskArray) {
     title.addEventListener('click', function showDetails() {
       const index = title.parentNode.dataset.index;
       const originalIndex = title.parentNode.dataset.ogindex;
-      generateTaskDetails(taskArray[index], index);
+      if (Task.taskArrayMethod === 'getCompletedTasks') {
+        generateCompletedTaskDetails(taskArray[index], index);
+      } else {
+        generateTaskDetails(taskArray[index], index);
+        editTask(title, originalIndex);
+      }
       title.removeEventListener('click', showDetails);
-      editTask(title, originalIndex);
       title.addEventListener('click', function hideDetails() {
         title.parentNode.nextSibling.remove();
         title.removeEventListener('click', hideDetails);
@@ -283,7 +321,7 @@ function listenForDeleteClick() {
 
 // Listen for checkbox click
 // Mark the task as completed
-function listenForCheckboxClick(taskArray) {
+function listenForCheckboxClick() {
   const checkboxIcons = document.querySelectorAll('.checkbox-icon');
 
   checkboxIcons.forEach((checkboxIcon) => {
@@ -349,7 +387,8 @@ export function generatePage() {
   let taskArray;
   if (
     Task.taskArrayMethod === 'getActiveTasks' ||
-    Task.taskArrayMethod === 'getComingUpTasks'
+    Task.taskArrayMethod === 'getComingUpTasks' ||
+    Task.taskArrayMethod === 'getCompletedTasks'
   ) {
     taskArray = Task[Task.taskArrayMethod]();
   } else {
@@ -362,5 +401,14 @@ export function generatePage() {
   listenForTitleClick(taskArray);
   createAddTaskButton();
   listenForDeleteClick();
-  listenForCheckboxClick(taskArray);
+  listenForCheckboxClick();
+}
+
+// Generate or refresh Completed page
+export function generateCompletedPage() {
+  const taskArray = Task[Task.taskArrayMethod]();
+  removeTasks();
+  displayTasks(taskArray);
+  listenForTitleClick(taskArray);
+  listenForDeleteClick();
 }

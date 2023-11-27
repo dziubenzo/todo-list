@@ -23,9 +23,16 @@ $sidebar-item-size: 1.2rem;
   }
 }
 
-// "Animation" when hovering over the task checkbox
+// "Animation" when hovering over the unchecked task checkbox
 @keyframes show-checked {
   to {
     content: url('../assets/checkbox-checked.svg');
+  }
+}
+
+// "Animation" when hovering over the checked task checkbox
+@keyframes show-unchecked {
+  to {
+    content: url('../assets/checkbox.svg');
   }
 }

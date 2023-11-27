@@ -63,6 +63,10 @@ export class Task {
     return Task.getActiveTasks().filter((task) => task.dueDate <= weekLater);
   }
 
+  static getCompletedTasks() {
+    return Task.tasks.filter((task) => task.completed === true);
+  }
+
   constructor(title, description, list, priority, dueDate) {
     this.title = title;
     this.description = description;

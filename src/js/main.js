@@ -6,7 +6,3 @@ import { handleTabs } from './sidebar';
 // Show all uncompleted tasks by default
 generatePage(Task.taskArrayMethod);
 handleTabs();
-
-// setInterval(() => {
-//   console.table(Task.tasks);
-// }, 2000);

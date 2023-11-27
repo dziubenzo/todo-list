@@ -104,6 +104,10 @@ main {
     .coming-up::before {
       content: url('../assets/coming-up.svg');
     }
+
+    .completed::before {
+      content: url('../assets/completed.svg');
+    }
   }
 
   .content {
@@ -152,6 +156,12 @@ main {
     img[class='checkbox-icon'] {
       &:hover {
         animation: show-checked 0s forwards;
+      }
+    }
+
+    img[class='checked-checkbox-icon'] {
+      &:hover {
+        animation: show-unchecked 0s forwards;
       }
     }
 
@@ -226,9 +236,10 @@ main {
 
       .title-details,
       .description-details {
-        cursor: pointer;
-
-        &:hover::after {
+        &[contenteditable='true']:hover {
+          cursor: pointer;
+        }
+        &[contenteditable='true']:hover::after {
           content: url('../assets/edit.svg');
           position: relative;
           top: 1px;
