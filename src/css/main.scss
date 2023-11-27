@@ -84,8 +84,7 @@ main {
       align-items: center;
       gap: 16px;
       font-size: $sidebar-item-size;
-      padding: 0 16px;
-      margin: 0;
+      padding-left: 16px;
       cursor: pointer;
 
       &::before {
@@ -95,6 +94,10 @@ main {
         filter: invert(76%) sepia(98%) saturate(1639%) hue-rotate(327deg)
           brightness(102%) contrast(106%);
       }
+    }
+
+    .lists-heading {
+      padding-left: 16px;
     }
 
     .all-tasks::before {
@@ -108,6 +111,19 @@ main {
     .completed::before {
       content: url('../assets/completed.svg');
     }
+
+    .lists-personal::before {
+      content: url('../assets/personal-list.svg');
+    }
+
+    .lists-work::before {
+      content: url('../assets/work-list.svg');
+    }
+
+    .lists-travel::before {
+      content: url('../assets/travel-list.svg');
+    }
+
   }
 
   .content {
