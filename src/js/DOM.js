@@ -334,6 +334,21 @@ function listenForCheckboxClick() {
   });
 }
 
+// Listen for checked checkbox click
+// Undo marking the task as completed
+function listenForCheckedCheckboxClick() {
+  const checkedCheckboxIcons = document.querySelectorAll('.checked-checkbox-icon');
+
+  checkedCheckboxIcons.forEach((checkedCheckboxIcon) => {
+    checkedCheckboxIcon.addEventListener('click', () => {
+      const originalIndex = checkedCheckboxIcon.parentNode.dataset.ogindex;
+      Task.tasks[originalIndex].undoCompleted();
+      // Refresh tasks
+      generatePage();
+    });
+  });
+}
+
 // Edit task details (title, description, list, priority, due date)
 function editTask(titleClicked, originalIndex) {
   // Select editable elements in the opened task details
@@ -411,4 +426,5 @@ export function generateCompletedPage() {
   displayTasks(taskArray);
   listenForTitleClick(taskArray);
   listenForDeleteClick();
+  listenForCheckedCheckboxClick();
 }

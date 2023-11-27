@@ -1,4 +1,4 @@
-import { addDays } from 'date-fns';
+import { addDays, setHours, setMinutes, setSeconds } from 'date-fns';
 
 export class Task {
   static tasks = [
@@ -27,7 +27,7 @@ export class Task {
   ];
   static priorities = ['low', 'medium', 'high', 'yesterday'];
   static lists = ['Personal', 'Work', 'Travel'];
-  static taskArrayMethod = "getActiveTasks";
+  static taskArrayMethod = 'getActiveTasks';
   static taskArraySortedInto;
   static taskArraySortedIntoIndex;
 
@@ -100,5 +100,16 @@ export class Task {
   markAsCompleted() {
     this.completed = true;
     this.completionDate = new Date();
+  }
+
+  // Undo marking task as completed
+  // Set due date to tomorrow, 23:59:59 by default
+  undoCompleted() {
+    this.completed = false;
+    delete this.completionDate;
+    this.dueDate = addDays(new Date(), 1);
+    this.dueDate = setHours(this.dueDate, 23);
+    this.dueDate = setMinutes(this.dueDate, 59);
+    this.dueDate = setSeconds(this.dueDate, 59);
   }
 }

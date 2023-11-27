@@ -155,13 +155,13 @@ main {
 
     img[class='checkbox-icon'] {
       &:hover {
-        animation: show-checked 0s forwards;
+        animation: check 0s forwards;
       }
     }
 
     img[class='checked-checkbox-icon'] {
       &:hover {
-        animation: show-unchecked 0s forwards;
+        animation: uncheck 0s forwards;
       }
     }
 
@@ -171,10 +171,6 @@ main {
 
     p.title {
       cursor: pointer;
-    }
-
-    p.coming-up {
-      cursor: default;
     }
 
     p.due-date {

@@ -6,3 +6,5 @@ import { handleTabs } from './sidebar';
 // Show all uncompleted tasks by default
 generatePage(Task.taskArrayMethod);
 handleTabs();
+
+console.log(Task.tasks[0])
