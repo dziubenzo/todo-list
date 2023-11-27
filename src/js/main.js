@@ -1,12 +1,12 @@
 import '../css/main.scss';
 import { Task } from './tasks';
-import { handleTabs } from './sidebar';
 import { generatePage } from './DOM';
+import { handleTabs } from './sidebar';
 
-// Show all active tasks by default
-export const filteredTasks = () => Task.getActiveTasks();
-
-generatePage(filteredTasks());
+// Show all uncompleted tasks by default
+generatePage(Task.getActiveTasks());
 handleTabs();
 
-console.table(Task.tasks)
+setInterval(() => {
+  console.table(Task.tasks);
+}, 2000);

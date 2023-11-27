@@ -1,4 +1,4 @@
-class Task {
+export class Task {
   static tasks = [
     new Task(
       'Learn JS',
@@ -27,9 +27,8 @@ class Task {
   static lists = ['Personal', 'Work', 'Travel'];
 
   // Sort tasks by due date (short to long)
-  // Return a 
-  static sort() {
-    return Task.tasks.sort((a, b) => {
+  static sort(taskArray) {
+    return taskArray.sort((a, b) => {
       if (a.dueDate < b.dueDate) {
         return -1;
       }
@@ -41,7 +40,7 @@ class Task {
   }
 
   static getActiveTasks() {
-    Task.sort()
+    Task.sort(Task.tasks);
     return Task.tasks.filter((task) => task.completed === false);
   }
 
@@ -88,5 +87,3 @@ class Task {
     this.completionDate = new Date();
   }
 }
-
-export { Task };

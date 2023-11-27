@@ -1,4 +1,3 @@
-import { filteredTasks } from './main';
 import { Task } from './tasks';
 import checkboxSrc from '../assets/checkbox.svg';
 import checkedCheckboxSrc from '../assets/checkbox-checked.svg';
@@ -23,7 +22,7 @@ import {
 
 // Create add task button
 // Listen for it
-function createAddTaskButton() {
+function createAddTaskButton(taskArray) {
   const contentDiv = document.querySelector('main .content');
   const addBtn = createDiv(`add-task`);
   contentDiv.append(addBtn);
@@ -33,7 +32,7 @@ function createAddTaskButton() {
 
   // Show add task form and hide add task form when clicked
   addBtn.addEventListener('click', () => {
-    createAddTaskForm(addBtn);
+    createAddTaskForm(addBtn, taskArray);
     removeAddTaskBtn(addBtn);
   });
 }
@@ -44,7 +43,7 @@ function removeAddTaskBtn(addTaskButton) {
 }
 
 // Create and show form for adding a new task
-function createAddTaskForm(addTaskButton) {
+function createAddTaskForm(addTaskButton, taskArray) {
   const heading = createH(2, 'Add New Task', 'add-task-heading');
   const addTaskForm = createForm('add-task-form');
   const titleLabel = createLabel('Title', 'title');
@@ -99,13 +98,13 @@ function createAddTaskForm(addTaskButton) {
   );
   addTaskButton.parentNode.insertBefore(addTaskForm, addTaskButton);
   // Listen for form submission
-  listenForNewTask(addTaskForm);
+  listenForNewTask(addTaskForm, taskArray);
   // Listen for Cancel button click
   listenForCancelButton(cancelBtn, addTaskForm);
 }
 
 // Add new task when the Create button is clicked
-function listenForNewTask(formElement) {
+function listenForNewTask(formElement, taskArray) {
   formElement.addEventListener('submit', (event) => {
     event.preventDefault();
     // Get form values
@@ -115,10 +114,12 @@ function listenForNewTask(formElement) {
     const priority = formElement.elements.priority.value;
     const dueDate = new Date(formElement.elements['due-date'].value);
     // Create new Task instance and add it to the tasks array
-    Task.tasks.push(new Task(title, description, list, priority, dueDate));
+    const newTask = new Task(title, description, list, priority, dueDate)
+    Task.tasks.push(newTask);
+    // Update currently displayed array
+    taskArray.push(newTask);
     // Refresh tasks
-    console.table(Task.tasks);
-    generatePage(filteredTasks());
+    generatePage(taskArray);
   });
 }
 
@@ -145,7 +146,7 @@ function displayTasks(taskArray) {
     if (Task.tasks.includes(task)) {
       const taskDiv = createDiv(`task-${index}`);
       taskDiv.dataset.index = index;
-      // Get index from the main array for task deletion purposes
+      // Get index from the main array
       taskDiv.dataset.ogindex = Task.tasks.indexOf(task);
       contentDiv.append(taskDiv);
 
@@ -254,7 +255,7 @@ function listenForTitleClick(taskArray) {
 // Listen for delete task icon clicks
 // Delete task from the tasks array
 // Refresh tasks
-function listenForDeleteClick() {
+function listenForDeleteClick(taskArray) {
   const deleteIcons = document.querySelectorAll('.delete-task-icon');
 
   deleteIcons.forEach((deleteIcon) => {
@@ -263,27 +264,25 @@ function listenForDeleteClick() {
       const originalIndex = deleteIcon.parentNode.dataset.ogindex;
       Task.tasks.splice(originalIndex, 1);
       // Refresh tasks
-      console.table(Task.tasks);
-      generatePage(filteredTasks());
+      generatePage(taskArray);
     });
   });
 }
 
 // Listen for checkbox click
 // Mark the task as completed
-// Change icon to checked box
-function listenForCheckboxClick() {
+function listenForCheckboxClick(taskArray) {
   const checkboxIcons = document.querySelectorAll('.checkbox-icon');
 
   checkboxIcons.forEach((checkboxIcon) => {
     checkboxIcon.addEventListener('click', () => {
       const originalIndex = checkboxIcon.parentNode.dataset.ogindex;
       Task.tasks[originalIndex].markAsCompleted();
-      checkboxIcon.src = checkedCheckboxSrc;
-      checkboxIcon.classList.replace('checkbox-icon', 'checkbox-checked-icon');
+      // Remove completed task from the currently displayed array
+      const index = checkboxIcon.parentNode.dataset.index;
+      taskArray.splice(index, 1);
       // Refresh tasks
-      console.table(Task.tasks);
-      generatePage(filteredTasks());
+      generatePage(taskArray);
     });
   });
 }
@@ -316,7 +315,6 @@ function editTask(titleClicked, originalIndex) {
   // Update due date value dynamically
   editableDueDate.addEventListener('change', () => {
     Task.tasks[originalIndex].updateDueDate(new Date(editableDueDate.value));
-    console.log(Task.tasks[originalIndex].dueDate)
     titleClicked.parentNode.querySelector('p.due-date').innerHTML =
       Task.tasks[originalIndex].dueDate.toLocaleDateString('pl');
   });
@@ -334,10 +332,12 @@ function editTask(titleClicked, originalIndex) {
 
 // Refresh or generate a page
 export function generatePage(taskArray) {
+  // Sort currently displayed array
+  Task.sort(taskArray);
   removeTasks();
   displayTasks(taskArray);
   listenForTitleClick(taskArray);
-  createAddTaskButton();
-  listenForDeleteClick();
-  listenForCheckboxClick();
+  createAddTaskButton(taskArray);
+  listenForDeleteClick(taskArray);
+  listenForCheckboxClick(taskArray);
 }
