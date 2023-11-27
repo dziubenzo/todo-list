@@ -1,3 +1,5 @@
+import { addDays } from 'date-fns';
+
 export class Task {
   static tasks = [
     new Task(
@@ -12,7 +14,7 @@ export class Task {
       'Learn some React, dumbass',
       'Work',
       'medium',
-      new Date(2023, 11, 5)
+      new Date(2023, 11, 4)
     ),
 
     new Task(
@@ -50,6 +52,12 @@ export class Task {
 
   static getTasksByPriority(priority) {
     return Task.getActiveTasks().filter((task) => task.priority === priority);
+  }
+
+  // Filter tasks by those whose due date is within a week
+  static getComingUpTasks() {
+    const weekLater = addDays(new Date(), 7);
+    return Task.getActiveTasks().filter((task) => task.dueDate <= weekLater);
   }
 
   constructor(title, description, list, priority, dueDate) {

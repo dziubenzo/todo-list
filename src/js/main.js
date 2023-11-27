@@ -7,6 +7,8 @@ import { handleTabs } from './sidebar';
 generatePage(Task.getActiveTasks());
 handleTabs();
 
-setInterval(() => {
-  console.table(Task.tasks);
-}, 2000);
+// setInterval(() => {
+//   console.table(Task.tasks);
+// }, 2000);
+
+console.table(Task.getComingUpTasks());

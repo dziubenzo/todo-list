@@ -11,7 +11,7 @@ export function handleTabs() {
   });
 
   comingUpBtn.addEventListener('click', () => {
-    taskArray = Task.getTasksByList(Task.lists[0]);
+    taskArray = Task.getComingUpTasks();
     generatePage(taskArray);
   });
 }
