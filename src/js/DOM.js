@@ -92,13 +92,13 @@ function createAddListForm(addListButton) {
 function listenForNewList(formElement) {
   formElement.addEventListener('submit', (event) => {
     event.preventDefault();
-    // Capitalise the new list and add it to the lists array
-    const firstChar = formElement.elements['list-name'].value
-      .charAt(0)
-      .toUpperCase();
-    const slicedList = formElement.elements['list-name'].value.slice(1);
+    // Trim white spaces from and capitalise the new list
+    // Add it to the lists array
+    const trimmedList = formElement.elements['list-name'].value.trim();
+    const firstChar = trimmedList.charAt(0).toUpperCase();
+    const slicedList = trimmedList.slice(1);
     const newList = firstChar + slicedList;
-    Task.lists.push(newList.trim());
+    Task.addList(newList);
     // Refresh list tabs
     removeListTabs();
     formElement.remove();
@@ -456,7 +456,9 @@ function editTask(titleClicked, originalIndex) {
     titleClicked.innerHTML = Task.tasks[originalIndex].title;
   });
   editableDescription.addEventListener('input', () => {
-    Task.tasks[originalIndex].updateDescription(editableDescription.textContent);
+    Task.tasks[originalIndex].updateDescription(
+      editableDescription.textContent
+    );
   });
   // Update due date value and refresh page
   editableDueDate.addEventListener('change', () => {

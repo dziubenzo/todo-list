@@ -67,6 +67,10 @@ export class Task {
     return Task.tasks.filter((task) => task.completed === true);
   }
 
+  static addList(newList) {
+    return Task.lists.push(newList);
+  }
+
   constructor(title, description, list, priority, dueDate) {
     this.title = title.trim();
     this.description = description.trim();
