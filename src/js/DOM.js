@@ -62,11 +62,13 @@ function createAddListForm(addListButton) {
     16,
     'Name'
   );
-  const createBtn = createImg(
+  const createBtn = createButton('submit', '');
+  const createBtnIcon = createImg(
     createIconScr,
     'Create List Icon',
     'create-list-icon'
   );
+  createBtn.append(createBtnIcon);
   const cancelBtn = createImg(
     cancelIconScr,
     'Cancel List Icon',
@@ -75,6 +77,27 @@ function createAddListForm(addListButton) {
   addListForm.append(listField, createBtn, cancelBtn);
   addListButton.parentNode.insertBefore(addListForm, addListButton);
   listField.focus();
+
+  // Listen for form submission
+  listenForNewList(addListForm);
+  // Remove form and show the add list button again if the Cancel button is clicked
+  cancelBtn.addEventListener('click', () => removeAddListForm(addListForm));
+}
+
+// Add new list when the Create button is clicked
+function listenForNewList(formElement) {
+  formElement.addEventListener('submit', (event) => {
+    event.preventDefault();
+    Task.lists.push(formElement.elements['list-name'].value);
+    // Hide the form and show the button
+    removeAddListForm(formElement);
+  });
+}
+
+// Remove form and show the add list button again
+function removeAddListForm(addListForm) {
+  addListForm.remove();
+  createAddListButton();
 }
 
 // Create add task button

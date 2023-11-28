@@ -153,6 +153,12 @@ main {
         }
       }
 
+      button {
+        background: none;
+        border: none;
+        height: min-content;
+      }
+
       img {
         width: 50%;
         cursor: pointer;
