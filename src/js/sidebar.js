@@ -4,20 +4,23 @@ import { createP } from './helpers';
 
 // Add listeners for three default tabs
 export function handleTabs() {
-  const allTasksBtn = document.querySelector('.sidebar .all-tasks');
-  const comingUpBtn = document.querySelector('.sidebar .coming-up');
-  const completedBtn = document.querySelector('.sidebar .completed');
-  allTasksBtn.addEventListener('click', () => {
+  const allTasksPara = document.querySelector('.tabs .all-tasks');
+  const comingUpPara = document.querySelector('.tabs .coming-up');
+  const completedPara = document.querySelector('.tabs .completed');
+  allTasksPara.addEventListener('click', () => {
+    toggleSelectedTab(allTasksPara);
     Task.taskArrayMethod = 'getActiveTasks';
     generatePage();
   });
 
-  comingUpBtn.addEventListener('click', () => {
+  comingUpPara.addEventListener('click', () => {
+    toggleSelectedTab(comingUpPara);
     Task.taskArrayMethod = 'getComingUpTasks';
     generatePage();
   });
 
-  completedBtn.addEventListener('click', () => {
+  completedPara.addEventListener('click', () => {
+    toggleSelectedTab(completedPara);
     Task.taskArrayMethod = 'getCompletedTasks';
     generateCompletedPage();
   });
@@ -33,6 +36,7 @@ export function generateListTabs() {
     );
     parentDiv.append(para);
     para.addEventListener('click', () => {
+      toggleSelectedTab(para);
       Task.taskArrayMethod = 'getTasksByList';
       Task.taskArraySortedInto = 'lists';
       Task.taskArraySortedIntoIndex = Task.lists.indexOf(list);
@@ -47,4 +51,14 @@ export function removeListTabs() {
   for (const list of listTabs) {
     list.remove();
   }
+}
+
+// Remove selected class from all tabs
+// Add selected class to the current tab
+export function toggleSelectedTab(currentTab) {
+  const tabs = document.querySelectorAll('.tabs p');
+  for (const tab of tabs) {
+    tab.classList.remove('selected');
+  }
+  currentTab.classList.add('selected');
 }

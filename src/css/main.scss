@@ -87,6 +87,12 @@ main {
       font-size: $sidebar-item-size;
       cursor: pointer;
 
+      &:hover {
+        font-weight: bold;
+        border-radius: 8px;
+        letter-spacing: 1px;
+      }
+
       &::before {
         display: inline-block;
         width: $sidebar-item-size;

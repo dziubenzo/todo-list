@@ -1,5 +1,5 @@
 import { Task } from './tasks';
-import { generateListTabs, removeListTabs } from './sidebar';
+import { generateListTabs, removeListTabs, toggleSelectedTab } from './sidebar';
 import checkboxSrc from '../assets/checkbox.svg';
 import checkboxCheckedSrc from '../assets/checkbox-checked.svg';
 import addTaskIconSrc from '../assets/add-task.svg';
@@ -104,6 +104,11 @@ function listenForNewList(formElement) {
     formElement.remove();
     generateListTabs();
     createAddListButton();
+    // Open All Tasks tab by default and add selected class to it
+    const allTasksPara = document.querySelector('.tabs .all-tasks');
+    toggleSelectedTab(allTasksPara);
+    Task.taskArrayMethod = 'getActiveTasks';
+    generatePage(Task.taskArrayMethod);
   });
 }
 
