@@ -88,7 +88,13 @@ function createAddListForm(addListButton) {
 function listenForNewList(formElement) {
   formElement.addEventListener('submit', (event) => {
     event.preventDefault();
-    Task.lists.push(formElement.elements['list-name'].value);
+    // Capitalise the new list and add it to the lists array
+    const firstChar = formElement.elements['list-name'].value
+      .charAt(0)
+      .toUpperCase();
+    const slicedList = formElement.elements['list-name'].value.slice(1);
+    const newList = firstChar + slicedList;
+    Task.lists.push(newList);
     // Hide the form and show the button
     removeAddListForm(formElement);
   });

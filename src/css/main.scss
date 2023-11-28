@@ -78,13 +78,13 @@ main {
     display: grid;
     gap: 16px;
     margin: 32px;
+    padding-left: 16px;
 
     p {
       display: flex;
       align-items: center;
       gap: 16px;
       font-size: $sidebar-item-size;
-      padding-left: 16px;
       cursor: pointer;
 
       &::before {
@@ -94,10 +94,6 @@ main {
         filter: invert(76%) sepia(98%) saturate(1639%) hue-rotate(327deg)
           brightness(102%) contrast(106%);
       }
-    }
-
-    .lists-heading {
-      padding-left: 16px;
     }
 
     .all-tasks::before {
@@ -138,8 +134,8 @@ main {
       gap: 8px;
 
       input[type='text'] {
-        width: 50%;
-        margin-left: 16px;
+        width: 100%;
+        flex-grow: 1;
         padding: 4px 8px;
         font-family: $font-stack;
         font-size: 1rem;
