@@ -30,15 +30,22 @@ export function handleTabs() {
 // Generate all list tabs together with Delete buttons
 export function generateListTabs() {
   const parentDiv = document.querySelector('.sidebar .tabs');
+  let index = 0;
   for (const list of Task.lists) {
-    const listDiv = createDiv(`lists-${list.replaceAll(' ', '-').toLowerCase()}`);
-    const para = createP(list);
-    const deleteIcon = createImg(
-      deleteListIconSrc,
-      'Delete List Icon',
-      'delete-list-icon'
+    const listDiv = createDiv(
+      `lists-${list.replaceAll(' ', '-').toLowerCase()}`
     );
-    listDiv.append(para, deleteIcon);
+    const para = createP(list);
+    listDiv.append(para);
+    // Generate Delete buttons only for user-created lists
+    if (index > 2) {
+      const deleteIcon = createImg(
+        deleteListIconSrc,
+        'Delete List Icon',
+        'delete-list-icon'
+      );
+      listDiv.append(deleteIcon);
+    }
     parentDiv.append(listDiv);
     para.addEventListener('click', () => {
       toggleSelectedTab(para.parentNode);
@@ -47,6 +54,7 @@ export function generateListTabs() {
       Task.taskArraySortedIntoIndex = Task.lists.indexOf(list);
       generatePage();
     });
+    index++;
   }
 }
 
@@ -68,5 +76,14 @@ export function toggleSelectedTab(currentTabDiv) {
   currentTabDiv.classList.add('selected');
 }
 
-// Delete created list
-export function deleteList() {}
+// Delete created list from the DOM and priorities array if the corresponding Delete icon is clicked
+export function deleteList() {
+  const deleteListIcons = document.querySelectorAll('.delete-list-icon');
+
+  deleteListIcons.forEach((deleteIcon) => {
+    deleteIcon.addEventListener('click', () => {
+      const listName = deleteIcon.parentNode.querySelector('p').textContent;
+      console.log(listName);
+    });
+  });
+}

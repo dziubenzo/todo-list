@@ -7,6 +7,10 @@
 
     .sidebar {
       grid-area: sidebar;
+
+      .tabs {
+        margin: 32px 48px;
+      }
     }
 
     .content {
