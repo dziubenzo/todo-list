@@ -124,6 +124,14 @@ main {
       content: url('../assets/travel-list.svg');
     }
 
+    img[class='add-list-btn'] {
+      width: calc($sidebar-item-size + 15px);
+      height: calc($sidebar-item-size + 15px);
+      filter: invert(76%) sepia(98%) saturate(1639%) hue-rotate(327deg)
+        brightness(102%) contrast(106%);
+      place-self: center;
+      cursor: pointer;
+    }
   }
 
   .content {

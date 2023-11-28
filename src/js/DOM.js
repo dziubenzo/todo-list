@@ -1,7 +1,8 @@
 import { Task } from './tasks';
 import checkboxSrc from '../assets/checkbox.svg';
 import checkboxCheckedSrc from '../assets/checkbox-checked.svg';
-import addIconSrc from '../assets/add-task.svg';
+import addTaskIconSrc from '../assets/add-task.svg';
+import addListIconSrc from '../assets/add-list.svg';
 import deleteTaskScr from '../assets/delete-task.svg';
 import {
   createH,
@@ -26,6 +27,18 @@ import {
   setSeconds,
 } from 'date-fns';
 
+// Create add list button
+// Listen for it
+function createAddListButton() {
+  const sidebarDiv = document.querySelector('main .tabs');
+  const addListIcon = createImg(
+    addListIconSrc,
+    'Add List Button',
+    'add-list-btn'
+  );
+  sidebarDiv.append(addListIcon);
+}
+
 // Create add task button
 // Listen for it
 function createAddTaskButton() {
@@ -33,7 +46,7 @@ function createAddTaskButton() {
   const addBtn = createDiv(`add-task`);
   contentDiv.append(addBtn);
 
-  const addIcon = createImg(addIconSrc, 'Add Task Button', 'add-task-btn');
+  const addIcon = createImg(addTaskIconSrc, 'Add Task Button', 'add-task-btn');
   addBtn.append(addIcon);
 
   // Show add task form and hide add task form when clicked
@@ -337,7 +350,9 @@ function listenForCheckboxClick() {
 // Listen for checked checkbox click
 // Undo marking the task as completed
 function listenForCheckedCheckboxClick() {
-  const checkedCheckboxIcons = document.querySelectorAll('.checked-checkbox-icon');
+  const checkedCheckboxIcons = document.querySelectorAll(
+    '.checked-checkbox-icon'
+  );
 
   checkedCheckboxIcons.forEach((checkedCheckboxIcon) => {
     checkedCheckboxIcon.addEventListener('click', () => {
@@ -415,6 +430,7 @@ export function generatePage() {
   displayTasks(taskArray);
   listenForTitleClick(taskArray);
   createAddTaskButton();
+  createAddListButton();
   listenForDeleteClick();
   listenForCheckboxClick();
 }
@@ -425,6 +441,7 @@ export function generateCompletedPage() {
   removeTasks();
   displayTasks(taskArray);
   listenForTitleClick(taskArray);
+  createAddListButton();
   listenForDeleteClick();
   listenForCheckedCheckboxClick();
 }
