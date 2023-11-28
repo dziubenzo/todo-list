@@ -80,24 +80,32 @@ main {
     margin: 32px;
     padding-left: 16px;
 
-    p {
+    div {
       display: flex;
       align-items: center;
       gap: 16px;
       font-size: $sidebar-item-size;
-      cursor: pointer;
 
-      &:hover {
+      p:hover {
         font-weight: bold;
         border-radius: 8px;
         letter-spacing: 1px;
+        cursor: pointer;
       }
 
-      &::before {
+      &::before,
+      img {
         display: inline-block;
         width: $sidebar-item-size;
         height: $sidebar-item-size;
         filter: $icon-clr;
+      }
+    }
+
+    div {
+      img {
+        cursor: pointer;
+        margin-left: auto;
       }
     }
 
@@ -109,24 +117,23 @@ main {
       content: url('../assets/coming-up.svg');
     }
 
-    
     .completed::before {
       content: url('../assets/completed.svg');
     }
-    
-    p[class^='lists-']::before {
+
+    div[class^='lists-']::before {
       content: url('../assets/list.svg');
     }
 
-    p.lists-personal::before {
+    div.lists-personal::before {
       content: url('../assets/personal-list.svg');
     }
 
-    p.lists-work::before {
+    div.lists-work::before {
       content: url('../assets/work-list.svg');
     }
 
-    p.lists-travel::before {
+    div.lists-travel::before {
       content: url('../assets/travel-list.svg');
     }
 

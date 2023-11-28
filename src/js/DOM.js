@@ -105,8 +105,8 @@ function listenForNewList(formElement) {
     generateListTabs();
     createAddListButton();
     // Open All Tasks tab by default and add selected class to it
-    const allTasksPara = document.querySelector('.tabs .all-tasks');
-    toggleSelectedTab(allTasksPara);
+    const allTasksDiv = document.querySelector('.tabs .all-tasks');
+    toggleSelectedTab(allTasksDiv);
     Task.taskArrayMethod = 'getActiveTasks';
     generatePage(Task.taskArrayMethod);
   });

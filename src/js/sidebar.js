@@ -1,42 +1,47 @@
 import { Task } from './tasks';
 import { generatePage, generateCompletedPage } from './DOM';
-import { createP } from './helpers';
+import { createP, createDiv, createImg } from './helpers';
+import deleteListIconSrc from '../assets/delete-list.svg';
 
 // Add listeners for three default tabs
 export function handleTabs() {
-  const allTasksPara = document.querySelector('.tabs .all-tasks');
-  const comingUpPara = document.querySelector('.tabs .coming-up');
-  const completedPara = document.querySelector('.tabs .completed');
+  const allTasksPara = document.querySelector('.all-tasks p');
+  const comingUpPara = document.querySelector('.coming-up p');
+  const completedPara = document.querySelector('.completed p');
   allTasksPara.addEventListener('click', () => {
-    toggleSelectedTab(allTasksPara);
+    toggleSelectedTab(allTasksPara.parentNode);
     Task.taskArrayMethod = 'getActiveTasks';
     generatePage();
   });
 
   comingUpPara.addEventListener('click', () => {
-    toggleSelectedTab(comingUpPara);
+    toggleSelectedTab(comingUpPara.parentNode);
     Task.taskArrayMethod = 'getComingUpTasks';
     generatePage();
   });
 
   completedPara.addEventListener('click', () => {
-    toggleSelectedTab(completedPara);
+    toggleSelectedTab(completedPara.parentNode);
     Task.taskArrayMethod = 'getCompletedTasks';
     generateCompletedPage();
   });
 }
 
-// Generate all list tabs
+// Generate all list tabs together with Delete buttons
 export function generateListTabs() {
   const parentDiv = document.querySelector('.sidebar .tabs');
   for (const list of Task.lists) {
-    const para = createP(
-      list,
-      `lists-${list.replaceAll(' ', '-').toLowerCase()}`
+    const listDiv = createDiv(`lists-${list.replaceAll(' ', '-').toLowerCase()}`);
+    const para = createP(list);
+    const deleteIcon = createImg(
+      deleteListIconSrc,
+      'Delete List Icon',
+      'delete-list-icon'
     );
-    parentDiv.append(para);
+    listDiv.append(para, deleteIcon);
+    parentDiv.append(listDiv);
     para.addEventListener('click', () => {
-      toggleSelectedTab(para);
+      toggleSelectedTab(para.parentNode);
       Task.taskArrayMethod = 'getTasksByList';
       Task.taskArraySortedInto = 'lists';
       Task.taskArraySortedIntoIndex = Task.lists.indexOf(list);
@@ -47,7 +52,7 @@ export function generateListTabs() {
 
 // Remove all list tabs
 export function removeListTabs() {
-  const listTabs = document.querySelectorAll('p[class^="lists-"');
+  const listTabs = document.querySelectorAll('div[class^="lists-"');
   for (const list of listTabs) {
     list.remove();
   }
@@ -55,12 +60,12 @@ export function removeListTabs() {
 
 // Remove selected class from all tabs
 // Add selected class to the current tab
-export function toggleSelectedTab(currentTab) {
-  const tabs = document.querySelectorAll('.tabs p');
+export function toggleSelectedTab(currentTabDiv) {
+  const tabs = document.querySelectorAll('.tabs div');
   for (const tab of tabs) {
     tab.classList.remove('selected');
   }
-  currentTab.classList.add('selected');
+  currentTabDiv.classList.add('selected');
 }
 
 // Delete created list
