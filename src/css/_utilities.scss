@@ -2,7 +2,8 @@ $font-stack: 'DM Sans', sans-serif;
 $bg-colour-dark: rgb(40, 40, 40);
 $font-colour-dark: rgb(255, 185, 55);
 $sidebar-item-size: 1.2rem;
-$selected-icon-clr: invert(94%) sepia(34%) saturate(2368%) hue-rotate(357deg) brightness(110%) contrast(101%);
+$selected-icon-clr: invert(94%) sepia(34%) saturate(2368%) hue-rotate(357deg)
+  brightness(110%) contrast(101%);
 
 // Animation when hovering over main content
 @keyframes show-border {
@@ -39,8 +40,35 @@ $selected-icon-clr: invert(94%) sepia(34%) saturate(2368%) hue-rotate(357deg) br
 }
 
 .selected {
-  // background-color: lighten($bg-colour-dark, 20%);
   font-weight: bold;
   border-radius: 8px;
   letter-spacing: 1px;
+}
+
+.priority-low,
+.priority-medium,
+.priority-high,
+.priority-yesterday,
+.priority-completed {
+  border-left: 5px solid;
+}
+
+.priority-low {
+  border-left-color: green;
+}
+
+.priority-medium {
+  border-left-color: yellow;
+}
+
+.priority-high {
+  border-left-color: red;
+}
+
+.priority-yesterday {
+  border-left-color: rgba(50, 1, 141, 0.616);
+}
+
+.priority-completed {
+  border-left-color: black;
 }

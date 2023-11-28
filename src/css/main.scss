@@ -181,7 +181,7 @@ main {
     display: grid;
     grid-template-columns: 1fr;
     grid-auto-rows: min-content;
-    gap: 4px;
+    gap: 8px;
     padding: 16px;
 
     .add-task {
@@ -208,6 +208,7 @@ main {
 
       &:hover {
         outline: 1px solid $font-colour-dark;
+        outline-offset: 0.05rem;
         border-radius: 8px;
       }
     }

@@ -243,6 +243,12 @@ function displayTasks(taskArray) {
       taskDiv.dataset.index = index;
       // Get index from the main array
       taskDiv.dataset.ogindex = Task.tasks.indexOf(task);
+      // Add appropriate priority indicator to tasks
+      if (Task.taskArrayMethod === 'getCompletedTasks') {
+        taskDiv.classList.add('priority-completed');
+      } else {
+        taskDiv.classList.add(`priority-${task.priority}`);
+      }
       contentDiv.append(taskDiv);
 
       let checkbox;
