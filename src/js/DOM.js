@@ -3,6 +3,8 @@ import checkboxSrc from '../assets/checkbox.svg';
 import checkboxCheckedSrc from '../assets/checkbox-checked.svg';
 import addTaskIconSrc from '../assets/add-task.svg';
 import addListIconSrc from '../assets/add-list.svg';
+import createIconScr from '../assets/confirm-list.svg';
+import cancelIconScr from '../assets/cancel-list.svg';
 import deleteTaskScr from '../assets/delete-task.svg';
 import {
   createH,
@@ -29,7 +31,7 @@ import {
 
 // Create add list button
 // Listen for it
-function createAddListButton() {
+export function createAddListButton() {
   const sidebarDiv = document.querySelector('main .tabs');
   const addListIcon = createImg(
     addListIconSrc,
@@ -37,6 +39,42 @@ function createAddListButton() {
     'add-list-btn'
   );
   sidebarDiv.append(addListIcon);
+
+  // Show add list field and remove add list button when clicked
+  addListIcon.addEventListener('click', () => {
+    createAddListForm(addListIcon);
+    removeAddListButton(addListIcon);
+  });
+}
+
+// Remove add list button
+function removeAddListButton(addListButton) {
+  addListButton.remove();
+}
+
+// Create add list form
+function createAddListForm(addListButton) {
+  const addListForm = createForm('add-list-form');
+  const listField = createInputText(
+    'add-list-form',
+    'list-name',
+    3,
+    16,
+    'Name'
+  );
+  const createBtn = createImg(
+    createIconScr,
+    'Create List Icon',
+    'create-list-icon'
+  );
+  const cancelBtn = createImg(
+    cancelIconScr,
+    'Cancel List Icon',
+    'cancel-list-icon'
+  );
+  addListForm.append(listField, createBtn, cancelBtn);
+  addListButton.parentNode.insertBefore(addListForm, addListButton);
+  listField.focus();
 }
 
 // Create add task button
@@ -49,15 +87,15 @@ function createAddTaskButton() {
   const addIcon = createImg(addTaskIconSrc, 'Add Task Button', 'add-task-btn');
   addBtn.append(addIcon);
 
-  // Show add task form and hide add task form when clicked
+  // Show add task form and remove add task button when clicked
   addBtn.addEventListener('click', () => {
     createAddTaskForm(addBtn);
-    removeAddTaskBtn(addBtn);
+    removeAddTaskButton(addBtn);
   });
 }
 
 // Remove add task button
-function removeAddTaskBtn(addTaskButton) {
+function removeAddTaskButton(addTaskButton) {
   addTaskButton.remove();
 }
 
@@ -430,7 +468,6 @@ export function generatePage() {
   displayTasks(taskArray);
   listenForTitleClick(taskArray);
   createAddTaskButton();
-  createAddListButton();
   listenForDeleteClick();
   listenForCheckboxClick();
 }
@@ -441,7 +478,6 @@ export function generateCompletedPage() {
   removeTasks();
   displayTasks(taskArray);
   listenForTitleClick(taskArray);
-  createAddListButton();
   listenForDeleteClick();
   listenForCheckedCheckboxClick();
 }

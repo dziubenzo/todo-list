@@ -132,6 +132,36 @@ main {
       place-self: center;
       cursor: pointer;
     }
+
+    #add-list-form {
+      display: flex;
+      gap: 8px;
+
+      input[type='text'] {
+        width: 50%;
+        margin-left: 16px;
+        padding: 4px 8px;
+        font-family: $font-stack;
+        font-size: 1rem;
+        background-color: lighten($bg-colour-dark, 10%);
+        color: $font-colour-dark;
+        border: none;
+        outline: 1px solid $font-colour-dark;
+        border-radius: 4px;
+        &::placeholder {
+          color: darken($font-colour-dark, 20%);
+        }
+      }
+
+      img {
+        width: 50%;
+        cursor: pointer;
+        width: calc($sidebar-item-size + 10px);
+        height: calc($sidebar-item-size + 10px);
+        filter: invert(76%) sepia(98%) saturate(1639%) hue-rotate(327deg)
+          brightness(102%) contrast(106%);
+      }
+    }
   }
 
   .content {
