@@ -104,19 +104,24 @@ main {
       content: url('../assets/coming-up.svg');
     }
 
+    
     .completed::before {
       content: url('../assets/completed.svg');
     }
+    
+    p[class^='lists-']::before {
+      content: url('../assets/list.svg');
+    }
 
-    .lists-personal::before {
+    p.lists-personal::before {
       content: url('../assets/personal-list.svg');
     }
 
-    .lists-work::before {
+    p.lists-work::before {
       content: url('../assets/work-list.svg');
     }
 
-    .lists-travel::before {
+    p.lists-travel::before {
       content: url('../assets/travel-list.svg');
     }
 

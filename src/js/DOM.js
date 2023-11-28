@@ -1,4 +1,5 @@
 import { Task } from './tasks';
+import { generateListTabs, removeListTabs } from './sidebar';
 import checkboxSrc from '../assets/checkbox.svg';
 import checkboxCheckedSrc from '../assets/checkbox-checked.svg';
 import addTaskIconSrc from '../assets/add-task.svg';
@@ -81,7 +82,10 @@ function createAddListForm(addListButton) {
   // Listen for form submission
   listenForNewList(addListForm);
   // Remove form and show the add list button again if the Cancel button is clicked
-  cancelBtn.addEventListener('click', () => removeAddListForm(addListForm));
+  cancelBtn.addEventListener('click', () => {
+    addListForm.remove();
+    createAddListButton();
+  });
 }
 
 // Add new list when the Create button is clicked
@@ -95,15 +99,12 @@ function listenForNewList(formElement) {
     const slicedList = formElement.elements['list-name'].value.slice(1);
     const newList = firstChar + slicedList;
     Task.lists.push(newList);
-    // Hide the form and show the button
-    removeAddListForm(formElement);
+    // Refresh list tabs
+    removeListTabs();
+    formElement.remove();
+    generateListTabs();
+    createAddListButton();
   });
-}
-
-// Remove form and show the add list button again
-function removeAddListForm(addListForm) {
-  addListForm.remove();
-  createAddListButton();
 }
 
 // Create add task button
@@ -491,6 +492,11 @@ export function generatePage() {
   } else {
     taskArray = Task[Task.taskArrayMethod](
       Task[Task.taskArraySortedInto][Task.taskArraySortedIntoIndex]
+    );
+    console.log(
+      Task.taskArrayMethod,
+      Task.taskArraySortedInto,
+      Task.taskArraySortedIntoIndex
     );
   }
   removeTasks();
