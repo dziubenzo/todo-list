@@ -71,6 +71,11 @@ export class Task {
     return Task.lists.push(newList);
   }
 
+  static deleteList(list) {
+    const listIndex = Task.lists.indexOf(list);
+    Task.lists.splice(listIndex, 1);
+  }
+
   constructor(title, description, list, priority, dueDate) {
     this.title = title.trim();
     this.description = description.trim();

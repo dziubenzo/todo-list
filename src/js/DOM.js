@@ -88,7 +88,7 @@ function createAddListForm(addListButton) {
   });
 }
 
-// Add new list when the Create button is clicked
+// Add a new list when the Create button is clicked
 function listenForNewList(formElement) {
   formElement.addEventListener('submit', (event) => {
     event.preventDefault();
@@ -105,10 +105,24 @@ function listenForNewList(formElement) {
     generateListTabs();
     createAddListButton();
     // Open All Tasks tab by default and add selected class to it
-    const allTasksDiv = document.querySelector('.tabs .all-tasks');
-    toggleSelectedTab(allTasksDiv);
-    Task.taskArrayMethod = 'getActiveTasks';
-    generatePage(Task.taskArrayMethod);
+    openAllTasksTab();
+  });
+}
+
+// Delete a user-created list if the corresponding Delete icon is clicked
+export function listenForDeleteListClick() {
+  const deleteListIcons = document.querySelectorAll('.delete-list-icon');
+
+  deleteListIcons.forEach((deleteIcon) => {
+    deleteIcon.addEventListener('click', () => {
+      // Delete from the lists array
+      const listName = deleteIcon.parentNode.querySelector('p').textContent;
+      Task.deleteList(listName);
+      // Delete from the DOM
+      deleteIcon.parentNode.remove();
+      // Open All Tasks tab by default and add selected class to it
+      openAllTasksTab();
+    });
   });
 }
 
@@ -523,4 +537,12 @@ export function generateCompletedPage() {
   listenForTitleClick(taskArray);
   listenForDeleteClick();
   listenForCheckedCheckboxClick();
+}
+
+// Open All Tasks tab by default and add selected class to it
+function openAllTasksTab() {
+  const allTasksDiv = document.querySelector('.tabs .all-tasks');
+  toggleSelectedTab(allTasksDiv);
+  Task.taskArrayMethod = 'getActiveTasks';
+  generatePage(Task.taskArrayMethod);
 }

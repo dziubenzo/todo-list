@@ -1,5 +1,9 @@
 import { Task } from './tasks';
-import { generatePage, generateCompletedPage } from './DOM';
+import {
+  generatePage,
+  generateCompletedPage,
+  listenForDeleteListClick,
+} from './DOM';
 import { createP, createDiv, createImg } from './helpers';
 import deleteListIconSrc from '../assets/delete-list.svg';
 
@@ -56,6 +60,8 @@ export function generateListTabs() {
     });
     index++;
   }
+  // Listen for Delete button clicks
+  listenForDeleteListClick();
 }
 
 // Remove all list tabs
@@ -74,16 +80,4 @@ export function toggleSelectedTab(currentTabDiv) {
     tab.classList.remove('selected');
   }
   currentTabDiv.classList.add('selected');
-}
-
-// Delete created list from the DOM and priorities array if the corresponding Delete icon is clicked
-export function deleteList() {
-  const deleteListIcons = document.querySelectorAll('.delete-list-icon');
-
-  deleteListIcons.forEach((deleteIcon) => {
-    deleteIcon.addEventListener('click', () => {
-      const listName = deleteIcon.parentNode.querySelector('p').textContent;
-      console.log(listName);
-    });
-  });
 }
