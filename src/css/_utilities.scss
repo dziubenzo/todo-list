@@ -2,8 +2,9 @@ $font-stack: 'DM Sans', sans-serif;
 $bg-colour-dark: rgb(40, 40, 40);
 $font-colour-dark: rgb(255, 185, 55);
 $sidebar-item-size: 1.2rem;
-$selected-icon-clr: invert(94%) sepia(34%) saturate(2368%) hue-rotate(357deg)
-  brightness(110%) contrast(101%);
+$yesterday-priority-clr: rgba(50, 1, 141, 0.616);
+$icon-clr: invert(76%) sepia(98%) saturate(1639%) hue-rotate(327deg)
+  brightness(102%) contrast(106%);
 
 // Animation when hovering over main content
 @keyframes show-border {
@@ -66,7 +67,7 @@ $selected-icon-clr: invert(94%) sepia(34%) saturate(2368%) hue-rotate(357deg)
 }
 
 .priority-yesterday {
-  border-left-color: rgba(50, 1, 141, 0.616);
+  border-left-color: $yesterday-priority-clr;
 }
 
 .priority-completed {

@@ -62,3 +62,6 @@ export function toggleSelectedTab(currentTab) {
   }
   currentTab.classList.add('selected');
 }
+
+// Delete created list
+export function deleteList() {}

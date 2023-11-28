@@ -97,8 +97,7 @@ main {
         display: inline-block;
         width: $sidebar-item-size;
         height: $sidebar-item-size;
-        filter: invert(76%) sepia(98%) saturate(1639%) hue-rotate(327deg)
-          brightness(102%) contrast(106%);
+        filter: $icon-clr;
       }
     }
 
@@ -134,8 +133,7 @@ main {
     img[class='add-list-btn'] {
       width: calc($sidebar-item-size + 15px);
       height: calc($sidebar-item-size + 15px);
-      filter: invert(76%) sepia(98%) saturate(1639%) hue-rotate(327deg)
-        brightness(102%) contrast(106%);
+      filter: $icon-clr;
       place-self: center;
       cursor: pointer;
     }
@@ -171,8 +169,7 @@ main {
         cursor: pointer;
         width: calc($sidebar-item-size + 10px);
         height: calc($sidebar-item-size + 10px);
-        filter: invert(76%) sepia(98%) saturate(1639%) hue-rotate(327deg)
-          brightness(102%) contrast(106%);
+        filter: $icon-clr;
       }
     }
   }
@@ -216,8 +213,7 @@ main {
     img {
       height: 1.5rem;
       width: 1.5rem;
-      filter: invert(76%) sepia(98%) saturate(1639%) hue-rotate(327deg)
-        brightness(102%) contrast(106%);
+      filter: $icon-clr;
       cursor: pointer;
     }
 
@@ -311,8 +307,7 @@ main {
           width: 0.8rem;
           height: 0.8rem;
           margin-left: 8px;
-          filter: invert(76%) sepia(98%) saturate(1639%) hue-rotate(327deg)
-            brightness(102%) contrast(106%);
+          filter: $icon-clr;
         }
         &:focus::after {
           display: none;
@@ -329,7 +324,7 @@ main {
         font-family: $font-stack;
         background-color: lighten($bg-colour-dark, 10%);
         color: $font-colour-dark;
-        font-size: 0.9rem;
+        font-size: 0.95rem;
         border-radius: 4px;
         border: none;
 
@@ -338,8 +333,7 @@ main {
         }
 
         &::-webkit-calendar-picker-indicator {
-          filter: invert(76%) sepia(98%) saturate(1639%) hue-rotate(327deg)
-            brightness(102%) contrast(106%);
+          filter: $icon-clr;
           cursor: pointer;
         }
       }
@@ -369,7 +363,7 @@ main {
         }
 
         input[id^='yesterday'] {
-          accent-color: rgba(50, 1, 141, 0.616);
+          accent-color: $yesterday-priority-clr;
         }
 
         label {

@@ -60,7 +60,7 @@ function createAddListForm(addListButton) {
     'add-list-form',
     'list-name',
     3,
-    16,
+    10,
     'Name'
   );
   const createBtn = createButton('submit', '');
@@ -213,7 +213,6 @@ function listenForNewTask(formElement) {
     Task.tasks.push(new Task(title, description, list, priority, dueDate));
     // Refresh tasks
     generatePage();
-    console.table(Task.tasks);
   });
 }
 
@@ -506,11 +505,6 @@ export function generatePage() {
   } else {
     taskArray = Task[Task.taskArrayMethod](
       Task[Task.taskArraySortedInto][Task.taskArraySortedIntoIndex]
-    );
-    console.log(
-      Task.taskArrayMethod,
-      Task.taskArraySortedInto,
-      Task.taskArraySortedIntoIndex
     );
   }
   removeTasks();
