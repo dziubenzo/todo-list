@@ -98,7 +98,7 @@ function listenForNewList(formElement) {
       .toUpperCase();
     const slicedList = formElement.elements['list-name'].value.slice(1);
     const newList = firstChar + slicedList;
-    Task.lists.push(newList);
+    Task.lists.push(newList.trim());
     // Refresh list tabs
     removeListTabs();
     formElement.remove();
@@ -208,6 +208,7 @@ function listenForNewTask(formElement) {
     Task.tasks.push(new Task(title, description, list, priority, dueDate));
     // Refresh tasks
     generatePage();
+    console.table(Task.tasks);
   });
 }
 
@@ -451,11 +452,11 @@ function editTask(titleClicked, originalIndex) {
   // Listen for task edits and change corresponding values in Task objects
   // Update task title value dynamically
   editableTitle.addEventListener('input', () => {
-    Task.tasks[originalIndex].updateTitle(editableTitle.innerHTML);
+    Task.tasks[originalIndex].updateTitle(editableTitle.textContent);
     titleClicked.innerHTML = Task.tasks[originalIndex].title;
   });
   editableDescription.addEventListener('input', () => {
-    Task.tasks[originalIndex].updateDescription(editableDescription.innerHTML);
+    Task.tasks[originalIndex].updateDescription(editableDescription.textContent);
   });
   // Update due date value and refresh page
   editableDueDate.addEventListener('change', () => {

@@ -68,8 +68,8 @@ export class Task {
   }
 
   constructor(title, description, list, priority, dueDate) {
-    this.title = title;
-    this.description = description;
+    this.title = title.trim();
+    this.description = description.trim();
     this.list = list;
     this.priority = priority;
     this.completed = false;
@@ -78,11 +78,11 @@ export class Task {
   }
 
   updateTitle(newTitle) {
-    this.title = newTitle;
+    this.title = newTitle.trim();
   }
 
   updateDescription(newDescription) {
-    this.description = newDescription;
+    this.description = newDescription.trim();
   }
 
   updateDueDate(newDueDate) {

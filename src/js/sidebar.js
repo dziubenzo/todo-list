@@ -2,6 +2,7 @@ import { Task } from './tasks';
 import { generatePage, generateCompletedPage } from './DOM';
 import { createP } from './helpers';
 
+// Add listeners for three default tabs
 export function handleTabs() {
   const allTasksBtn = document.querySelector('.sidebar .all-tasks');
   const comingUpBtn = document.querySelector('.sidebar .coming-up');
@@ -26,7 +27,10 @@ export function handleTabs() {
 export function generateListTabs() {
   const parentDiv = document.querySelector('.sidebar .tabs');
   for (const list of Task.lists) {
-    const para = createP(list, `lists-${list.toLowerCase()}`);
+    const para = createP(
+      list,
+      `lists-${list.replaceAll(' ', '-').toLowerCase()}`
+    );
     parentDiv.append(para);
     para.addEventListener('click', () => {
       Task.taskArrayMethod = 'getTasksByList';
