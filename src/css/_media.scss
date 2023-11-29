@@ -40,26 +40,58 @@
     main {
       grid-template-columns: 1fr;
 
+      .sidebar,
+      .content {
+        &:hover {
+          animation: none;
+        }
+      }
+
       .sidebar {
         display: none;
         position: absolute;
         z-index: 1;
-        height: 100vh;
+        height: min-content;
+        width: 60vw;
+
+        .tabs {
+          margin: 16px 8px 16px 16px;
+        }
+
+        #add-list-form {
+          input[type='text'] {
+            width: 100%;
+          }
+
+          button {
+            background: none;
+            border: none;
+            height: min-content;
+          }
+
+          img {
+            width: 20%;
+            cursor: pointer;
+            width: calc($sidebar-item-size + 10px);
+            height: calc($sidebar-item-size + 10px);
+            filter: $icon-clr;
+          }
+        }
       }
 
       .content {
         height: 100vh;
-      }
 
-      div[class^='details'],
-      #add-task-form {
-        grid-template-columns: 1fr 2fr;
-      }
+        div[class^='details'],
+        #add-task-form {
+          grid-template-columns: 1fr 2fr;
+        }
 
-      .priorities-details,
-      .priorities-add-task {
-        display: grid;
-        grid-template-columns: min-content 1fr;
+        .priorities-details,
+        .priorities-add-task {
+          display: grid;
+          grid-template-columns: min-content 1fr;
+        }
       }
     }
   }

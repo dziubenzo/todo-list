@@ -598,6 +598,10 @@ function openAllTasksTab() {
   generatePage(Task.taskArrayMethod);
 }
 
+//
+// Functions for small-width devices
+//
+
 // Show or hide sidebar on smaller-width devices
 export function showOrHideSidebar() {
   const hamburgerMenuBtn = document.querySelector('.hamburger-menu-btn');
@@ -612,4 +616,26 @@ export function showOrHideSidebar() {
       content.style.filter = 'blur(2px)';
     }
   });
+}
+
+// Hide sidebar
+function hideSidebar() {
+  const sidebar = document.querySelector('.sidebar');
+  if (sidebar.style.display === 'block') {
+    sidebar.style.display = 'none';
+  }
+}
+
+// Hide sidebar when the content div is clicked
+export function hideSidebarOnContentDivClick() {
+  const content = document.querySelector('.content');
+  content.addEventListener('click', () => {
+    hideSidebar();
+  });
+}
+
+// Run the two functions above in parallel
+export function handleSidebar() {
+  hideSidebar();
+  hideSidebarOnContentDivClick();
 }

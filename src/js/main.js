@@ -4,7 +4,11 @@ import {
   getTasksFromLocalStorage,
   getListsFromLocalStorage,
 } from './tasks';
-import { generatePage, showOrHideSidebar } from './DOM';
+import {
+  generatePage,
+  showOrHideSidebar,
+  hideSidebarOnContentDivClick,
+} from './DOM';
 import { handleTabs, generateListTabs } from './sidebar';
 import { createAddListButton } from './DOM';
 
@@ -15,4 +19,6 @@ generatePage(Task.taskArrayMethod);
 handleTabs();
 generateListTabs();
 createAddListButton();
+// Functions/listeners for small-width devices
 showOrHideSidebar();
+hideSidebarOnContentDivClick();
