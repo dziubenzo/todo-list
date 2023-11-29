@@ -418,7 +418,7 @@ function generateCompletedTaskDetails(task, index) {
 // Listen for task title click
 // Show or hide task details
 function listenForTitleClick(taskArray) {
-  const taskTitles = document.querySelectorAll('.title');
+  const taskTitles = document.querySelectorAll('.content .title');
 
   taskTitles.forEach((title) => {
     title.addEventListener('click', function showDetails() {

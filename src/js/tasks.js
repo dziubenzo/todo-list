@@ -145,7 +145,7 @@ export function getListsFromLocalStorage() {
   let userLists;
   if (localStorage.getItem('userLists')) {
     userLists = JSON.parse(localStorage.getItem('userLists'));
-    console.log(userLists)
+    console.log(userLists);
     for (const list of userLists) {
       Task.addListFromLocalStorage(list);
     }
@@ -156,6 +156,4 @@ export function getListsFromLocalStorage() {
 // Do not include the three default lists
 export function updateListsInLocalStorage() {
   localStorage.setItem('userLists', JSON.stringify(Task.lists.slice(3)));
-  console.log(localStorage.getItem('userLists'));
-  console.log(Task.lists);
 }
