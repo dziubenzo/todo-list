@@ -489,8 +489,8 @@ function listenForCheckedCheckboxClick() {
       Task.tasks[originalIndex].undoCompleted();
       // Update localStorage
       updateTasksInLocalStorage();
-      // Refresh tasks
-      generatePage();
+      // Refresh completed tasks
+      generateCompletedPage();
     });
   });
 }

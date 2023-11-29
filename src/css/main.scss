@@ -41,6 +41,10 @@ header {
     color: darken($font-colour-dark, 20%);
     margin: 0;
   }
+
+  .hamburger-menu-btn {
+    display: none;
+  }
 }
 
 footer {
@@ -190,7 +194,7 @@ main {
     .no-tasks {
       display: flex;
       justify-content: center;
-      
+
       .heading-no-tasks {
         position: absolute;
         align-self: center;
@@ -418,3 +422,6 @@ main {
     }
   }
 }
+
+// Load media queries
+@include media.queries;
