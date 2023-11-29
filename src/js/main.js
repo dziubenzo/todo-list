@@ -1,6 +1,10 @@
 import '../css/main.scss';
-import { Task, getTasksFromLocalStorage, getListsFromLocalStorage } from './tasks';
-import { generatePage } from './DOM';
+import {
+  Task,
+  getTasksFromLocalStorage,
+  getListsFromLocalStorage,
+} from './tasks';
+import { generatePage, showOrHideSidebar } from './DOM';
 import { handleTabs, generateListTabs } from './sidebar';
 import { createAddListButton } from './DOM';
 
@@ -11,3 +15,4 @@ generatePage(Task.taskArrayMethod);
 handleTabs();
 generateListTabs();
 createAddListButton();
+showOrHideSidebar();

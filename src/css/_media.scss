@@ -1,3 +1,5 @@
+@use 'utilities' as *;
+
 @mixin queries {
   @media only screen and (width >= 1200px) {
     main {
@@ -22,6 +24,11 @@
 
   @media only screen and (width <= 768px) {
     header {
+      background-color: $bg-colour-dark;
+      position: sticky;
+      top: 0;
+      z-index: 2;
+
       .hamburger-menu-btn {
         display: block;
         background: none;
@@ -35,6 +42,13 @@
 
       .sidebar {
         display: none;
+        position: absolute;
+        z-index: 1;
+        height: 100vh;
+      }
+
+      .content {
+        height: 100vh;
       }
 
       div[class^='details'],

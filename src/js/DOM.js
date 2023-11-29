@@ -597,3 +597,19 @@ function openAllTasksTab() {
   Task.taskArrayMethod = 'getActiveTasks';
   generatePage(Task.taskArrayMethod);
 }
+
+// Show or hide sidebar on smaller-width devices
+export function showOrHideSidebar() {
+  const hamburgerMenuBtn = document.querySelector('.hamburger-menu-btn');
+  hamburgerMenuBtn.addEventListener('click', () => {
+    const sidebar = document.querySelector('.sidebar');
+    const content = document.querySelector('.content');
+    if (sidebar.style.display === 'block') {
+      sidebar.style.display = 'none';
+      content.removeAttribute('style');
+    } else {
+      sidebar.style.display = 'block';
+      content.style.filter = 'blur(2px)';
+    }
+  });
+}
