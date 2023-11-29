@@ -1,4 +1,4 @@
-import { Task } from './tasks';
+import { Task, updateTasksInLocalStorage } from './tasks';
 import { generateListTabs, removeListTabs, toggleSelectedTab } from './sidebar';
 import checkboxSrc from '../assets/checkbox.svg';
 import checkboxCheckedSrc from '../assets/checkbox-checked.svg';
@@ -229,7 +229,9 @@ function listenForNewTask(formElement) {
     dueDate = setMinutes(dueDate, 59);
     dueDate = setSeconds(dueDate, 59);
     // Create new Task instance and add it to the tasks array
+    // Update localStorage
     Task.tasks.push(new Task(title, description, list, priority, dueDate));
+    updateTasksInLocalStorage();
     // Refresh tasks
     generatePage();
   });
@@ -439,8 +441,10 @@ function listenForDeleteClick() {
   deleteIcons.forEach((deleteIcon) => {
     deleteIcon.addEventListener('click', () => {
       // Delete from the original tasks array
+      // Update localStorage
       const originalIndex = deleteIcon.parentNode.dataset.ogindex;
       Task.tasks.splice(originalIndex, 1);
+      updateTasksInLocalStorage();
       // Refresh tasks
       generatePage();
     });
@@ -456,6 +460,8 @@ function listenForCheckboxClick() {
     checkboxIcon.addEventListener('click', () => {
       const originalIndex = checkboxIcon.parentNode.dataset.ogindex;
       Task.tasks[originalIndex].markAsCompleted();
+      // Update localStorage
+      updateTasksInLocalStorage();
       // Refresh tasks
       generatePage();
     });
@@ -473,6 +479,8 @@ function listenForCheckedCheckboxClick() {
     checkedCheckboxIcon.addEventListener('click', () => {
       const originalIndex = checkedCheckboxIcon.parentNode.dataset.ogindex;
       Task.tasks[originalIndex].undoCompleted();
+      // Update localStorage
+      updateTasksInLocalStorage();
       // Refresh tasks
       generatePage();
     });
@@ -500,31 +508,44 @@ function editTask(titleClicked, originalIndex) {
   editableTitle.addEventListener('input', () => {
     Task.tasks[originalIndex].updateTitle(editableTitle.textContent);
     titleClicked.innerHTML = Task.tasks[originalIndex].title;
+    // Update localStorage
+    updateTasksInLocalStorage();
   });
   editableDescription.addEventListener('input', () => {
     Task.tasks[originalIndex].updateDescription(
       editableDescription.textContent
     );
+    // Update localStorage
+    updateTasksInLocalStorage();
   });
-  // Update due date value and refresh page
+  // Update due date value
   editableDueDate.addEventListener('change', () => {
     let newDueDate = new Date(editableDueDate.value);
     newDueDate = setHours(newDueDate, 23);
     newDueDate = setMinutes(newDueDate, 59);
     newDueDate = setSeconds(newDueDate, 59);
     Task.tasks[originalIndex].updateDueDate(newDueDate);
+    // Update localStorage
+    updateTasksInLocalStorage();
+    // Refresh page
     generatePage();
   });
-  // Update priority and refresh page
+  // Update priority
   editablePriorities.forEach((priorityInput) => {
     priorityInput.addEventListener('change', () => {
       Task.tasks[originalIndex].updatePriority(priorityInput.value);
+      // Update localStorage
+      updateTasksInLocalStorage();
+      // Refresh page
       generatePage();
     });
   });
-  // Update list and refresh page
+  // Update list
   editableList.addEventListener('change', () => {
     Task.tasks[originalIndex].updateList(editableList.value);
+    // Update localStorage
+    updateTasksInLocalStorage();
+    // Refresh page
     generatePage();
   });
 }

@@ -1,30 +1,7 @@
 import { addDays, setHours, setMinutes, setSeconds } from 'date-fns';
 
 export class Task {
-  static tasks = [
-    new Task(
-      'Learn JS',
-      'Learn some JS, dumbass',
-      'Personal',
-      'high',
-      new Date(2023, 11, 15, 23, 59, 59)
-    ),
-    new Task(
-      'Learn React',
-      'Learn some React, dumbass',
-      'Work',
-      'medium',
-      new Date(2023, 11, 4, 23, 59, 59)
-    ),
-
-    new Task(
-      'Learn algorithms',
-      'Learn some algorithms, dumbass',
-      'Travel',
-      'low',
-      new Date(2023, 11, 3, 23, 59, 59)
-    ),
-  ];
+  static tasks = [];
   static priorities = ['low', 'medium', 'high', 'yesterday'];
   static lists = ['Personal', 'Work', 'Travel'];
   static taskArrayMethod = 'getActiveTasks';
@@ -138,4 +115,21 @@ export class Task {
     this.dueDate = setMinutes(this.dueDate, 59);
     this.dueDate = setSeconds(this.dueDate, 59);
   }
+}
+
+// Retrieve tasks stored in localStorage if they exist
+// Turn them back into Task class instances
+export function getTasksFromLocalStorage() {
+  let taskObjects;
+  if (localStorage.getItem('tasks')) {
+    taskObjects = JSON.parse(localStorage.getItem('tasks'));
+  }
+  for (const task of taskObjects) {
+    Task.addTaskFromLocalStorage(task);
+  }
+}
+
+// Update tasks stored in localStorage
+export function updateTasksInLocalStorage() {
+  localStorage.setItem('tasks', JSON.stringify(Task.tasks));
 }
