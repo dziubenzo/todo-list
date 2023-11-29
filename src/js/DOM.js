@@ -7,6 +7,7 @@ import addListIconSrc from '../assets/add-list.svg';
 import createIconScr from '../assets/confirm-list.svg';
 import cancelIconScr from '../assets/cancel-list.svg';
 import deleteTaskScr from '../assets/delete-task.svg';
+import noTasksIconScr from '../assets/no-tasks-icon.svg';
 import {
   createH,
   createDiv,
@@ -139,6 +140,10 @@ function createAddTaskButton() {
   // Show add task form and remove add task button when clicked
   addBtn.addEventListener('click', () => {
     createAddTaskForm(addBtn);
+    // Remove no-tasks content if it exists
+    if (document.querySelector('.no-tasks')) {
+      document.querySelector('.no-tasks').remove();
+    }
     removeAddTaskButton(addBtn);
   });
 }
@@ -250,6 +255,23 @@ function removeTasks() {
 // Execute slightly differently for the Coming Up and Completed pages
 function displayTasks(taskArray) {
   const contentDiv = document.querySelector('main .content');
+  // Add some content for empty tabs and return
+  if (taskArray.length === 0) {
+    const noTasksDiv = createDiv('no-tasks');
+    const noTasksHeading = createH(
+      2,
+      'No tasks to display.',
+      'heading-no-tasks'
+    );
+    const noTasksIcon = createImg(
+      noTasksIconScr,
+      'No Tasks Icon',
+      'no-tasks-icon'
+    );
+    noTasksDiv.append(noTasksHeading, noTasksIcon);
+    contentDiv.append(noTasksDiv);
+    return;
+  }
   taskArray.forEach((task, index) => {
     if (Task.tasks.includes(task)) {
       const taskDiv = createDiv(`task-${index}`);

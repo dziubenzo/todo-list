@@ -187,6 +187,24 @@ main {
     gap: 8px;
     padding: 16px;
 
+    .no-tasks {
+      display: flex;
+      justify-content: center;
+      
+      .heading-no-tasks {
+        position: absolute;
+        place-self: center;
+      }
+
+      .no-tasks-icon {
+        width: 70%;
+        height: 70%;
+        place-self: center;
+        opacity: 0.05;
+        cursor: default;
+      }
+    }
+
     .add-task {
       display: flex;
       justify-content: center;
