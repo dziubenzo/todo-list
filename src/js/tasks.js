@@ -53,7 +53,7 @@ export class Task {
     Task.lists.splice(listIndex, 1);
   }
 
-  // Add task from a JSON-parsed object to the tasks array
+  // Add tasks stored in localStorage back to the tasks array
   static addTaskFromLocalStorage(task) {
     const taskToAdd = new Task(
       task.title,
@@ -68,6 +68,11 @@ export class Task {
       taskToAdd.completed = task.completed;
     }
     Task.tasks.push(taskToAdd);
+  }
+
+  // Add user-created lists stored in localStorage back to the lists array
+  static addListFromLocalStorage(list) {
+    Task.lists.push(list);
   }
 
   constructor(title, description, list, priority, dueDate) {
@@ -123,13 +128,34 @@ export function getTasksFromLocalStorage() {
   let taskObjects;
   if (localStorage.getItem('tasks')) {
     taskObjects = JSON.parse(localStorage.getItem('tasks'));
-  }
-  for (const task of taskObjects) {
-    Task.addTaskFromLocalStorage(task);
+    for (const task of taskObjects) {
+      Task.addTaskFromLocalStorage(task);
+    }
   }
 }
 
-// Update tasks stored in localStorage
+// Update tasks in localStorage
 export function updateTasksInLocalStorage() {
   localStorage.setItem('tasks', JSON.stringify(Task.tasks));
+}
+
+// Retrieve user-created lists from localStorage if there are any
+// Add them to the lists array
+export function getListsFromLocalStorage() {
+  let userLists;
+  if (localStorage.getItem('userLists')) {
+    userLists = JSON.parse(localStorage.getItem('userLists'));
+    console.log(userLists)
+    for (const list of userLists) {
+      Task.addListFromLocalStorage(list);
+    }
+  }
+}
+
+// Update lists in localStorage
+// Do not include the three default lists
+export function updateListsInLocalStorage() {
+  localStorage.setItem('userLists', JSON.stringify(Task.lists.slice(3)));
+  console.log(localStorage.getItem('userLists'));
+  console.log(Task.lists);
 }

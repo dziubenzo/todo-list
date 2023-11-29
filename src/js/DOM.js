@@ -1,4 +1,8 @@
-import { Task, updateTasksInLocalStorage } from './tasks';
+import {
+  Task,
+  updateTasksInLocalStorage,
+  updateListsInLocalStorage,
+} from './tasks';
 import { generateListTabs, removeListTabs, toggleSelectedTab } from './sidebar';
 import checkboxSrc from '../assets/checkbox.svg';
 import checkboxCheckedSrc from '../assets/checkbox-checked.svg';
@@ -100,6 +104,8 @@ function listenForNewList(formElement) {
     const slicedList = trimmedList.slice(1);
     const newList = firstChar + slicedList;
     Task.addList(newList);
+    // Update localStorage
+    updateListsInLocalStorage();
     // Refresh list tabs
     removeListTabs();
     formElement.remove();
@@ -119,6 +125,8 @@ export function listenForDeleteListClick() {
       // Delete from the lists array
       const listName = deleteIcon.parentNode.querySelector('p').textContent;
       Task.deleteList(listName);
+      // Update localStorage
+      updateListsInLocalStorage();
       // Delete from the DOM
       deleteIcon.parentNode.remove();
       // Open All Tasks tab by default and add selected class to it
