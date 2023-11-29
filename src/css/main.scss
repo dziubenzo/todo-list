@@ -193,13 +193,13 @@ main {
       
       .heading-no-tasks {
         position: absolute;
-        place-self: center;
+        align-self: center;
       }
 
       .no-tasks-icon {
         width: 70%;
         height: 70%;
-        place-self: center;
+        align-self: center;
         opacity: 0.05;
         cursor: default;
       }

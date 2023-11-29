@@ -76,6 +76,23 @@ export class Task {
     Task.lists.splice(listIndex, 1);
   }
 
+  // Add task from a JSON-parsed object to the tasks array
+  static addTaskFromLocalStorage(task) {
+    const taskToAdd = new Task(
+      task.title,
+      task.description,
+      task.list,
+      task.priority,
+      new Date(task.dueDate)
+    );
+    taskToAdd.creationDate = new Date(task.creationDate);
+    if (task.completed) {
+      taskToAdd.completionDate = new Date(task.completionDate);
+      taskToAdd.completed = task.completed;
+    }
+    Task.tasks.push(taskToAdd);
+  }
+
   constructor(title, description, list, priority, dueDate) {
     this.title = title.trim();
     this.description = description.trim();
