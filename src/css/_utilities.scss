@@ -5,6 +5,7 @@ $sidebar-item-size: 1.2rem;
 $yesterday-priority-clr: rgba(50, 1, 141, 0.616);
 $icon-clr: invert(76%) sepia(98%) saturate(1639%) hue-rotate(327deg)
   brightness(102%) contrast(106%);
+$mobile-sidebar-width: 60vw;
 
 // Animation when hovering over main content
 @keyframes show-border {
@@ -37,6 +38,16 @@ $icon-clr: invert(76%) sepia(98%) saturate(1639%) hue-rotate(327deg)
 @keyframes uncheck {
   to {
     content: url('../assets/checkbox.svg');
+  }
+}
+
+// Animation when showing the sidebar on mobile devices
+@keyframes show-sidebar {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.9;
   }
 }
 

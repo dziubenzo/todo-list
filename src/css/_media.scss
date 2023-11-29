@@ -23,12 +23,19 @@
   }
 
   @media only screen and (width <= 768px) {
-    header {
+    .container {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+    header,
+    footer {
       background-color: $bg-colour-dark;
       position: sticky;
-      top: 0;
       z-index: 2;
+    }
 
+    header {
+      top: 0;
       .hamburger-menu-btn {
         display: block;
         background: none;
@@ -52,7 +59,8 @@
         position: absolute;
         z-index: 1;
         height: min-content;
-        width: 60vw;
+        width: $mobile-sidebar-width;
+        animation: show-sidebar 0.5s forwards;
 
         .tabs {
           margin: 16px 8px 16px 16px;
@@ -93,6 +101,9 @@
           grid-template-columns: min-content 1fr;
         }
       }
+    }
+    footer {
+      bottom: 0;
     }
   }
 }

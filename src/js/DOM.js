@@ -631,6 +631,7 @@ export function hideSidebarOnContentDivClick() {
   const content = document.querySelector('.content');
   content.addEventListener('click', () => {
     hideSidebar();
+    content.removeAttribute('style');
   });
 }
 
