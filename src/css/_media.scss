@@ -20,4 +20,22 @@
 }
 
 @media only screen and (width <= 768px) {
+  main {
+    grid-template-columns: 1fr !important;
+
+    .sidebar {
+      display: none;
+    }
+
+    div[class^='details'],
+    #add-task-form {
+      grid-template-columns: 1fr 2fr !important;
+    }
+
+    .priorities-details,
+    .priorities-add-task {
+      display: grid;
+      grid-template-columns: min-content 1fr;
+    }
+  }
 }
