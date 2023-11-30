@@ -37,7 +37,12 @@
 
     header {
       height: $mobile-header-height;
+      padding-bottom: 0;
       top: 0;
+
+      .title {
+        margin-top: 8px;
+      }
 
       .hamburger-menu-btn {
         display: block;
@@ -116,10 +121,19 @@
           display: grid;
           grid-template-columns: min-content 1fr;
         }
+
+        .priority-completed + div[class^='details'] {
+          grid-template-columns: 2fr 3fr;
+        }
       }
     }
     footer {
       bottom: 0;
+      padding-top: 8px;
+
+      a {
+        margin-bottom: 8px;
+      }
     }
   }
 }
