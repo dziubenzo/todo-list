@@ -1,21 +1,36 @@
 $font-stack: 'DM Sans', sans-serif;
-$bg-colour-dark: rgb(40, 40, 40);
-$font-colour-dark: rgb(255, 185, 55);
 $sidebar-item-size: 1.2rem;
 $yesterday-priority-clr: rgba(50, 1, 141, 0.616);
-$icon-clr: invert(76%) sepia(98%) saturate(1639%) hue-rotate(327deg)
-  brightness(102%) contrast(106%);
+
+// Dark mode variables
+html[data-theme='dark'] {
+  --bg-colour: rgb(40, 40, 40);
+  --bg-colour-lightened-10: rgb(66, 66, 66);
+  --font-colour: rgb(255, 185, 55);
+  --font-colour-darkened-20: rgb(208, 135, 0);
+  --icon-colour: invert(76%) sepia(98%) saturate(1639%) hue-rotate(327deg)
+    brightness(102%) contrast(106%);
+}
+// Light mode variables
+html[data-theme='light'] {
+  --bg-colour: rgb(40, 40, 40);
+  --bg-colour-lightened-10: rgb(66, 66, 66);
+  --font-colour: rgb(255, 185, 55);
+  --font-colour-darkened-20: rgb(208, 135, 0);
+  --icon-colour: invert(76%) sepia(98%) saturate(1639%) hue-rotate(327deg)
+    brightness(102%) contrast(106%);
+}
 
 $mobile-sidebar-width: 60vw;
-$mobile-header-height: 125px;
+$mobile-header-height: 110px;
 
 // Animation when hovering over main content
 @keyframes show-border {
   from {
-    outline: 1px solid $bg-colour-dark;
+    outline: 1px solid var(--bg-colour);
   }
   to {
-    outline: 1px solid darken($font-colour-dark, 20%);
+    outline: 1px solid var(--font-colour-darkened-20);
   }
 }
 

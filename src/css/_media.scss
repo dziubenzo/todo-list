@@ -30,7 +30,7 @@
     }
     header,
     footer {
-      background-color: $bg-colour-dark;
+      background-color: var(--bg-colour);
       position: sticky;
       z-index: 2;
     }
@@ -46,7 +46,7 @@
         img {
           width: 24px;
           height: 24px;
-          filter: $icon-clr;
+          filter: var(--icon-colour);
           cursor: pointer;
         }
       }
@@ -91,7 +91,7 @@
             cursor: pointer;
             width: calc($sidebar-item-size + 10px);
             height: calc($sidebar-item-size + 10px);
-            filter: $icon-clr;
+            filter: var(--icon-colour);
           }
         }
       }
