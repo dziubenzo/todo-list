@@ -13,12 +13,17 @@ html[data-theme='dark'] {
 }
 // Light mode variables
 html[data-theme='light'] {
-  --bg-colour: rgb(237, 237, 237);
-  --bg-colour-lightened-10: rgb(66, 66, 66);
-  --font-colour: rgb(255, 185, 55);
-  --font-colour-darkened-20: rgb(208, 135, 0);
-  --icon-colour: invert(76%) sepia(98%) saturate(1639%) hue-rotate(327deg)
-    brightness(102%) contrast(106%);
+  --bg-colour: rgb(213, 213, 213);
+  --bg-colour-lightened-10: rgb(177, 177, 177);
+  --font-colour: rgb(79, 53, 4);
+  --font-colour-darkened-20: rgb(55, 36, 0);
+  --icon-colour: invert(15%) sepia(7%) saturate(3123%) hue-rotate(316deg) brightness(98%) contrast(76%);
+
+  footer {
+    img {
+      content: url('../assets/github-mark-black.svg');
+    }
+  }
 }
 
 $mobile-sidebar-width: 60vw;

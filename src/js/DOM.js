@@ -49,8 +49,8 @@ export function loadIcons() {
   );
   hamburgerMenuBtn.append(hamburgerMenuIcon);
   const gitHubLink = document.querySelector('footer a');
-  const gitHubLogoWhite = createImg(gitHubLogoWhiteSrc, 'GitHub Logo - White');
-  gitHubLink.append(gitHubLogoWhite);
+  const gitHubLogo = createImg(gitHubLogoWhiteSrc, 'GitHub Logo');
+  gitHubLink.append(gitHubLogo);
   const header = document.querySelector('header');
   const themeSwitch = createImg(
     themeSwitchSrc,
