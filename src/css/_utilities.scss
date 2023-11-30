@@ -10,6 +10,7 @@ html[data-theme='dark'] {
   --font-colour-darkened-20: rgb(208, 135, 0);
   --icon-colour: invert(76%) sepia(98%) saturate(1639%) hue-rotate(327deg)
     brightness(102%) contrast(106%);
+  --selection-colour: rgb(140, 0, 0);
 }
 // Light mode variables
 html[data-theme='light'] {
@@ -18,6 +19,7 @@ html[data-theme='light'] {
   --font-colour: rgb(79, 53, 4);
   --font-colour-darkened-20: rgb(55, 36, 0);
   --icon-colour: invert(15%) sepia(7%) saturate(3123%) hue-rotate(316deg) brightness(98%) contrast(76%);
+  --selection-colour: rgb(222, 221, 156);
 
   footer {
     img {

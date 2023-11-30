@@ -15,6 +15,10 @@ body {
   color: var(--font-colour);
 }
 
+::selection {
+  background-color: var(--selection-colour);
+}
+
 .container {
   display: grid;
   grid-template-rows: min-content 5fr min-content;
