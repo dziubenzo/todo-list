@@ -1,5 +1,7 @@
 import {
   Task,
+  MAX_TITLE_LENGTH,
+  MAX_DESCRIPTION_LENGTH,
   updateTasksInLocalStorage,
   updateListsInLocalStorage,
 } from './tasks';
@@ -186,7 +188,7 @@ function createAddTaskForm(addTaskButton) {
     'title',
     'title',
     3,
-    48,
+    MAX_TITLE_LENGTH,
     'Title (3 to 48 characters)',
     true
   );
@@ -195,7 +197,7 @@ function createAddTaskForm(addTaskButton) {
     'description',
     5,
     3,
-    250,
+    MAX_DESCRIPTION_LENGTH,
     'Description (3 to 250 characters)',
     true
   );
@@ -506,16 +508,37 @@ function editTask(titleClicked, originalIndex) {
 
   // Listen for task edits and change corresponding values in Task objects
   // Update task title value dynamically
+  // Make sure it cannot exceed the limit
   editableTitle.addEventListener('input', () => {
-    Task.tasks[originalIndex].updateTitle(editableTitle.textContent);
-    titleClicked.innerHTML = Task.tasks[originalIndex].title;
+    if (editableTitle.textContent.length > MAX_TITLE_LENGTH) {
+      editableTitle.contentEditable = 'false';
+      editableTitle.textContent = editableTitle.textContent.substr(
+        0,
+        MAX_TITLE_LENGTH
+      );
+      editableTitle.contentEditable = 'true';
+    } else {
+      Task.tasks[originalIndex].updateTitle(editableTitle.textContent);
+      titleClicked.innerHTML = Task.tasks[originalIndex].title;
+    }
     // Update localStorage
     updateTasksInLocalStorage();
   });
+  // Update task description value dynamically
+  // Make sure it cannot exceed the limit
   editableDescription.addEventListener('input', () => {
-    Task.tasks[originalIndex].updateDescription(
-      editableDescription.textContent
-    );
+    if (editableDescription.textContent.length > MAX_DESCRIPTION_LENGTH) {
+      editableDescription.contentEditable = 'false';
+      editableDescription.textContent = editableDescription.textContent.substr(
+        0,
+        MAX_DESCRIPTION_LENGTH
+      );
+      editableDescription.contentEditable = 'true';
+    } else {
+      Task.tasks[originalIndex].updateDescription(
+        editableDescription.textContent
+      );
+    }
     // Update localStorage
     updateTasksInLocalStorage();
   });

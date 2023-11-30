@@ -1,5 +1,8 @@
 import { addDays, setHours, setMinutes, setSeconds } from 'date-fns';
 
+export const MAX_TITLE_LENGTH = 48;
+export const MAX_DESCRIPTION_LENGTH = 250;
+
 export class Task {
   static tasks = [];
   static priorities = ['low', 'medium', 'high', 'yesterday'];
