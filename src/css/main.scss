@@ -352,8 +352,11 @@ main {
           margin-left: 8px;
           filter: var(--icon-colour);
         }
-        &:focus::after {
-          display: none;
+        &[contenteditable='true']:focus::after {
+          content: none;
+        }
+        &[contenteditable='true']:focus {
+          cursor: auto;
         }
         &:focus {
           outline: 1px solid var(--font-colour);

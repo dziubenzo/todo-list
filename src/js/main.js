@@ -23,7 +23,7 @@ if (!localStorage.getItem('tasks')) {
       "Yes. I am indeed a demo task. You will probably delete me, right? Sad, but that's just the way life goes...",
       'Personal',
       'low',
-      new Date(2025, 11, 24)
+      new Date(2050, 11, 24)
     )
   );
 }
