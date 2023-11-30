@@ -113,6 +113,9 @@ function listenForNewList(formElement) {
     createAddListButton();
     // Open All Tasks tab by default and add selected class to it
     openAllTasksTab();
+    // Reapply content div blur and listen for clicking it
+    listenForContentDivClick();
+    applyBlurToContentDiv();
   });
 }
 
@@ -131,6 +134,9 @@ export function listenForDeleteListClick() {
       deleteIcon.parentNode.remove();
       // Open All Tasks tab by default and add selected class to it
       openAllTasksTab();
+      // Reapply content div blur and listen for clicking it
+      listenForContentDivClick();
+      applyBlurToContentDiv();
     });
   });
 }
@@ -627,7 +633,7 @@ function hideSidebar() {
 }
 
 // Hide sidebar when the content div is clicked
-export function hideSidebarOnContentDivClick() {
+export function listenForContentDivClick() {
   const content = document.querySelector('.content');
   content.addEventListener('click', () => {
     hideSidebar();
@@ -638,5 +644,14 @@ export function hideSidebarOnContentDivClick() {
 // Run the two functions above in parallel
 export function handleSidebar() {
   hideSidebar();
-  hideSidebarOnContentDivClick();
+  listenForContentDivClick();
+}
+
+// Apply blur to the content div when the sidebar is open
+function applyBlurToContentDiv() {
+  const sidebar = document.querySelector('.sidebar');
+  const content = document.querySelector('.content');
+  if (sidebar.style.display === 'block') {
+    content.style.filter = 'blur(2px)';
+  }
 }

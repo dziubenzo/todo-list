@@ -43,6 +43,10 @@
         background: none;
         border: none;
         height: min-content;
+        img {
+          filter: $icon-clr;
+          cursor: pointer;
+        }
       }
     }
 

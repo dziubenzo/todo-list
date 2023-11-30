@@ -7,7 +7,7 @@ import {
 import {
   generatePage,
   showOrHideSidebar,
-  hideSidebarOnContentDivClick,
+  listenForContentDivClick,
 } from './DOM';
 import { handleTabs, generateListTabs } from './sidebar';
 import { createAddListButton } from './DOM';
@@ -21,4 +21,4 @@ generateListTabs();
 createAddListButton();
 // Functions/listeners for small-width devices
 showOrHideSidebar();
-hideSidebarOnContentDivClick();
+listenForContentDivClick();
