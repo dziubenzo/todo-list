@@ -225,7 +225,7 @@ function createAddTaskForm(addTaskButton) {
   // Listen for form submission
   listenForNewTask(addTaskForm);
   // Listen for Cancel button click
-  listenForCancelButton(cancelBtn, addTaskForm);
+  listenForCancelButton(cancelBtn);
 }
 
 // Add new task when the Create button is clicked
@@ -251,11 +251,10 @@ function listenForNewTask(formElement) {
   });
 }
 
-// Remove the add task form and recreate the add form button if the Cancel button is clicked
-function listenForCancelButton(cancelButton, addTaskForm) {
+// Refresh the page when the Cancel button is clicked
+function listenForCancelButton(cancelButton) {
   cancelButton.addEventListener('click', () => {
-    addTaskForm.remove();
-    createAddTaskButton();
+    generatePage();
   });
 }
 
@@ -273,19 +272,7 @@ function displayTasks(taskArray) {
   const contentDiv = document.querySelector('main .content');
   // Add some content for empty tabs and return
   if (taskArray.length === 0) {
-    const noTasksDiv = createDiv('no-tasks');
-    const noTasksHeading = createH(
-      2,
-      'No tasks to display.',
-      'heading-no-tasks'
-    );
-    const noTasksIcon = createImg(
-      noTasksIconScr,
-      'No Tasks Icon',
-      'no-tasks-icon'
-    );
-    noTasksDiv.append(noTasksHeading, noTasksIcon);
-    contentDiv.append(noTasksDiv);
+    addContentToEmptyTabs(contentDiv);
     return;
   }
   taskArray.forEach((task, index) => {
@@ -602,6 +589,19 @@ function openAllTasksTab() {
   toggleSelectedTab(allTasksDiv);
   Task.taskArrayMethod = 'getActiveTasks';
   generatePage(Task.taskArrayMethod);
+}
+
+// Add content to tabs with no tasks
+function addContentToEmptyTabs(contentDiv) {
+  const noTasksDiv = createDiv('no-tasks');
+  const noTasksHeading = createH(2, 'No tasks to display.', 'heading-no-tasks');
+  const noTasksIcon = createImg(
+    noTasksIconScr,
+    'No Tasks Icon',
+    'no-tasks-icon'
+  );
+  noTasksDiv.append(noTasksHeading, noTasksIcon);
+  contentDiv.append(noTasksDiv);
 }
 
 //
