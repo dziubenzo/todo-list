@@ -44,6 +44,8 @@
         border: none;
         height: min-content;
         img {
+          width: 24px;
+          height: 24px;
           filter: $icon-clr;
           cursor: pointer;
         }

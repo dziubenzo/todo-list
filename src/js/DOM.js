@@ -36,6 +36,21 @@ import {
   setMinutes,
   setSeconds,
 } from 'date-fns';
+import hamburgerMenuIconSrc from '../assets/hamburger-menu.svg';
+import gitHubLogoWhiteSrc from '../assets/github-mark-white.svg';
+
+// Load icons
+export function loadIcons() {
+  const hamburgerMenuBtn = document.querySelector('.hamburger-menu-btn');
+  const hamburgerMenuIcon = createImg(
+    hamburgerMenuIconSrc,
+    'Hamburger Menu Icon'
+  );
+  hamburgerMenuBtn.append(hamburgerMenuIcon);
+  const gitHubLink = document.querySelector('footer a');
+  const gitHubLogoWhite = createImg(gitHubLogoWhiteSrc, 'GitHub Logo - White');
+  gitHubLink.append(gitHubLogoWhite);
+}
 
 // Create add list button
 // Listen for it
@@ -631,7 +646,7 @@ function addContentToEmptyTabs(contentDiv) {
 // Functions for small-width devices
 //
 
-// Show or hide sidebar on smaller-width devices
+// Show or hide sidebar on smaller-width devices when the hamburger menu button is clicked
 export function showOrHideSidebar() {
   const hamburgerMenuBtn = document.querySelector('.hamburger-menu-btn');
   hamburgerMenuBtn.addEventListener('click', () => {
