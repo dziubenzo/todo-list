@@ -52,7 +52,11 @@ export function loadIcons() {
   const gitHubLogoWhite = createImg(gitHubLogoWhiteSrc, 'GitHub Logo - White');
   gitHubLink.append(gitHubLogoWhite);
   const header = document.querySelector('header');
-  const themeSwitch = createImg(themeSwitchSrc, 'Light/Dark Mode Toggle', 'colour-theme-switch-icon');
+  const themeSwitch = createImg(
+    themeSwitchSrc,
+    'Light/Dark Mode Toggle',
+    'colour-theme-switch-icon'
+  );
   header.append(themeSwitch);
 }
 
@@ -644,6 +648,30 @@ function addContentToEmptyTabs(contentDiv) {
   );
   noTasksDiv.append(noTasksHeading, noTasksIcon);
   contentDiv.append(noTasksDiv);
+}
+
+// Toggle light/dark mode when the icon is clicked
+export function toggleColourTheme() {
+  const themeSwitch = document.querySelector('.colour-theme-switch-icon');
+  themeSwitch.addEventListener('click', () => {
+    const html = document.querySelector('html');
+    if (html.dataset.theme === 'light') {
+      html.dataset.theme = 'dark';
+    } else {
+      html.dataset.theme = 'light';
+    }
+    // Save the current setting in localStorage
+    localStorage.setItem('theme', html.dataset.theme);
+  });
+}
+
+// Retrieve user colour theme from localStorage if set
+// Set the page to use it
+export function getColourThemeFromLocalStorage() {
+  const html = document.querySelector('html');
+  if (localStorage.getItem('theme')) {
+    html.dataset.theme = localStorage.getItem('theme');
+  }
 }
 
 //

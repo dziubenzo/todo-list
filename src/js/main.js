@@ -9,10 +9,13 @@ import {
   showOrHideSidebar,
   listenForContentDivClick,
   loadIcons,
+  toggleColourTheme,
+  getColourThemeFromLocalStorage,
 } from './DOM';
 import { handleTabs, generateListTabs } from './sidebar';
 import { createAddListButton } from './DOM';
 
+getColourThemeFromLocalStorage();
 getTasksFromLocalStorage();
 getListsFromLocalStorage();
 // Show all uncompleted tasks by default
@@ -21,6 +24,7 @@ loadIcons();
 handleTabs();
 generateListTabs();
 createAddListButton();
+toggleColourTheme();
 // Functions/listeners for small-width devices
 showOrHideSidebar();
 listenForContentDivClick();
