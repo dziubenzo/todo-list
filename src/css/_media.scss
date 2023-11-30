@@ -38,17 +38,26 @@
     header {
       height: $mobile-header-height;
       top: 0;
+
       .hamburger-menu-btn {
         display: block;
         background: none;
         border: none;
         height: min-content;
+
         img {
           width: 24px;
           height: 24px;
           filter: var(--icon-colour);
           cursor: pointer;
         }
+      }
+
+      .colour-theme-switch-icon {
+        width: 30px;
+        height: 30px;
+        bottom: 10px;
+        right: 10px;
       }
     }
 

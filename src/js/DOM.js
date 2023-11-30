@@ -38,6 +38,7 @@ import {
 } from 'date-fns';
 import hamburgerMenuIconSrc from '../assets/hamburger-menu.svg';
 import gitHubLogoWhiteSrc from '../assets/github-mark-white.svg';
+import themeSwitchSrc from '../assets/light-dark-theme.svg';
 
 // Load icons
 export function loadIcons() {
@@ -50,6 +51,9 @@ export function loadIcons() {
   const gitHubLink = document.querySelector('footer a');
   const gitHubLogoWhite = createImg(gitHubLogoWhiteSrc, 'GitHub Logo - White');
   gitHubLink.append(gitHubLogoWhite);
+  const header = document.querySelector('header');
+  const themeSwitch = createImg(themeSwitchSrc, 'Light/Dark Mode Toggle', 'colour-theme-switch-icon');
+  header.append(themeSwitch);
 }
 
 // Create add list button

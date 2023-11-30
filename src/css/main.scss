@@ -45,6 +45,15 @@ header {
   .hamburger-menu-btn {
     display: none;
   }
+
+  .colour-theme-switch-icon {
+    position: absolute;
+    right: 50px;
+    width: 40px;
+    height: 40px;
+    filter: var(--icon-colour);
+    cursor: pointer;
+  }
 }
 
 footer {
