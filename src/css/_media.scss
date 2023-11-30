@@ -25,8 +25,7 @@
   @media only screen and (width <= 768px) {
     .container {
       grid-template-rows: $mobile-header-height 1fr min-content;
-      padding-top: 0;
-      padding-bottom: 0;
+      padding: 0 4px;
     }
     header,
     footer {
@@ -113,13 +112,42 @@
       .content {
         div[class^='details'],
         #add-task-form {
-          grid-template-columns: 1fr 2fr;
+          grid-template-columns: 1fr 3fr;
+          font-size: 0.9rem;
+
+          input[type='text'],
+          textarea {
+            width: 100%;
+            font-size: 0.9rem;
+          }
+
+          input[type='date'] {
+            font-size: 0.9rem;
+          }
+        }
+
+        div[class^='task'] {
+          font-size: 0.9rem;
+          gap: 8px;
+          padding: 8px 4px;
+
+          .title {
+            width: 100px;
+          }
+          .due-date {
+            font-size: 0.9rem;
+          }
         }
 
         .priorities-details,
         .priorities-add-task {
           display: grid;
           grid-template-columns: min-content 1fr;
+        }
+
+        img {
+          height: 1.1rem;
+          width: 1.1rem;
         }
 
         .priority-completed + div[class^='details'] {

@@ -617,6 +617,7 @@ export function generatePage() {
   createAddTaskButton();
   listenForDeleteClick();
   listenForCheckboxClick();
+  handleSidebar();
 }
 
 // Generate or refresh Completed page
@@ -627,6 +628,7 @@ export function generateCompletedPage() {
   listenForTitleClick(taskArray);
   listenForDeleteClick();
   listenForCheckedCheckboxClick();
+  handleSidebar();
 }
 
 // Open All Tasks tab by default and add selected class to it

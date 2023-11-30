@@ -3,7 +3,6 @@ import {
   generatePage,
   generateCompletedPage,
   listenForDeleteListClick,
-  handleSidebar,
 } from './DOM';
 import { createP, createDiv, createImg } from './helpers';
 import deleteListIconSrc from '../assets/delete-list.svg';
@@ -17,21 +16,18 @@ export function handleTabs() {
     toggleSelectedTab(allTasksPara.parentNode);
     Task.taskArrayMethod = 'getActiveTasks';
     generatePage();
-    handleSidebar();
   });
 
   comingUpPara.addEventListener('click', () => {
     toggleSelectedTab(comingUpPara.parentNode);
     Task.taskArrayMethod = 'getComingUpTasks';
     generatePage();
-    handleSidebar();
   });
 
   completedPara.addEventListener('click', () => {
     toggleSelectedTab(completedPara.parentNode);
     Task.taskArrayMethod = 'getCompletedTasks';
     generateCompletedPage();
-    handleSidebar();
   });
 }
 
@@ -61,7 +57,6 @@ export function generateListTabs() {
       Task.taskArraySortedInto = 'lists';
       Task.taskArraySortedIntoIndex = Task.lists.indexOf(list);
       generatePage();
-      handleSidebar();
     });
     index++;
   }
