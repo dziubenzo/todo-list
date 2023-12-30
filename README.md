@@ -14,6 +14,8 @@ A to-do app with lists, JS-generated task tabs, light/dark mode toggle, full loc
 - Lightweight design with a heavy use of SVG icons
 - Support for mobile devices, which turn the sidebar into a hamburger menu, and for WQHD+ display devices
 
-## Known Bugs
+## Known Bugs/Future Improvements
 
 - Using the hamburger menu via the DevTools device toolbar and going back to normal view will break the page due to how the hide/show sidebar functionality is handled for mobile devices
+- Reconsider enlarging sidebar buttons, perhaps it's better to just lighten the colour of the buttons instead
+- The default list for a task when added from any list tab should be that list instead of the topmost one
